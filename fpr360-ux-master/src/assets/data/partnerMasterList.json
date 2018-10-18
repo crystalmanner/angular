@@ -1,0 +1,192 @@
+[
+    {
+        "id": "1",
+        "name": "Joan Walsh",
+        "icon": {
+            "initials": "JW",
+            "color": "rgb(87,177,87)"
+        },
+        "company": {
+            "id": "1000",
+            "name": "A&W Restaurants"           
+        },
+        "email": "breanne_schumm@jarrod.net",
+        "work": "+1 484-284-8274",
+        "ext": "384",
+        "mobile": "+1 484-284-8274",
+        "skypeId": "skype123",
+        "contact": true,
+        "active": true
+    },
+    {
+        "id": "2",  
+        "name": "Carol Dennis",
+        "icon": {
+            "initials": "CD",
+            "color": "rgb(140,197,83)"
+        },
+        "company": {
+            "id": "1002",
+            "name": "Dana Holding Corporation"
+        },
+        "email": "breanne_schumm@jarrod.net",
+        "work": "+1 484-284-8274",
+        "ext": "384",
+        "mobile": "+1 484-284-8274",
+        "skypeId": "skype123",
+        "contact": true,
+        "active": true
+    },
+    {
+        "id": "3",
+        "name": "Loretta Crawford",
+        "icon": {
+            "initials": "LC",
+            "color": "rgb(87,177,87)"
+        },
+        "company": {
+            "id": "1003",
+            "name": "Darden Restaurants"            
+        },
+        "email": "breanne_schumm@jarrod.net",
+        "work": "+1 484-284-8274",
+        "ext": "384",
+        "mobile": "+1 484-284-8274",
+        "skypeId": "",
+        "contact": false,
+        "active": true
+    },
+    {
+        "id": "4",
+        "name": "Edward Wade",
+        "icon": {
+            "initials": "EW",
+            "color": "rgb(253,88,53)"
+        },
+        "company": {
+            "id": "1000",
+            "name": "A&W Restaurants"          
+        },
+        "email": "roob_rogers@klocko.org",
+        "work": "+1 484-284-8274",
+        "ext": "384",
+        "mobile": "+1 484-284-8274",
+        "skypeId": "",
+        "contact": false,
+        "active": true
+    },
+    {
+        "id": "5",
+        "name": "Bob Rhodes",
+        "icon": {
+            "initials": "BR",
+            "color": "rgb(150,193,32)"
+        },
+        "company": {
+            "id": "1000",
+            "name": "A&W Restaurants"           
+        },
+        "email": "romaguera.maude@hotmail.com",
+        "work": "+1 484-284-8274",
+        "ext": "384",
+        "mobile": "+1 484-284-8274",
+        "skypeId": "skype123",
+        "contact": true,
+        "active": true
+    },
+    {
+        "id": "6",
+        "name": "Michael Gregory",
+        "icon": {
+            "initials": "MG",
+            "color": "rgb(153,43,174)"
+        },
+        "company": {
+            "id": "1000",
+            "name": "A&W Restaurants"          
+        },
+        "email": "quinten_runolfsson@conn.io",
+        "work": "+1 484-284-8274",
+        "ext": "384",
+        "mobile": "+1 484-284-8274",
+        "skypeId": "",
+        "contact": false,
+        "active": true
+    },
+    {
+        "id": "7",
+        "name": "Patricia Hubbard",
+        "icon": {
+            "initials": "PH",
+            "color": "rgb(54,146,243)"
+        },
+        "company": {
+            "id": "1000",
+            "name": "A&W Restaurants"            
+        },
+        "email": "jose.collier@schuppe.ca",
+        "work": "+1 484-284-8274",
+        "ext": "384",
+        "mobile": "+1 484-284-8274",
+        "skypeId": "skype123",
+        "contact": true,
+        "active": true
+    },
+    {
+        "id": "8",
+        "name": "Ethel Schwartz",
+        "icon": {
+            "initials": "ES",
+            "color": "rgb(253,88,53)"
+        },
+        "company": {
+            "id": "1000",
+            "name": "A&W Restaurants"           
+        },
+        "email": "phyllis_grady@batz.io",
+        "work": "+1 484-284-8274",
+        "ext": "384",
+        "mobile": "+1 484-284-8274",
+        "skypeId": "skype123",
+        "contact": true,
+        "active": false
+    },
+    {
+        "id": "9",
+        "name": "Oscar Kim",
+        "icon": {
+            "initials": "OK",
+            "color": "rgb(39,187,209)"
+        },
+        "company": {
+            "id": "1000",
+            "name": "A&W Restaurants"           
+        },
+        "email": "boyer.kallie@austin.name",
+        "work": "+1 484-284-8274",
+        "ext": "384",
+        "mobile": "+1 484-284-8274",
+        "skypeId": "skype123",
+        "contact": true,
+        "active": true
+    },
+    {
+        "id": "10",
+        "name": "Amanda Morton",
+        "icon": {
+            "initials": "AM",
+            "color": "rgb(87,177,87)"
+        },
+        "company": {
+            "id": "1000",
+            "name": "A&W Restaurants"            
+        },
+        "email": "shanahan_furman@trever.org",
+        "work": "+1 484-284-8274",
+        "ext": "384",
+        "mobile": "+1 484-284-8274",
+        "skypeId": "",
+        "contact": false,
+        "active": true
+    }
+]

@@ -1,0 +1,13 @@
+<table-component [tableData]="midAccountsData"></table-component>
+<div class="button-box bottom-position">
+  <button mat-fab
+    (click)="uploadDialog()"
+    class="visible-on-hover">
+    <i class="material-icons">file_upload</i>
+  </button>
+  <button mat-fab
+    class="visible"
+    routerLink="/new-mid-account">
+    <i class="material-icons">add</i>
+  </button>
+</div>

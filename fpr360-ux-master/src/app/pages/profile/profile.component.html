@@ -1,0 +1,28 @@
+<div class="sub-header-box with-menu">
+  <div class="wrap">
+    <div class="line-item">
+      <div class="left-item">
+        <app-user-title [data]="userData"
+          [guru]="true"
+          [readonly]="readonly"
+          [(ngModel)]="userName"
+          (change)="changeName(userName)"></app-user-title>
+      </div>
+      <div class="right-item middle">
+        <div class="el">
+          <app-status [disabledBtn]="readonly"
+            [active]="user.active"
+            (inactive)="activate()"></app-status>
+        </div>
+        <div class="el settings-placeholder">
+          <app-dd-menu [options]="options"
+            [light]="true"
+            (select)="setActive($event)"></app-dd-menu>
+        </div>
+      </div>
+    </div>
+    <app-sub-header [light]="true"
+      [innerMenuItems]="profileInnerMenu"></app-sub-header>
+  </div>
+</div>
+<router-outlet></router-outlet>

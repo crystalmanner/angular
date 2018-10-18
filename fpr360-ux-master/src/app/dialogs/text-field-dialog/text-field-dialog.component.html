@@ -1,0 +1,28 @@
+<div class="dialog-content check-list-item-dialog">
+  <header>
+    <h3>{{data.dialogName}}</h3>
+  </header>
+  <section>
+    <mat-form-field class="full-width"
+      [ngClass]="readonly? 'readonly': ''">
+      <input matInput
+        [focus]
+        placeholder="{{data.label}}"
+        [readonly]="readonly"
+        [(ngModel)]="itemName">
+    </mat-form-field>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog();">Cancel</button>
+        <button mat-button
+          color="primary"
+          (click)="saveFunction();">Save</button>
+      </div>
+    </div>
+  </footer>
+</div>

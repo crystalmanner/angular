@@ -1,0 +1,33 @@
+<div class="dialog-content check-list-item-dialog">
+  <header>
+    <h3>{{data.dialogName}}</h3>
+  </header>
+  <section>
+    <mat-form-field class="full-width">
+      <mat-select placeholder="{{data.label}}"
+        [(ngModel)]="value">
+        <div class="options-wrap"
+          appNoScroller
+          [perfectScrollbar]>
+          <mat-option *ngFor="let item of array"
+            [value]="item.value">
+            {{ item.viewValue }}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog();">Cancel</button>
+        <button mat-button
+          color="primary"
+          (click)="saveFunction();">Save</button>
+      </div>
+    </div>
+  </footer>
+</div>

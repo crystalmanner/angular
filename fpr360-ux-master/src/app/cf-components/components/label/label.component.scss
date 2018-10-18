@@ -1,0 +1,26 @@
+.label-box {
+  border-radius: 500rem;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 0.04em;
+  text-align: center;
+  &.size-24 {
+    padding: 0 16px;
+    min-width: 80px;
+    line-height: 24px;
+    font-size: 12px;
+  }
+  &.size-32 {
+    padding: 0 24px;
+    min-width: 96px;
+    line-height: 32px;
+    font-size: 14px;
+  }
+  &.size-36 {
+    padding: 0 24px;
+    min-width: 96px;
+    line-height: 36px;
+    font-size: 14px;
+  }
+}

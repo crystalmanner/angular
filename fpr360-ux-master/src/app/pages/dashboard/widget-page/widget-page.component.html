@@ -1,0 +1,12 @@
+<div class="content">
+  <section class="main-content full-width single-widget">
+    <app-widget [widgetTitle]="widgetName"
+      [widgetSettings]="widgetSettings"
+      [fullScreenBtn]="false"
+      (select)="widgetMenu($event)">
+      <img class="chart-placeholder"
+        src=" {{widgetChart}}">
+    </app-widget>
+  </section>
+</div>
+<table-component [tableData]="widgetData"></table-component>

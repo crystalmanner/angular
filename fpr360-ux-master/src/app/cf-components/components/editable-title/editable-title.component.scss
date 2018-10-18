@@ -1,0 +1,59 @@
+.editable-title {
+  position: relative;
+  height: 48px;
+  margin-top: 10px;
+  input {
+    border: none;
+    background: none;
+    width: 100%;
+    font-size: 34px;
+    line-height: 48px;
+    font-weight: 300;
+    padding: 0;
+    outline: none;
+  }
+  &.light {
+    color: #fff;
+    input {
+      color: #fff;
+      &::-webkit-input-placeholder {
+        color: rgba(255, 255, 255, 0.87);
+      }
+      &::-moz-placeholder {
+        color: rgba(255, 255, 255, 0.87);
+      }
+      &:-ms-input-placeholder {
+        color: rgba(255, 255, 255, 0.87);
+      }
+      &:-moz-placeholder {
+        color: rgba(255, 255, 255, 0.87);
+      }
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.87);
+      }
+    }
+    label {
+      color: #fff;
+    }
+  }
+  &.icon {
+    padding-left: 44px;
+    i {
+      &.material-icons,
+      &.custom-icons {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -12px;
+      }
+    }
+    &.light {
+      i {
+        &.material-icons,
+        &.custom-icons {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+    }
+  }
+}

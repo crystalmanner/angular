@@ -1,0 +1,74 @@
+@import '../cf-components/styles/mixins';
+@import 'theme-var';
+
+a {
+  &.mat-icon-button {
+    color: $primary;
+  }
+}
+
+.button-box {
+  &.bottom-position {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    &.bottom-position-left {
+      left: 32px;
+      right: inherit !important;
+    }
+    width: 56px;
+    z-index: 5;
+    .mat-fab {
+      background: $primary;
+      display: block;
+      color: #fff;
+      &:hover {
+        background-color: #208cff;
+      }
+      &.visible {
+        margin-top: 12px;
+        position: relative;
+        z-index: 1;
+      }
+      &.visible-on-hover {
+        margin-bottom: -68px;
+        opacity: 0;
+        @include animation();
+      }
+    }
+    &:hover {
+      .mat-fab {
+        &.visible-on-hover {
+          margin-bottom: 0;
+          opacity: 1;
+          @include animation();
+        }
+      }
+    }
+  }
+}
+.mat-raised-button {
+  box-shadow: none !important;
+  padding: 0 20px !important;
+  &.dark-button {
+    background-color: #28609b;
+  }
+  &[disabled] {
+    background-color: rgba(233, 239, 245, 0.46) !important;
+    color: rgba(11, 38, 66, 0.24) !important;
+  }
+}
+.mat-button,
+.mat-icon-button {
+  &.mat-primary {
+    color: $primary;
+    &.cancel-dialog {
+      color: #28609b;
+    }
+  }
+}
+.mat-icon-button {
+  &.addButton {
+    color: $primary;
+  }
+}

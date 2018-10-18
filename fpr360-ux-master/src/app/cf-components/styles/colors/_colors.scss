@@ -1,0 +1,53 @@
+$textColor: rgba(0, 0, 0, 0.87);
+$textColorLight: rgba(0, 0, 0, 0.54);
+$ultraLight: rgba(0, 0, 0, 0.38);
+
+$divider: rgba(0, 0, 0, 0.11);
+
+$borderColor: rgba(0, 0, 0, 0.11);
+
+$shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+
+$menuHover: rgba(40, 96, 155, 0.05);
+$menuSelected: rgba(40, 96, 155, 0.1);
+
+$blue: #42a7ff;
+$red: #f44336;
+$gray: #9e9e9e;
+$green: #4caf50;
+
+$fieldSelection: #fafafa;
+
+$formActive: $blue;
+$formHover: rgba(0, 0, 0, 0.87);
+$formError: $red;
+
+$iconColor: rgba(0, 0, 0, 0.54);
+$iconColorHover: rgba(0, 0, 0, 0.87);
+
+$iconColorLight: rgba(11, 38, 66, 0.24);
+$iconColorLightHover: rgba(11, 38, 66, 0.54);
+
+$linkColor: $blue;
+$linkColorHover: darken($blue, 10%);
+
+$tableHover: #f7f9fa;
+$tableActive: #f2f7fa;
+
+$calendar-primary: #009688;
+
+//typography variables
+$color_display_4: $textColorLight;
+$color_display_3: $textColorLight;
+$color_display_2: $textColorLight;
+$color_display_1: $textColorLight;
+$color_headline: $textColor;
+$color_title: $textColor;
+$color_subhead: $textColor;
+$color_body_2: $textColor;
+$color_body_1: $textColor;
+$color_caption: $textColorLight;
+$color_button: $textColor;
+$color_menu: $textColor;
+
+$primary: $blue;

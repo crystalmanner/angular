@@ -1,0 +1,183 @@
+@import './cf-components/styles/mixins';
+
+// navigation styles
+
+.mat-drawer {
+  overflow: visible;
+}
+
+.side-nav-holder {
+  width: 100%;
+  padding: 80px 0 96px;
+  position: relative;
+  height: 100vh;
+}
+.dashboard-select {
+  padding-top: 12px;
+}
+.user-item {
+  background: #113a64;
+  height: 80px;
+  width: 100%;
+  padding: 8px 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  .user {
+    cursor: pointer;
+    outline: none;
+    padding: 12px 0 0 64px;
+    position: relative;
+    .avatar-wrap {
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 48px;
+      height: 48px;
+      i {
+        &.custom-icons {
+          display: block;
+          width: 18px;
+          height: 18px;
+          background: #fff;
+          line-height: 18px;
+          text-align: center;
+          font-size: 16px;
+          border-radius: 500rem;
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          color: #2a5f9a;
+        }
+      }
+    }
+    span {
+      @include text-overflow();
+      color: #fff;
+      font-size: 14px;
+      line-height: 20px;
+      max-width: 144px;
+    }
+    em {
+      @include caption();
+      @include text-overflow();
+      font-style: normal;
+      color: rgba(255, 255, 255, 0.54);
+      line-height: 20px;
+      max-width: 144px;
+    }
+  }
+}
+
+.left-sidenav {
+  background: #195087;
+  width: 224px;
+  height: 100%;
+  box-shadow: $shadow;
+  overflow: hidden;
+  nav {
+    width: 100%;
+    position: relative;
+    overflow: auto;
+    max-height: calc(100vh - 80px - 80px);
+    ul {
+      margin: 0;
+      padding: 8px 0;
+      list-style: none;
+      li {
+        padding: 0;
+        .mat-button {
+          width: 100%;
+          text-align: left;
+          padding: 6px 16px 6px 80px;
+          font-size: 14px;
+          font-weight: 400;
+          text-transform: none;
+          position: relative;
+          &.light {
+            color: #fff;
+            i {
+              &.material-icons,
+              &.custom-icons {
+                position: absolute;
+                left: 16px;
+                top: 50%;
+                margin-top: -20px;
+                display: block;
+                width: 40px;
+                height: 40px;
+                color: rgba(255, 255, 255, 0.7);
+                text-align: center;
+                line-height: 40px;
+              }
+            }
+            em {
+              &.menu-badge {
+                position: absolute;
+                top: 8px;
+                left: 36px;
+                font-style: normal;
+                display: block;
+                width: 16px;
+                height: 16px;
+                border-radius: 500rem;
+                color: #fff;
+                background: #ff2929;
+                text-align: center;
+                line-height: 16px;
+                font-size: 9px;
+                font-weight: normal;
+              }
+            }
+          }
+          &.active {
+            font-weight: 600;
+          }
+          &:hover {
+            background: #4475a8;
+          }
+        }
+      }
+    }
+  }
+}
+
+.right-sidenav {
+  width: 448px;
+  height: 100%;
+  box-shadow: $shadow;
+  overflow: hidden;
+  position: fixed;
+}
+.mat-drawer-opened {
+  overflow: hidden;
+  height: 100%;
+}
+
+.secondary-menu {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-logo {
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  height: 70px;
+  position: absolute;
+  img {
+    width: 42px;
+    height: 40px;
+    display: block;
+    margin: 0 auto 14px;
+  }
+  em {
+    &.version {
+      color: #fff;
+      display: block;
+      font-size: 12px;
+      line-height: 14px;
+      font-style: normal;
+      text-align: center;
+    }
+  }
+}

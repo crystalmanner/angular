@@ -1,0 +1,146 @@
+@import '../mixins';
+.mat-card {
+  &.search {
+    position: relative;
+    z-index: 1;
+    padding: 0;
+    width: 864px;
+    min-height: 52px;
+    border-radius: 0;
+    .search-btn {
+      position: absolute;
+      top: 6px;
+      left: 24px;
+      z-index: 1;
+    }
+    .open-advanced-btn {
+      position: absolute;
+      top: 6px;
+      right: 12px;
+      z-index: 1;
+    }
+    .search-field {
+      .main-search {
+        &.mat-form-field {
+          width: 100%;
+        }
+        .mat-form-field-wrapper {
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
+        .mat-form-field-infix {
+          padding: 0;
+          border-top: 0;
+          input {
+            &.mat-input-element {
+              margin: 0;
+              padding: 14px 0 14px 94px;
+              width: 700px;
+            }
+          }
+        }
+        .mat-form-field-placeholder-wrapper,
+        .mat-input-underline.mat-form-field-underline,
+        .mat-input-subscript-wrapper.mat-form-field-subscript-wrapper {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+//advansed search
+.search-autocomplete {
+  max-height: 456px;
+  border-top: 1px solid $borderColor;
+  overflow-y: auto;
+  will-change: 100%;
+  position: relative;
+  margin-bottom: 64px;
+  .ps__rail-y {
+    left: auto !important;
+    right: 0 !important;
+  }
+  .mat-option {
+    padding-left: 128px;
+    position: relative;
+    border-bottom: 1px solid $borderColor;
+    &:first-child {
+      margin-top: 16px;
+    }
+    i {
+      &.material-icons {
+        position: absolute;
+        left: 64px;
+        top: 12px;
+        color: $iconColor;
+      }
+    }
+  }
+}
+.mat-autocomplete-panel {
+  position: relative;
+  overflow: hidden !important;
+  max-height: 532px !important;
+  &.mat-autocomplete-hidden {
+    visibility: visible !important;
+  }
+}
+.autocomplete-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 1;
+  padding: 14px 54px;
+}
+
+.advansed-search-content {
+  padding: 24px 64px;
+  border-top: 1px solid $borderColor;
+  .mat-form-field-wrapper {
+    margin-bottom: 0;
+  }
+  .right-item {
+    padding: 18px 0 !important;
+  }
+}
+.filter-fields {
+  margin-right: -12px;
+  padding-right: 12px;
+  position: relative;
+  max-height: 70vh;
+  overflow: auto;
+}
+.add-filter {
+  padding: 24px 0;
+  > a {
+    &.clickable {
+      display: inline-block;
+      line-height: 24px;
+      i {
+        margin-right: 8px;
+        float: left;
+      }
+      span {
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.87);
+      }
+    }
+  }
+}
+.mat-autocomplete-panel {
+  box-shadow: none !important;
+}
+
+.seach-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.54);
+}

@@ -1,0 +1,29 @@
+<div class="sub-header-box with-menu">
+  <div class="wrap">
+    <div class="line-item editable-title-wrap">
+      <div class="left-item">
+        <app-editable-title [icon]="'business'"
+          [placeholder]="'Partner Name (Output:)'+setString"
+          [light]="true"
+          [readonly]="false"
+          (changeValue)="titleVal($event)"></app-editable-title>
+      </div>
+      <div class="right-item middle">
+        <div class="el">
+          <app-status [disabledBtn]="!activateButton"
+            [active]="activePage"
+            (inactive)="inactive($event)"></app-status>
+        </div>
+        <div class="el settings-placeholder">
+          <app-dd-menu [options]="pageSettings"
+            [light]="true"
+            (select)="selectPageSettings($event)"></app-dd-menu>
+        </div>
+      </div>
+    </div>
+    <app-sub-header [light]="true"
+      [innerMenuItems]="partnerInnerMenu" [dlgName]="newTitleName" (change)="updateFromChild($event)"></app-sub-header>
+  </div>
+</div>
+<!-- <app-sub-header style="display:none" [dlgName]="activePageName"></app-sub-header> -->
+<router-outlet></router-outlet>

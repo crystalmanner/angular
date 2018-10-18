@@ -1,0 +1,196 @@
+@import '../cf-components/styles/mixins';
+.FPR360-theme {
+  .mat-dialog-container {
+    padding: 32px 0 0;
+    .dialog-content {
+      header {
+        padding: 0 32px 24px;
+      }
+      section {
+        max-height: calc(90vh - 96px - 80px);
+        padding: 0 32px;
+        position: relative;
+      }
+      footer {
+        margin: 0;
+        padding: 28px 16px 24px;
+      }
+      &.check-list-item-dialog,
+      &.assign-company-dialog {
+        section {
+          max-height: calc(90vh - 96px - 80px - 80px);
+        }
+      }
+    }
+  }
+}
+.dialog-content {
+  width: calc(664px - 32px);
+  @media only screen and (max-width: 720px) {
+    width: 100%;
+  }
+  &.dialog-480 {
+    width: calc(480px - 32px);
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+    }
+  }
+  header {
+    @include clearfix();
+    h3 {
+      float: left;
+      line-height: 40px;
+      text-transform: uppercase;
+      color: #28609b;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .right-align {
+      float: right;
+      max-width: 50%;
+    }
+    .dynamic-search {
+      min-width: 40px;
+      &.open-search {
+        .field-wrap {
+          width: 360px !important;
+        }
+      }
+    }
+  }
+}
+.select-dialog-toolbar {
+  padding: 0 32px 8px;
+}
+.dialog-toolbar {
+  padding: 0 80px 8px 32px;
+  position: relative;
+  .left-item {
+    min-height: 48px;
+  }
+  .dialog-search {
+    position: absolute;
+    top: 0;
+    right: 32px;
+    height: 48px;
+    .dynamic-search {
+      min-width: 40px;
+      &.open-search {
+        width: 568px;
+        background: #fff;
+        overflow: visible;
+        .field-wrap {
+          width: 568px !important;
+          input {
+            &[type='search'] {
+              padding-left: 48px !important;
+              width: calc(100% - 48px) !important;
+            }
+          }
+        }
+        .dynamic-search-btn {
+          left: -6px !important;
+        }
+      }
+    }
+  }
+  .select-el {
+    max-width: 96px;
+    .mat-form-field-wrapper {
+      margin-bottom: 0;
+      padding: 0;
+    }
+    .mat-form-field-placeholder-wrapper {
+      padding-top: 0;
+      top: 0;
+    }
+    .mat-form-field-infix {
+      padding: 0;
+      border-top: 0;
+    }
+    .mat-form-field-underline {
+      bottom: 0;
+    }
+    .mat-select-trigger {
+      height: 40px;
+    }
+    .mat-select-value {
+      height: 40px;
+      line-height: 40px;
+    }
+  }
+  .checkbox-line {
+    margin-bottom: 0;
+    padding: 10px 0;
+    .mat-checkbox {
+      display: block;
+      line-height: 20px;
+    }
+  }
+}
+.guru-role {
+  .switch-line {
+    .left-label {
+      .mat-slide-toggle-label {
+        .mat-slide-toggle-content {
+          padding-right: 8px !important;
+        }
+      }
+    }
+  }
+}
+.ckeck-list-items {
+  .checkbox-line {
+    height: 48px;
+    line-height: 48px;
+    margin-bottom: 0;
+    .mat-checkbox-layout {
+      display: block;
+      white-space: normal;
+      @include clearfix();
+      .mat-checkbox-inner-container {
+        float: left;
+        margin-top: 13px;
+      }
+      .mat-checkbox-label {
+        line-height: 48px;
+        @include text-overflow();
+      }
+    }
+    &.with-border {
+      border-bottom: 1px solid $borderColor;
+    }
+    @include clearfix();
+    .delete-btn {
+      float: right;
+      opacity: 0;
+      margin-top: 4px;
+    }
+    .editable-name {
+      padding-top: 5px;
+      float: left;
+      width: 420px;
+      .mat-form-field-underline {
+        background-color: transparent;
+      }
+    }
+    &:hover {
+      .delete-btn {
+        opacity: 1;
+      }
+      .editable-name {
+        .mat-form-field-underline {
+          background-color: $borderColor;
+        }
+      }
+    }
+    &.border-bottom {
+      border-bottom: 1px solid $borderColor;
+    }
+  }
+}
+.add-item-line {
+  .right-item {
+    padding: 4px;
+  }
+}

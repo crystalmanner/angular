@@ -1,0 +1,27 @@
+@import '../cf-components/styles/mixins';
+@import 'theme-var';
+
+.clients-companies-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    width: 100%;
+    @include clearfix();
+    min-height: 48px;
+    span {
+      &.company-name {
+        float: left;
+        line-height: 48px;
+        font-size: 16px;
+      }
+    }
+    .status-select {
+      padding-top: 6px;
+    }
+    .companies-list-settings {
+      margin: 4px 0 4px 8px;
+      float: left;
+    }
+  }
+}

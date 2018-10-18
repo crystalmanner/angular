@@ -1,0 +1,8 @@
+<div class="avatar s-{{size}}">
+  <img *ngIf="type=='image'"
+    ngClass="{{imgClass}}"
+    src="{{imageUrl}}"
+    alt="{{imageAlt}}">
+  <span *ngIf="type=='initial'"
+    [ngStyle]="{'background-color' : initialColor }">{{initial}}</span>
+</div>

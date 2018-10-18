@@ -1,0 +1,17 @@
+<button mat-icon-button
+  [matMenuTriggerFor]="menu"
+  class="standard-lignt"
+  [ngClass]="light?' light':null">
+  <i class="material-icons">more_vert</i>
+</button>
+<mat-menu #menu="matMenu">
+  <div *ngFor="let item of options">
+    <button *ngIf="item!='divider'"
+      mat-menu-item
+      (click)="backOption(item)">
+      <span>{{item}}</span>
+    </button>
+    <span *ngIf="item==='divider'"
+      class="cf-divider"></span>
+  </div>
+</mat-menu>

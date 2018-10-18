@@ -1,0 +1,28 @@
+﻿<div class="cf-clock">
+  <div class="cf-clock-center"></div>
+  <div class="cf-clock-hand"
+    [ngStyle]="_hand"></div>
+  <div class="cf-clock-hours"
+    [class.active]="_hourView">
+    <div *ngFor="let item of _hours"
+      class="cf-clock-cell"
+      [class.cf-clock-cell-selected]="_selectedHour == item.value"
+      [class.cf-clock-cell-disabled]="!item.enabled"
+      [style.top]="item.top+'%'"
+      [style.left]="item.left+'%'"
+      [style.fontSize]="item.fontSize">
+      {{ item.displayValue }}
+    </div>
+  </div>
+  <div class="cf-clock-minutes"
+    [class.active]="!_hourView">
+    <div *ngFor="let item of _minutes"
+      class="cf-clock-cell"
+      [class.cf-clock-cell-selected]="_selectedMinute == item.value"
+      [class.cf-clock-cell-disabled]="!item.enabled"
+      [style.top]="item.top+'%'"
+      [style.left]="item.left+'%'">
+      {{ item.displayValue }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.contact-box {
+  padding: 0 64px 32px;
+  position: relative;
+  .avatar-wrap {
+    position: absolute;
+    left: 0;
+    top: 12px;
+  }
+  .contact-settings {
+    position: absolute;
+    right: -2px;
+    top: 8px;
+  }
+}

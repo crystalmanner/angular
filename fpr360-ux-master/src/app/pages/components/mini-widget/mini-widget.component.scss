@@ -1,0 +1,42 @@
+@import '../../../cf-components/styles/mixins';
+
+.mini-widget {
+  float: left;
+  padding: 0 38px;
+  min-height: 68px;
+  em {
+    display: block;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $textColor;
+  }
+  strong {
+    float: left;
+    position: relative;
+    padding-right: 38px;
+    font-size: 24px;
+    line-height: 38px;
+    font-weight: 600;
+    color: #184e87;
+    span {
+      &.change-info {
+        position: absolute;
+        right: 0;
+        bottom: 8px;
+        display: block;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        .green {
+          color: $green;
+        }
+        .red {
+          color: $red;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+[
+    {
+        "id": "1",
+        "name": "Admin"
+    }, 
+    {
+        "id": "2",
+        "name": "Ops Manager"
+    },
+    {
+        "id": "3",
+        "name": "Prevention Alerts Manager"
+    },
+    {
+        "id": "4",
+        "name": "Client Services Manager"
+    },
+    {
+        "id": "5",
+        "name": "Chargeback Analyst (Senior)"
+    },
+    {
+        "id": "6",
+        "name": "Chargeback Analyst (Intermediate)"
+    },
+    {
+        "id": "7",
+        "name": "Chargeback Analyst (Junior)"
+    },
+    {
+        "id": "8",
+        "name": "Followup Analyst"
+    }
+]

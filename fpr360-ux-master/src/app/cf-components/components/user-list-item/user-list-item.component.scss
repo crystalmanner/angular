@@ -1,0 +1,40 @@
+.user-item {
+  border-radius: 0;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  text-transform: none;
+  display: block;
+  .line-item {
+    .user-item-box {
+      position: relative;
+      padding: 14px 56px 0 72px;
+      height: 72px;
+      float: left;
+      .avatar-wrap {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        margin-top: -20px;
+      }
+      span {
+        display: block;
+        line-height: 24px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      em {
+        display: block;
+        font-style: normal;
+        line-height: 20px;
+        font-size: 13px;
+      }
+    }
+  }
+  .right-item-box {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -20px;
+  }
+}

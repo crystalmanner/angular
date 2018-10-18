@@ -1,0 +1,10 @@
+<div class="status-box">
+  <button mat-raised-button
+    *ngIf="!active"
+    color="primary"
+    [disabled]="disabledBtn"
+    (click)="activate()">Activate</button>
+  <app-label class="status-label"
+    *ngIf="active"
+    [backgroundStyle]="color">Active</app-label>
+</div>

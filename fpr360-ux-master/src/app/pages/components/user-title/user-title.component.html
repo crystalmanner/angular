@@ -1,0 +1,26 @@
+<div class="user-profile">
+  <div class="avatar-wrap"
+    (click)="file.click()">
+    <span *ngIf="!data.avatar&&!data.initials"
+      class="default-avatar">
+      <i class="material-icons">add_a_photo</i>
+    </span>
+    <app-image *ngIf="data.avatar||data.initials"
+      [size]="56"
+      [type]="type"
+      [imageUrl]="data.avatar"
+      [imageAlt]="value"
+      [initial]="data.initials"
+      [initialColor]="data.initialsColor"></app-image>
+    <i *ngIf="guru"
+      class="custom-icons icon-guru"></i>
+  </div>
+  <input #file
+    class="upload-avatar"
+    type="file">
+  <input [readonly]="readonly"
+    type="text"
+    placeholder="{{data.placeholder}}"
+    [(ngModel)]="value"
+    (ngModelChange)="initialsFunction(value)">
+</div>

@@ -1,0 +1,93 @@
+@import '../cf-components/styles/mixins';
+@import 'theme-var';
+
+.main-toolbar {
+  @include clearfix();
+  position: fixed;
+  top: -192px;
+  left: 0;
+  right: 0;
+  height: 256px;
+  background: $headerBg;
+  color: rgba(255, 255, 255, 0.87);
+  z-index: 8;
+  min-width: $pageWidth;
+  .header-wrap {
+    padding: 0 0 0 80px;
+    height: 64px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include clearfix();
+    .header-title {
+      float: left;
+      a {
+        color: rgba(255, 255, 255, 0.87);
+        text-decoration: none !important;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+    h3 {
+      line-height: 64px;
+      color: rgba(255, 255, 255, 0.87);
+      font-weight: 400;
+    }
+    .right-item {
+      padding: 12px 32px 12px 0;
+      .mat-icon-button {
+        float: left;
+        margin-left: 20px;
+        &.notifications-button {
+          em {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-style: normal;
+            display: block;
+            width: 16px;
+            height: 16px;
+            border-radius: 500rem;
+            color: #fff;
+            background: #ff2929;
+            text-align: center;
+            line-height: 16px;
+            font-size: 9px;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+  .mat-icon-button {
+    &.left-btn {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .main-toolbar {
+    height: 248px;
+    .header-wrap {
+      padding: 0 0 0 56px;
+      height: 56px;
+      .right-item {
+        padding: 8px 16px 8px 0;
+      }
+      h2 {
+        line-height: 56px;
+      }
+    }
+    .mat-icon-button {
+      &.left-btn {
+        top: 8px;
+        left: 12px;
+      }
+    }
+  }
+}

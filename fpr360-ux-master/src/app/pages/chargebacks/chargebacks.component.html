@@ -1,0 +1,15 @@
+<table-component [tableData]="chargebacksData"
+  [assignButton]="true"></table-component>
+<!-- add button -->
+<div class="button-box bottom-position">
+  <button mat-fab
+    (click)="uploadDialog()"
+    class="visible-on-hover">
+    <i class="material-icons">file_upload</i>
+  </button>
+  <button mat-fab
+    class="visible"
+    routerLink="/chargeback">
+    <i class="material-icons">add</i>
+  </button>
+</div>

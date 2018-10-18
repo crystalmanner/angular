@@ -1,0 +1,13 @@
+<div class="mini-widget">
+  <em>{{dataMiniWidget.name}}</em>
+  <strong>
+    {{dataMiniWidget.amount}}
+    <span *ngIf="dataMiniWidget.change"
+      class="change-info">
+      <i *ngIf="dataMiniWidget.change==='up'"
+        class="material-icons green">arrow_upward</i>
+      <i *ngIf="dataMiniWidget.change==='down'"
+        class="material-icons red">arrow_downward</i>
+    </span>
+  </strong>
+</div>

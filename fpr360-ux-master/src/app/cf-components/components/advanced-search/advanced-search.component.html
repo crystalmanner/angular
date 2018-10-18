@@ -1,0 +1,161 @@
+<div *ngIf="open">
+  <mat-card class="search">
+    <button mat-icon-button
+      class="standard search-btn"
+      (click)="searchFunction(searchField)">
+      <i class="material-icons">search</i>
+    </button>
+    <button mat-icon-button
+      class="standard open-advanced-btn"
+      (click)="showAdvansedSearch = true; showAutocomplete = false;">
+      <i class="material-icons">arrow_drop_down</i>
+    </button>
+    <div class="search-field">
+      <mat-form-field class="main-search">
+        <input class="main-search-field"
+          #searchField
+          matInput
+          focus="open"
+          type="search"
+          [matAutocomplete]="auto"
+          [formControl]="searchCtrl"
+          [(ngModel)]="inputVal"
+          (ngModelChange)="changeFunction(inputVal)" />
+        <div class="search-content">
+          <div class="autocomplete">
+            <mat-autocomplete #auto="matAutocomplete">
+              <div [perfectScrollbar]
+                class="search-autocomplete {{!showAutocomplete? 'hidden': null}}">
+                <mat-option *ngFor="let item of filteredSearch | async"
+                  [value]="item.name">
+                  <i class="material-icons {{item.iconColor}}">
+                    {{item.icon}}
+                  </i>
+                  <span> {{ item.name }}</span>
+                </mat-option>
+              </div>
+              <div class="autocomplete-footer"
+                *ngIf="showAutocomplete">
+                <button mat-button
+                  (click)="showAdvansedSearch = true; showAutocomplete = false;"
+                  color="primary">Advanced search</button>
+              </div>
+            </mat-autocomplete>
+          </div>
+        </div>
+      </mat-form-field>
+      <div class="advansed-search-content"
+        *ngIf="showAdvansedSearch">
+        <div class="filter-fields"
+          [perfectScrollbar]>
+          <div class="row">
+            <div class="col-6"
+              *ngFor="let item of filterFields">
+              <mat-form-field class="full-width"
+                *ngIf="item.type==='field'">
+                <input matInput
+                  placeholder="{{item.placeholder}}"
+                  [(ngModel)]="item.value"
+                  (change)="changeValue(item, item.value)">
+              </mat-form-field>
+              <mat-form-field class="full-width"
+                *ngIf="item.type==='select'">
+                <mat-select placeholder="{{item.placeholder}}"
+                  [(ngModel)]="item.value"
+                  (change)="changeValue(item, item.value)">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let el of item.options"
+                      [value]="el.value">
+                      {{ el.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="line-item">
+          <div class="left-item">
+            <div class="add-filter">
+              <a class="clickable"
+                [matMenuTriggerFor]="filters">
+                <i class="material-icons">add_circle</i>
+                <span>Add Filter</span>
+              </a>
+
+              <mat-menu #filters="matMenu">
+                <button mat-menu-item
+                  (click)="addDate()">Date</button>
+                <button mat-menu-item
+                  (click)="addStatus()">Status</button>
+                <button mat-menu-item
+                  (click)="addAmount()">Amount</button>
+                <button mat-menu-item
+                  (click)="addId()">ID Number</button>
+                <button mat-menu-item
+                  (click)="addName()">Name</button>
+                <span class="cf-divider"></span>
+                <button mat-menu-item
+                  [matMenuTriggerFor]="innerChargeback">Chargeback</button>
+                <button mat-menu-item
+                  [matMenuTriggerFor]="innerTransaction">Transaction</button>
+                <button mat-menu-item
+                  [matMenuTriggerFor]="innerCustomer">Customer</button>
+                <button mat-menu-item
+                  [matMenuTriggerFor]="innerRefund">Refund</button>
+              </mat-menu>
+
+              <mat-menu #innerChargeback="matMenu">
+                <button mat-menu-item>Dispute Type</button>
+                <button mat-menu-item>Dispute Reason</button>
+                <button mat-menu-item>Root Cause</button>
+                <button mat-menu-item>Not Fought Reason</button>
+              </mat-menu>
+
+              <mat-menu #innerTransaction="matMenu">
+                <button mat-menu-item>Card Type</button>
+                <button mat-menu-item>Credit Card First 6 Digits</button>
+                <button mat-menu-item>Credit Card Last 4 Digits</button>
+                <button mat-menu-item>AVS Match</button>
+                <button mat-menu-item>CVV Match</button>
+                <button mat-menu-item>Sale Type</button>
+              </mat-menu>
+
+              <mat-menu #innerCustomer="matMenu">
+                <button mat-menu-item>Country</button>
+                <button mat-menu-item>State</button>
+                <button mat-menu-item>IP Address</button>
+                <button mat-menu-item>Product</button>
+                <button mat-menu-item>Affiliate ID</button>
+                <button mat-menu-item>Sub-Affiliate ID</button>
+                <button mat-menu-item>Contacted Customer Service?</button>
+              </mat-menu>
+
+              <mat-menu #innerRefund="matMenu">
+                <button mat-menu-item>Refund</button>
+                <button mat-menu-item>Refund</button>
+              </mat-menu>
+            </div>
+          </div>
+          <div class="right-item">
+            <div class="el">
+              <button mat-button
+                color="primary"
+                class="cancel-dialog"
+                (click)="cancelAdvansedSearch(searchField)">Cancel</button>
+            </div>
+            <div class="el">
+              <button mat-raised-button
+                color="primary"
+                (click)="search()">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <div class="seach-overlay"
+    (click)="globalClose()"></div>
+</div>

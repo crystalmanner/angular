@@ -1,0 +1,15 @@
+<div class="data-widget"
+  [ngClass]="className?className:''">
+  <div class="row">
+    <div class="data"
+      [ngClass]="item.balance? 'balance':''"
+      *ngFor="let item of data">
+      <em>{{item.label}}</em>
+      <strong [ngClass]="item.error? 'error-color': ''">{{item.value}}</strong>
+    </div>
+  </div>
+  <app-dd-menu *ngIf="dataSettings"
+    class="data-settings"
+    [options]="dataSettings"
+    (select)="selectMenu($event)"></app-dd-menu>
+</div>

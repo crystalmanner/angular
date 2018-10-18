@@ -1,0 +1,26 @@
+<div class="dialog-content save-dialog">
+  <header>
+    <h3>Dashboard Name</h3>
+  </header>
+  <section appNoScroller
+    [perfectScrollbar]>
+    <mat-form-field class="full-width">
+      <input matInput
+        placeholder="Dashboard Name"
+        [(ngModel)]="dashboardName">
+    </mat-form-field>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog();">Cancel</button>
+        <button mat-button
+          color="primary"
+          (click)="saveFunction();">Save</button>
+      </div>
+    </div>
+  </footer>
+</div>

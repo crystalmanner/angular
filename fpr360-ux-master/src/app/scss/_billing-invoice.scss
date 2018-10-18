@@ -1,0 +1,24 @@
+@import '../cf-components/styles/mixins';
+@import 'theme-var';
+
+.title-row {
+  padding-bottom: 24px;
+  @include clearfix();
+  h3 {
+    float: left;
+    padding: 0 48px 0 0;
+    line-height: 48px;
+    text-transform: uppercase;
+    font-size: 18px;
+    position: relative;
+    font-weight: 700;
+  }
+  .title-label {
+    float: left;
+    padding: 8px 12px;
+  }
+  .right-button {
+    float: right;
+    padding: 6px 48px 0 0;
+  }
+}

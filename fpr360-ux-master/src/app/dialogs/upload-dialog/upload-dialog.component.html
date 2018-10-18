@@ -1,0 +1,43 @@
+<div class="dialog-content upload-dialog">
+  <header>
+    <h3 *ngIf="!oneDoc">Bulk Upload</h3>
+    <h3 *ngIf="oneDoc">Upload Document</h3>
+  </header>
+  <section appNoScroller
+    [perfectScrollbar]>
+    <div class="upload-box">
+      <div class="file-box">
+        <div class="icon-box">
+          <i class="custom-icons">&#xe900;</i>
+        </div>
+        <p>Drag and drop or upload [Tempalte Name] file to upload</p>
+      </div>
+      <button mat-raised-button
+        color="primary"
+        (click)="file.click()">Locate</button>
+      <input type="file"
+        #file
+        class="hidden">
+    </div>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="left-item"
+        *ngIf="!oneDoc">
+        <a class="link-with-icon">
+          <i class="material-icons">file_download</i>
+          <span>Download Template</span>
+        </a>
+      </div>
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog()">Cancel</button>
+        <button mat-button
+          color="primary"
+          (click)="upload()">Save</button>
+      </div>
+    </div>
+  </footer>
+</div>

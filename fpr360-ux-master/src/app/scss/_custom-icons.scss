@@ -1,0 +1,95 @@
+$icomoon-font-path: '/assets/fonts' !default;
+
+$icon-add-message: '\e905';
+$icon-industry: '\e904';
+$icon-guru: '\e903';
+$icon-dupl_alert: '\e902';
+$icon-partners: '\e901';
+$icon-file-upload: '\e900';
+$icon-arrow_downward: '\e5db';
+$icon-arrow_upward: '\e5d8';
+$icon-check_circle: '\e86c';
+$icon-close: '\e5cd';
+$icon-warning: '\e002';
+
+@font-face {
+  font-family: 'fpr360-icons';
+  src: url('#{$icomoon-font-path}/fpr360-icons.ttf') format('truetype'),
+    url('#{$icomoon-font-path}/fpr360-icons.woff') format('woff'),
+    url('#{$icomoon-font-path}/fpr360-icons.svg#fpr360-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+i {
+  &.custom-icons {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'fpr360-icons' !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+.icon-add-message {
+  &:before {
+    content: $icon-add-message;
+  }
+}
+.icon-industry {
+  &:before {
+    content: $icon-industry;
+  }
+}
+.icon-guru {
+  &:before {
+    content: $icon-guru;
+  }
+}
+.icon-dupl_alert {
+  &:before {
+    content: $icon-dupl_alert;
+  }
+}
+.icon-partners {
+  &:before {
+    content: $icon-partners;
+  }
+}
+.icon-file-upload {
+  &:before {
+    content: $icon-file-upload;
+  }
+}
+.icon-arrow_downward {
+  &:before {
+    content: $icon-arrow_downward;
+  }
+}
+.icon-arrow_upward {
+  &:before {
+    content: $icon-arrow_upward;
+  }
+}
+.icon-check_circle {
+  &:before {
+    content: $icon-check_circle;
+  }
+}
+.icon-close {
+  &:before {
+    content: $icon-close;
+  }
+}
+.icon-warning {
+  &:before {
+    content: $icon-warning;
+  }
+}

@@ -1,0 +1,19 @@
+@import '../../styles/var';
+
+// data line height = 24px element line-height + 8px top & 8px bottom padding = 40px
+.data-line {
+  label {
+    float: left;
+    @include labels();
+    width: 160px;
+    padding: 8px 24px 8px 0;
+    @include text-overflow();
+  }
+  span {
+    float: left;
+    @include values();
+    padding: 8px 0;
+    @include text-overflow();
+    max-width: calc(100% - 160px); // data-line width - label width
+  }
+}

@@ -1,0 +1,40 @@
+<div class="dialog-content dialog-480">
+  <header>
+    <h3>New Reason Code</h3>
+  </header>
+  <section appNoScroller
+    [perfectScrollbar]>
+    <div class="row"
+      *ngFor="let item of array">
+      <div class="col-6">
+        <mat-form-field class="full-width readonly">
+          <input matInput
+            placeholder="Card Type"
+            [readonly]="true"
+            [(ngModel)]="item.name">
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="full-width">
+          <input matInput
+            placeholder="Code"
+            [readonly]="false"
+            [(ngModel)]="item.value">
+        </mat-form-field>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog();">Cancel</button>
+        <button mat-button
+          color="primary"
+          (click)="saveFunction();">Save</button>
+      </div>
+    </div>
+  </footer>
+</div>

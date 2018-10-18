@@ -1,0 +1,106 @@
+@import '../cf-components/styles/mixins';
+@import 'theme-var';
+
+.dropdown-box {
+  width: 608px;
+  max-width: 608px !important;
+  position: relative;
+  padding: 16px 24px 24px;
+  top: 40px;
+  .mat-menu-content {
+    padding: 0;
+  }
+  .box-title {
+    width: 100%;
+    @include clearfix();
+    min-height: 64px;
+    margin-bottom: 16px;
+    h3 {
+      float: left;
+      line-height: 64px;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #28609b;
+    }
+    .right-item {
+      padding-top: 14px;
+    }
+  }
+  .dropdown-box-content {
+    max-height: calc(90vh - 228px);
+    position: relative;
+    .ps__rail-y {
+      left: auto !important;
+      right: 0;
+    }
+  }
+  .history-item {
+    padding: 12px 0 0 48px;
+    position: relative;
+    min-height: 72px;
+    margin-left: 16px;
+    i {
+      &.icon {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -12px;
+        color: $iconColor;
+      }
+    }
+    span {
+      display: block;
+      font-size: 16px;
+    }
+    em {
+      font-style: normal;
+      display: block;
+      font-size: 14px;
+      color: $textColorLight;
+    }
+  }
+  .note-item {
+    padding: 16px 16px 32px 80px;
+    position: relative;
+    .avatar-wrap {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 16px;
+      left: 8px;
+      i {
+        &.custom-icons {
+          display: block;
+          width: 18px;
+          height: 18px;
+          background: #fff;
+          line-height: 18px;
+          text-align: center;
+          font-size: 16px;
+          border-radius: 500rem;
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          color: #2a5f9a;
+        }
+      }
+    }
+    span {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 18px;
+    }
+    em {
+      font-style: normal;
+      display: block;
+      font-size: 13px;
+      color: $textColorLight;
+      padding-bottom: 8px;
+    }
+    p {
+      padding: 0;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<div class="notifications-bar">
+  <header>
+    <div class="notifications-icon">
+      <i class="material-icons">notifications</i>
+      <em *ngIf="notificationsCount">{{notificationsCount}}</em>
+    </div>
+    <div class="line-item">
+      <div class="left-item">
+        <div class="el">
+          <h3>{{title}}</h3>
+        </div>
+      </div>
+      <div class="right-item">
+        <div class="el notifications-settings">
+          <app-dd-menu [light]="true"
+            [options]="notificationsSettings"
+            (select)="notificationsSettingsSelect($event)"></app-dd-menu>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="notifications-toolbar line-item">
+    <div class="left-item">
+      <span class="new-count">{{count}} new</span>
+    </div>
+    <div [hidden]="true"
+      class="right-item">
+      <button mat-icon-button>
+        <i class="material-icons">done_all</i>
+      </button>
+    </div>
+  </div>
+  <section [perfectScrollbar]>
+    <article *ngFor="let item of notifications">
+      <i *ngIf="item.icon&&(item.icon==='warning')"
+        class="item-icon material-icons orange-color">warning</i>
+      <i *ngIf="item.icon&&(item.icon==='link')"
+        class="item-icon material-icons error-color">link</i>
+      <div class="notification-box">
+        <div class="notification-title">
+          <h4>{{item.name}}</h4>
+          <em>{{item.date}}</em>
+        </div>
+        <p [innerHTML]="item.content"></p>
+        <button mat-button
+          color="primary">Resolve</button>
+      </div>
+    </article>
+  </section>
+</div>

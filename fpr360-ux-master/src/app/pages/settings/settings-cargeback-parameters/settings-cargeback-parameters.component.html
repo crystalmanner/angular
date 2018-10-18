@@ -1,0 +1,70 @@
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Field Type</h3>
+            <div class="right-item">
+              <a mat-icon-button
+                (click)="addFieldDialog(fields, 'New Field')">
+                <i class="material-icons">add_circle</i>
+              </a>
+            </div>
+          </div>
+          <ul class="checking-list double-val auto-height"
+            [perfectScrollbar]>
+            <li class="line-item"
+              *ngFor="let item of fields"
+              [ngClass]="item.active?'active':''">
+              <div class="left-item"
+                (click)="acviveFunction(item)">
+                <span class="data">{{item.fieldName}}</span>
+                <em class="type-field">{{item.type}}</em>
+              </div>
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeItem(fields, item); valuesList = []; showValues=false">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Values</h3>
+            <div class="right-item">
+              <button class="addButton"
+                disabled="{{!showValues}}"
+                mat-icon-button
+                (click)="addValueDialog('Dropdown Options')">
+                <i class="material-icons">add_circle</i>
+              </button>
+            </div>
+          </div>
+          <ul *ngIf="showValues"
+            class="checking-list auto-height"
+            [perfectScrollbar]>
+            <li class="line-item"
+              *ngFor="let val of valuesList">
+              <div class="left-item no-link">
+                <span class="data">{{val.value}}</span>
+              </div>
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeItem(valuesList, val)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+    </div>
+  </section>
+</div>

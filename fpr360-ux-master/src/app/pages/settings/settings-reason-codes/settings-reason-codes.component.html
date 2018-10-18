@@ -1,0 +1,14 @@
+<table-component [tableData]="settingsReasonCodeData"></table-component>
+<!-- add button -->
+<div class="button-box bottom-position">
+  <button mat-fab
+    (click)="uploadDialog()"
+    class="visible-on-hover">
+    <i class="material-icons">file_upload</i>
+  </button>
+  <button mat-fab
+    class="visible"
+    routerLink="/settings/new-reason-codes">
+    <i class="material-icons">add</i>
+  </button>
+</div>

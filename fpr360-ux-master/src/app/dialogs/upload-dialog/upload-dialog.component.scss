@@ -1,0 +1,42 @@
+@import '../../cf-components/styles/mixins';
+@import '../../scss/theme-var';
+
+.upload-dialog {
+  width: calc(960px - 32px);
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
+  }
+  .link-with-icon {
+    cursor: pointer;
+    float: left;
+    line-height: 24px;
+    outline: none;
+    margin: 6px 0 0 16px;
+    i {
+      float: left;
+      margin-right: 8px;
+      color: $iconColor;
+    }
+    span {
+      float: left;
+      color: $textColor;
+    }
+  }
+}
+.upload-box {
+  text-align: center;
+  padding: 64px 0;
+  .icon-box {
+    padding-bottom: 24px;
+    .custom-icons {
+      color: $iconColor;
+      font-size: 72px;
+    }
+  }
+  p {
+    padding: 0 0 44px;
+  }
+  .mat-raised-button {
+    min-width: 128px;
+  }
+}

@@ -1,0 +1,222 @@
+@import 'colors/colors';
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: ' '; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+//$animVar: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+$animVar: cubic-bezier(0.25, 0.8, 0.25, 1);
+
+$animationTime: 0.175s;
+
+@mixin animation($i:$animationTime) {
+  -webkit-transition: all $i $animVar;
+  -moz-transition: all $i $animVar;
+  -o-transition: all $i $animVar;
+  transition: all $i $animVar;
+}
+
+@mixin animationWidth($i:$animationTime) {
+  -webkit-transition: width $i $animVar;
+  -moz-transition: width $i $animVar;
+  -o-transition: width $i $animVar;
+  transition: width $i $animVar;
+}
+
+@mixin animationTop($i:$animationTime) {
+  -webkit-transition: top $i $animVar;
+  -moz-transition: top $i $animVar;
+  -o-transition: top $i $animVar;
+  transition: top $i $animVar;
+}
+@mixin animationBottom($i:$animationTime) {
+  -webkit-transition: bottom $i $animVar;
+  -moz-transition: bottom $i $animVar;
+  -o-transition: bottom $i $animVar;
+  transition: bottom $i $animVar;
+}
+@mixin animationHeight($i:$animationTime) {
+  -webkit-transition: height $i $animVar;
+  -moz-transition: height $i $animVar;
+  -o-transition: height $i $animVar;
+  transition: height $i $animVar;
+}
+
+@mixin animationMaxHeight($i:$animationTime) {
+  -webkit-transition: max-height $i $animVar;
+  -moz-transition: max-height $i $animVar;
+  -o-transition: max-height $i $animVar;
+  transition: max-height $i $animVar;
+}
+
+$menuAnim: cubic-bezier(0.4, 0, 0.2, 1);
+
+@mixin animationLeft($i:$animationTime) {
+  -webkit-transition: left $i $menuAnim;
+  -moz-transition: left $i $menuAnim;
+  -o-transition: left $i $menuAnim;
+  transition: left $i $menuAnim;
+}
+
+@mixin animationOpacity($i:$animationTime) {
+  -webkit-transition: opacity $i linear;
+  -moz-transition: opacity $i linear;
+  -o-transition: opacity $i linear;
+  transition: opacity $i linear;
+}
+
+@mixin text-overflow() {
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@mixin icon() {
+  display: block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 24px;
+}
+
+@mixin transition ($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transform($string) {
+  -webkit-transform: $string;
+  -moz-transform: $string;
+  -ms-transform: $string;
+  -o-transform: $string;
+  transform: $string;
+}
+@mixin zoom($_zoom) {
+  @include transition(all 0.5s ease);
+  @include transform(scale($_zoom));
+}
+
+//Display 4
+@mixin display_4() {
+  font-size: 112px;
+  line-height: 1.2em;
+  letter-spacing: 0.01em;
+  font-weight: 300;
+  color: $color_display_4;
+}
+//Display 3
+@mixin display_3() {
+  font-size: 56px;
+  line-height: 1.2em;
+  letter-spacing: 0.005em;
+  font-weight: 400;
+  color: $color_display_3;
+}
+//Display 2
+@mixin display_2() {
+  font-size: 45px;
+  line-height: 48px;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: $color_display_2;
+}
+//Display 1
+@mixin display_1() {
+  font-size: 34px;
+  line-height: 40px;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: $color_display_1;
+}
+//Headline
+@mixin headline() {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: $color_headline;
+}
+//Title
+@mixin title() {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  color: $color_title;
+}
+//Subhead
+@mixin subhead() {
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: $color_subhead;
+  @media only screen and (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+//Body 2
+@mixin body_2() {
+  font-size: 13px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  font-weight: 600;
+  color: $color_body_2;
+  @media only screen and (max-width: 1024px) {
+    font-size: 14px;
+  }
+}
+//Body 1
+@mixin body_1() {
+  font-size: 13px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: $color_body_1;
+  @media only screen and (max-width: 1024px) {
+    font-size: 14px;
+  }
+}
+//Caption
+@mixin caption() {
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: $color_caption;
+}
+//Button
+@mixin button() {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $color_button;
+  letter-spacing: 0.01em;
+}
+//labels
+@mixin labels() {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: $textColorLight;
+}
+//values
+@mixin values() {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: $textColor;
+}

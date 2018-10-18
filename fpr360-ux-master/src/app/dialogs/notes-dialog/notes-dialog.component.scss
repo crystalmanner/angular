@@ -1,0 +1,23 @@
+@import '../../cf-components/styles/mixins';
+@import '../../scss/theme-var';
+
+.notes-dialog {
+  width: calc(420px - 32px);
+  padding-bottom: 32px;
+  @media only screen and (max-width: 480px) {
+    width: 100%;
+  }
+}
+.dialog-note {
+  width: 100%;
+  padding: 16px 0 32px;
+  em {
+    display: block;
+    font-style: normal;
+    color: $textColorLight;
+    padding-bottom: 12px;
+  }
+  span {
+    display: block;
+  }
+}

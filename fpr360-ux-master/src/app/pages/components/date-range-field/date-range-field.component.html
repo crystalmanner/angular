@@ -1,0 +1,18 @@
+<div class="date-range-field">
+  <span class="clickable"
+    [matMenuTriggerFor]="menu">{{value}}
+    <i class="material-icons">arrow_drop_down</i>
+    <em class="mat-select-underline"></em>
+  </span>
+  <mat-menu #menu="matMenu">
+    <div *ngFor="let item of list">
+      <button *ngIf="item!='divider'"
+        mat-menu-item
+        (click)="changeRange(item)">
+        <span>{{item}}</span>
+      </button>
+      <span *ngIf="item==='divider'"
+        class="cf-divider"></span>
+    </div>
+  </mat-menu>
+</div>

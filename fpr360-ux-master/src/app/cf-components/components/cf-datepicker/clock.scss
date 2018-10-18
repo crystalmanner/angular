@@ -1,0 +1,94 @@
+@import 'var';
+:host {
+  position: relative;
+  display: block;
+  width: $cf-clock-min-size;
+  margin: $cf-clock-margin auto;
+  font-size: $cf-clock-font-size;
+  box-sizing: border-box;
+  user-select: none;
+}
+.cf-clock {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+  background-color: darken(#fff, 12);
+  border-radius: 50%;
+}
+.cf-clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2%;
+  height: 2%;
+  margin: -1%;
+  border-radius: 50%;
+  background-color: $primary;
+}
+.cf-clock-hand {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  margin: 0 auto;
+  background-color: $primary;
+  transform-origin: bottom;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: $primary;
+  }
+}
+.cf-clock-hours,
+.cf-clock-minutes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: 350ms;
+  transform: scale(1.2);
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+}
+.cf-clock-minutes {
+  transform: scale(0.8);
+}
+.cf-clock-cell {
+  position: absolute;
+  display: flex;
+  width: $cf-clock-cell-size;
+  height: $cf-clock-cell-size;
+  color: $textColor;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 50%;
+  align-items: center;
+  cursor: pointer;
+  &:not(.cf-clock-cell-selected) {
+    &:not(.cf-clock-cell-disabled):hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+  &.cf-clock-cell-disabled {
+    color: $ultraLight;
+    pointer-events: none;
+  }
+  &.cf-clock-cell-selected {
+    color: #fff;
+    background-color: lighten($primary, 5);
+  }
+}

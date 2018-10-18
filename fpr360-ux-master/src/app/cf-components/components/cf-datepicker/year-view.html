@@ -1,0 +1,15 @@
+<table class="cf-calendar-table">
+  <thead class="cf-calendar-table-header"></thead>
+  <tbody [@slideCalendar]="_calendarState"
+    (@slideCalendar.done)="_calendarStateDone()"
+    app-calendar-body
+    role="grid"
+    allowDisabledSelection="true"
+    [label]="_yearLabel"
+    [rows]="_months"
+    [todayValue]="_todayMonth"
+    [selectedValue]="_selectedMonth"
+    [labelMinRequiredCells]="2"
+    [activeCell]="_util.getMonth(activeDate)"
+    (selectedValueChange)="_monthSelected($event)"></tbody>
+</table>

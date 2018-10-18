@@ -1,0 +1,225 @@
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <div class="col-6">
+        <!-- Merchant Info -->
+        <fieldset class="form-section">
+          <div class="form-title"
+            *ngIf="onboarding">
+            <h3>Merchant Info</h3>
+          </div>
+          <div class="check-line field-line"
+            *ngIf="onboarding">
+            <mat-checkbox [ngClass]="readonly? 'readonly': ''"
+              [disabled]="readonly"
+              [(ngModel)]="sameAddress">Same as company address</mat-checkbox>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Country"
+                  [(ngModel)]="detailsData.countryValue"
+                  [disabled]="readonly"
+                  (change)="changeCountry(detailsData.countryValue); changeIndicator(detailsData.countryValue)">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of country"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-5">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Industry"
+                  [(ngModel)]="detailsData.industryValue"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of detailsData.industry"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-3">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Currency"
+                  [(ngModel)]="detailsData.currencyValue"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of detailsData.currency"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Address"
+                  [(ngModel)]="detailsData.addressValue"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="City"
+                  [(ngModel)]="detailsData.cityValue"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+            <div class="col-s-3"
+              *ngIf="!this.countryChanges.stateField">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="{{countryChanges.stateLabel}}"
+                  [(ngModel)]="detailsData.stateValue"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of state"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-3"
+              *ngIf="this.countryChanges.stateField">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  [readonly]="readonly"
+                  placeholder="{{countryChanges.stateLabel}}"
+                  [(ngModel)]="detailsData.stateValue">
+              </mat-form-field>
+            </div>
+            <div class="col-s-2">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  [readonly]="readonly"
+                  placeholder="{{countryChanges.zipLabel}}"
+                  [(ngModel)]="detailsData.zipValue"
+                  [textMask]="{mask: countryChanges.zipMask, guide: false}">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Email"
+                  [formControl]="emailFormControl"
+                  [(ngModel)]="detailsData.emailValue"
+                  [readonly]="readonly">
+                <mat-error *ngIf="emailFormControl.hasError('pattern')">
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Phone Number"
+                  [textMask]="{mask: countryChanges.phoneMask, guide: false}"
+                  [(ngModel)]="detailsData.phoneValue"
+                  [readonly]="readonly"
+                  [formControl]="phoneFormControl">
+                <mat-error *ngIf="phoneFormControl.hasError('pattern')">
+                  Please enter a valid number
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-s-2">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Ext."
+                  [(ngModel)]="detailsData.extensionValue"
+                  [readonly]="readonly"
+                  [textMask]="{mask: extMask, guide: false}">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Lead Source"
+                  [(ngModel)]="detailsData.leadSourceValue"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of leadSource"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Client complexity"
+                  [(ngModel)]="detailsData.clientComplexityValue"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of clientComplexity"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <textarea matInput
+                  rows="1"
+                  autosize
+                  #notes
+                  placeholder="Company Description"
+                  [(ngModel)]="detailsData.description"
+                  [readonly]="readonly"></textarea>
+                <mat-hint align="start">This description will appear in the client's chargeback dispute cover letter</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </section>
+</div>

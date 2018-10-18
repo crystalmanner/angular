@@ -1,0 +1,283 @@
+<div class="table-position"
+  tablePosition>
+  <div class="content-toolbar-wrap"
+    [ngClass]="selectedFlag? ' bg-toolbar': null">
+    <div class="wrap">
+      <div *ngIf="!selectedFlag"
+        class="line-item content-toolbar tollbar-with-settings">
+        <div class="left-item">
+          <div class="el"
+            *ngIf="newCounter || expiringCounter || errorCounter">
+            <div class="badges">
+              <app-badge *ngIf="newCounter"
+                [backgroundStyle]="'#1DBAA6'"
+                class="clickable"
+                [colorStyle]="'#fff'"
+                (click)="newFilter()">{{newCounter}} New</app-badge>
+              <app-badge *ngIf="expiringCounter"
+                [backgroundStyle]="'#FFB829'"
+                [colorStyle]="'#fff'"
+                class="clickable"
+                (click)="expiringFilter()">{{expiringCounter}}</app-badge>
+              <app-badge *ngIf="errorCounter"
+                [backgroundStyle]="'#FF2929'"
+                [colorStyle]="'#fff'"
+                class="clickable"
+                (click)="errorFilter()">{{errorCounter}}</app-badge>
+            </div>
+          </div>
+          <div class="el">
+            <app-simple-search [placeholder]="'Filter by keyword …'"
+              (change)="searchFunction($event)"></app-simple-search>
+          </div>
+        </div>
+        <div class="right-item">
+          <div class="el"
+            *ngIf="duplicatesFilter">
+            <div class="switch-line">
+              <mat-slide-toggle class="left-label"
+                [(ngModel)]="showDuplicates"
+                (change)="showDuplicatesFunction(showDuplicates)">Show Duplicates</mat-slide-toggle>
+            </div>
+          </div>
+          <div class="left-item"
+            *ngIf="tableData.addidionalData.selects">
+            <div class="el"
+              *ngFor="let el of tableData.addidionalData.selects">
+              <app-select-menu [value]="el.selected"
+                [options]="el.options"
+                (change)="el.function($event)"></app-select-menu>
+            </div>
+          </div>
+          <div class="el"
+            *ngIf="dateRange">
+            <app-date-range-field (change)="dateRangeFunction($event)"></app-date-range-field>
+          </div>
+          <div class="el"
+            *ngIf="tableData.addidionalData.toolbarFilter">
+            <app-dd-filter [filterOptions]="tableData.addidionalData.toolbarFilter.options"
+              (check)="tableData.addidionalData.toolbarFilter.function($event)"></app-dd-filter>
+          </div>
+          <div class="el"
+            *ngIf="tableData.addidionalData.downloadButton">
+            <button mat-icon-button
+              class="standard"
+              (click)="tableData.addidionalData.downloadButton.function($event)">
+              <i class="material-icons">file_download</i>
+            </button>
+          </div>
+          <div class="el"
+            *ngIf="tableData.addidionalData.toolbarOptions">
+            <app-dd-menu [options]="tableData.addidionalData.toolbarOptions.options"
+              (select)="tableData.addidionalData.toolbarOptions.function($event)"></app-dd-menu>
+          </div>
+        </div>
+      </div>
+      <!-- selected content toolbar -->
+      <div *ngIf="selectedFlag"
+        class="line-item content-toolbar">
+        <div class="left-item">
+          <div class="el">
+            <button mat-icon-button
+              class="light"
+              (click)="cancelSelected()">
+              <i class="material-icons">arrow_back</i>
+            </button>
+          </div>
+          <div class="el">
+            <span class="selected-count">
+              {{selectedCount}} Selected
+            </span>
+          </div>
+        </div>
+        <div class="right-item">
+          <div class="el"
+            *ngIf="assignButton">
+            <button mat-raised-button
+              color="primary"
+              (click)="openAssignDialog()">Assign</button>
+          </div>
+          <div class="el">
+            <button mat-icon-button
+              (click)="cancelSelected()"
+              class="light">
+              <i class="material-icons">file_download</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <!-- List structure -->
+    <section class="main-content table-section">
+      <div #tableWrapper
+        class="table-wrap"
+        [ngClass]="selectedFlag? 'selected-row': null">
+        <ngx-datatable #table
+          class="material fullscreen"
+          [rows]="tableData.rows"
+          [columnMode]="'force'"
+          [headerHeight]="56"
+          [scrollbarV]="false"
+          [scrollbarH]="false"
+          [rowHeight]="48"
+          [rowClass]="getRowClass"
+          [selected]="selected"
+          [selectionType]="'checkbox'"
+          (activate)="onActivate($event)"
+          (select)='onSelect($event)'>
+          <ngx-datatable-column [width]="60"
+            [sortable]="false"
+            [canAutoResize]="false"
+            [draggable]="false"
+            [resizeable]="false"
+            [frozenLeft]="true"
+            [name]="'no-link'"
+            headerClass="checkbox-cell"
+            [cellClass]="'checkbox-cell'">
+            <ng-template ngx-datatable-header-template
+              let-value="value"
+              let-allRowsSelected="allRowsSelected"
+              let-selectFn="selectFn">
+              <mat-checkbox *ngIf="noresult"
+                class="header-checkbox"
+                [checked]="allRowsSelected"
+                [(indeterminate)]="indeterminate"
+                (change)="selectFn(!allRowsSelected)"></mat-checkbox>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template
+              let-value="value"
+              let-isSelected="isSelected"
+              let-onCheckboxChangeFn="onCheckboxChangeFn"
+              let-row="row">
+              <mat-checkbox [checked]="isSelected"
+                (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+              <i class="material-icons icon-row {{row.icon.iconColor}}"
+                *ngIf="row.icon&&row.icon.iconName && row.icon.iconName!='icon-dupl_alert'">{{row.icon.iconName}}</i>
+              <i class="custom-icons icon-row {{row.icon.iconColor}} {{row.icon.iconName}}"
+                *ngIf="row.icon&&row.icon.iconName && row.icon.iconName==='icon-dupl_alert'"></i>
+              <div *ngIf="row.icon&&row.icon.type"
+                class="table-avatar">
+                <app-image [type]="row.icon.type"
+                  [initial]="row.icon.initials"
+                  [initialColor]="row.icon.color"
+                  [imageUrl]="row.icon.photo"
+                  [imageAlt]="row.name">
+                </app-image>
+                <i *ngIf="row.icon.guru"
+                  class="custom-icons icon-guru"></i>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column *ngFor="let item of tableData.addidionalData.colsData"
+            [draggable]="false"
+            name="{{item.name}}"
+            [canAutoResize]="!item.width"
+            [maxWidth]="item.width? item.width: undefined"
+            [minWidth]="item.width? item.width: undefined"
+            [width]="item.width? item.width: undefined"
+            [flexGrow]="1"
+            headerClass="{{item.rightAlign? ' right-align ': null}}{{(!item.included? ' hidden ': '')}}{{(item.gray? ' gray-cell ': '')}}"
+        
+            [cellClass]="(item.bold? ' bold ': '') + ' ' + (item.rightAlign? ' right-align ': '') + ' ' + (!item.included? ' hidden ': '') + (item.gray? ' gray-cell ': '')">
+            <ng-template *ngIf="!item.editableselect&&!item.notesIcon"
+              ngx-datatable-cell-template
+              let-rowIndex="rowIndex"
+              let-value="value"
+              let-row="row"
+              let-rowHeight="rowHeight">
+              <i *ngIf="value==='Check'"
+                class="table-icon material-icons primary-color">check</i>
+              <i *ngIf="value==='Close'"
+                class="table-icon material-icons error-color">close</i>
+              <i *ngIf="value==='Up'"
+                class="table-icon material-icons error-color">arrow_upward</i>
+              <i *ngIf="value==='Down'"
+                class="table-icon material-icons green-color">arrow_downward</i>
+              <span *ngIf="value==='Active_label'"
+                class="table-label active-label">Active</span>
+              <span *ngIf="value==='Paid_label'"
+                class="table-label paid-label">Paid</span>
+              <span *ngIf="value==='Inactive_label'"
+                class="table-label inactive-label">Inactive</span>
+              <span *ngIf="value==='Legacy_label'"
+                class="table-label legacy-label">Legacy</span>
+              <span *ngIf="value==='Open_label'"
+                class="table-label open-label">Open</span>
+              <span *ngIf="value==='Closed_label'"
+                class="table-label closed-label">Closed</span>
+              <span *ngIf="value==='Lost_label'"
+                class="table-label lost-label">Lost</span>
+              <span *ngIf="value==='Won_label'"
+                class="table-label won-label">Won</span>
+              <span *ngIf="value==='Unfought_label'"
+                class="table-label unfought-label">Unfought</span>
+              <span *ngIf="value==='New_label'"
+                class="table-label new-label">New</span>
+              <span *ngIf="value==='Pending_label'"
+                class="table-label pending-label">Pending</span>
+              <span *ngIf="value==='Declined_label'"
+                class="table-label declined-label">Declined</span>
+              <span *ngIf="value==='Void_label'"
+                class="table-label void-label">Void</span>
+              <span *ngIf="value==='Paused_label'"
+                class="table-label paused-label">Paused</span>
+
+              <span *ngIf="value!='Paused_label'&&value!='Void_label'&&value!='Declined_label'&&value!='Pending_label'&&value!='New_label'&&value!='Unfought_label'&&value!='Won_label'&&value!='Lost_label'&&value!='Active_label'&& value!='Inactive_label'&& value!='Legacy_label'&& value!='Paid_label'&&value!='Open_label'&&value!='Closed_label'"
+            
+                [innerHTML]="value"></span>
+            </ng-template>
+            <ng-template *ngIf="item.editableselect"
+              ngx-datatable-cell-template
+              let-rowIndex="rowIndex"
+              let-value="value"
+              let-row="row"
+              let-rowHeight="rowHeight">
+              <app-select-menu class="table-select"
+                [value]="value"
+                [options]="item.editableSelectOptions"
+                (click)="onEvent($event)"
+                (change)="changeStatus($event, item)"></app-select-menu>
+            </ng-template>
+            <ng-template *ngIf="item.notesIcon"
+              ngx-datatable-cell-template
+              let-rowIndex="rowIndex"
+              let-value="value"
+              let-row="row"
+              let-rowHeight="rowHeight">
+              <button mat-icon-button
+                *ngIf="value"
+                class="standard"
+                (click)="openNotes(value)">
+                <i class="material-icons">message</i>
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column [width]="60"
+            [sortable]="false"
+            [canAutoResize]="false"
+            [draggable]="false"
+            [resizeable]="false"
+            [frozenRight]="true"
+            [name]="'no-link'">
+            <ng-template ngx-datatable-header-template
+              let-column="column">
+              <app-dd-menu class="table-settings"
+                [options]="globalTableSettings"
+                (select)="selectGlobalTableSettings($event)"></app-dd-menu>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template
+              let-rowIndex="rowIndex"
+              let-value="value"
+              let-row="row">
+              <app-dd-menu class="table-settings"
+                [options]="tableData.addidionalData.rowSettings"
+                (select)="rowSettings($event, row)"></app-dd-menu>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+.mat-dialog-container {
+  padding-bottom: 0 !important;
+}
+.dialog-content {
+  header {
+    padding: 0 0 16px;
+  }
+  section {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(90vh - 68px - 68px);
+  }
+  footer {
+    margin: 0 -24px;
+    padding: 28px 8px 8px;
+    position: relative;
+  }
+  &.without-title {
+    section {
+      max-height: calc(90vh - 68px);
+    }
+  }
+}

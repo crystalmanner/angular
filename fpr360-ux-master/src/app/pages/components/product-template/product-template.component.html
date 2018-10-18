@@ -1,0 +1,174 @@
+<div class="sub-header-box">
+  <div class="wrap">
+    <div class="line-item editable-title-wrap">
+      <div class="left-item">
+        <app-editable-title [placeholder]="'Enter Product Name'"
+          [value]="productData.productName"
+          [light]="true"
+          (changeValue)="titleVal($event)"></app-editable-title>
+      </div>
+      <div class="right-item middle">
+        <div class="el"
+          *ngIf="showSave">
+          <button mat-raised-button
+            routerLink="/onboarding/products"
+            color="primary">Save</button>
+        </div>
+        <div class="el settings-placeholder"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <!-- Details -->
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Details</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="productData.productDetails.url"
+                  placeholder="URL"
+                  [formControl]="urlFormControl"
+                  (change)="changeSaveButton()">
+                <mat-error *ngIf="urlFormControl.hasError('pattern')">
+                  Please enter a valid url
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-2">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="productData.productDetails.price"
+                  maxlength="10"
+                  placeholder="Price"
+                  [textMask]="{mask: moneyMask, guide: false}"
+                  (change)="changeSaveButton()">
+              </mat-form-field>
+            </div>
+            <div class="col-s-5">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Type"
+                  [(ngModel)]="productData.productDetails.type"
+                  (change)="changeSaveButton()">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of productType"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-2">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="productData.productDetails.trialTerm"
+                  placeholder="Trial (d)"
+                  [textMask]="{mask: dayMask, guide: false}"
+                  (change)="changeSaveButton()">
+              </mat-form-field>
+            </div>
+            <div class="col-s-3">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="productData.productDetails.refundTerm"
+                  placeholder="Refund (d)"
+                  [textMask]="{mask: dayMask, guide: false}"
+                  (change)="changeSaveButton()">
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <!-- Screenshots -->
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Screenshots</h3>
+          </div>
+          <div class="row screenshots">
+            <app-screenshot [file]="productData.screens.homepageUrl"
+              (change)="changeScreenshot($event); changeSaveButton()">Homepage</app-screenshot>
+            <app-screenshot [file]="productData.screens.checkoutPageUrl"
+              (change)="changeScreenshot($event); changeSaveButton()">Checkout Page</app-screenshot>
+            <app-screenshot [file]="productData.screens.termsConditionsUrl"
+              (change)="changeScreenshot($event); changeSaveButton()">Terms &amp; Conditions</app-screenshot>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="row top-level">
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Merchants</h3>
+            <div class="right-item">
+              <a mat-icon-button
+                (click)="openDialog('Merchants')">
+                <i class="material-icons">add_circle</i>
+              </a>
+            </div>
+          </div>
+          <ul class="checking-list">
+            <li class="line-item"
+              *ngFor="let item of productData.merchantsList"
+              [hidden]="!item.included"
+              [ngClass]="item.active?'active':''">
+              <div class="left-item"
+                (click)="acviveMerchantsFunction(item)">
+                <span class="data">{{item.name}}</span>
+              </div>
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeMerchantsItem(item)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+      <div class="col-6">
+        <div class="form-title">
+          <h3>MIDs</h3>
+          <div class="right-item">
+            <button class="addButton"
+              disabled="{{!midsFlag}}"
+              mat-icon-button
+              (click)="openDialog('MIDs')">
+              <i class="material-icons">add_circle</i>
+            </button>
+          </div>
+        </div>
+        <ul *ngIf="midsFlag"
+          class="checking-list">
+          <li class="line-item"
+            *ngFor="let item of midsList"
+            [hidden]="!item.included">
+            <div class="left-item">
+              <span class="data">{{item.name}}</span>
+            </div>
+            <div class="right-item">
+              <button mat-icon-button
+                class="standard"
+                (click)="removeItem(item)">
+                <i class="material-icons">close</i>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>

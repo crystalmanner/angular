@@ -1,0 +1,17 @@
+<div class="cf-picker-style {{error? ' error-date-field':null}}"
+  [ngClass]="!icons? ' without-icons': null">
+  <app-datepicker placeholder="{{labelPicker}}"
+    [openOnFocus]="isOpenOnFocus"
+    [type]="typePicker"
+    [format]="formatPicker"
+    [touchUi]="touchPicker"
+    [(ngModel)]="value"
+    [disabled]="readonly"
+    [min]="min"
+    [max]="max"
+    (change)="changeDate(value)">
+  </app-datepicker>
+  <mat-error *ngIf="error">
+    {{errorText}}
+  </mat-error>
+</div>

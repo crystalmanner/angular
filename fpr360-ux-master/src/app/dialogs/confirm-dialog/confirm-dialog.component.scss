@@ -1,0 +1,14 @@
+@import '../../cf-components/styles/mixins';
+@import '../../scss/theme-var';
+
+.conform-dialog {
+  header {
+    h3 {
+      color: $red;
+    }
+  }
+  p {
+    font-weight: 600;
+    padding-bottom: 32px;
+  }
+}

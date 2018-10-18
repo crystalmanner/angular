@@ -1,0 +1,130 @@
+<div class="sub-header-box header-filter">
+  <div class="wrap">
+    <div class="row">
+      <div class="col-7">
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field class="full-width light"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{dashboardFilter.industry.label}}"
+                [(ngModel)]="dashboardFilter.industry.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of dashboardFilter.industry.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="full-width light"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{dashboardFilter.category.label}}"
+                [(ngModel)]="dashboardFilter.category.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of dashboardFilter.category.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="full-width light"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{dashboardFilter.company.label}}"
+                [(ngModel)]="dashboardFilter.company.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of dashboardFilter.company.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="row">
+          <div class="col-8">
+            <mat-form-field class="full-width light"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{dashboardFilter.merchant.label}}"
+                [(ngModel)]="dashboardFilter.merchant.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of dashboardFilter.merchant.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field class="full-width light"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{dashboardFilter.mid.label}}"
+                [(ngModel)]="dashboardFilter.mid.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of dashboardFilter.mid.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <section class="main-content full-width">
+    <div class="mini-widgets"
+      *ngIf="miniWidgets">
+      <div class="row">
+        <app-mini-widget *ngFor="let item of miniWidgets"
+          [hidden]="!item.included"
+          [dataMiniWidget]="item"></app-mini-widget>
+      </div>
+      <div class="mini-widgets-settings">
+        <app-dd-menu [options]="miniWidgetsSettings"
+          (select)="selectMiniWidgetsSettings($event)"></app-dd-menu>
+      </div>
+    </div>
+    <div class="widgets"
+      [sortablejs]="widgets"
+      [sortablejsOptions]="{ animation: 150 }">
+      <div *ngFor="let item of widgets"
+        [hidden]="!item.included"
+        class="dashboard-widget {{item.size}}">
+        <app-widget [widgetTitle]="item.name"
+          [widgetSettings]="widgetSettings"
+          (fullScreen)="fullScreenFunction($event, item)"
+          (select)="widgetMenu($event, item)">
+          <img class="chart-placeholder"
+            src=" {{item.chart}}">
+        </app-widget>
+      </div>
+    </div>
+  </section>
+</div>

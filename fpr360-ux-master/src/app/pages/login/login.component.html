@@ -1,0 +1,80 @@
+<div class="login-wrap">
+  <div class="login-box">
+    <img class="login-logo"
+      src="{{logo.url}}"
+      alt="{{logo.title}}"
+      width="{{logo.width}}"
+      height="{{logo.height}}">
+    <div class="form-title">
+      <h3>{{title}}</h3>
+    </div>
+    <div class="login-form"
+      *ngIf="!forgotPasswordFlag">
+      <div class="login-line">
+        <mat-form-field class="full-width">
+          <input matInput
+            placeholder="User Email"
+            [formControl]="email"
+            required>
+          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="login-line">
+        <app-password (change)="passwordFunction($event)"></app-password>
+      </div>
+      <div class="login-line button-line">
+        <button class="big-button"
+          routerLink="/"
+          mat-raised-button
+          color="primary">Login</button>
+      </div>
+      <ul class="login-menu">
+        <li>
+          <a class="clickable"
+            (click)="forgotPassword()"
+            title="Forgot Password?">Forgot Password?</a>
+        </li>
+        <li>
+          <a routerLink="/request-an-account"
+            title="Request an account">Request an account</a>
+        </li>
+      </ul>
+    </div>
+    <div class="login-form"
+      *ngIf="forgotPasswordFlag">
+      <div class="login-line">
+        <p>{{forgotPasswordText}}</p>
+      </div>
+      <div class="login-line">
+        <mat-form-field class="full-width">
+          <input matInput
+            placeholder="Email"
+             [formControl]="email"
+               required>
+          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="login-line button-line">
+        <button class="big-button"
+          mat-raised-button
+          (click)="continueForgot()"
+          color="primary">Continue</button>
+      </div>
+    </div>
+    <div class="povered-by">
+      <h4>Powered by</h4>
+      <img src="assets/images/chargeback-gurus-logo.png"
+        alt="Chargeback Gurus"
+        width="58"
+        height="64">
+    </div>
+  </div>
+</div>
+<footer class="logon-footer">
+  <ul>
+    <li *ngFor="let item of footerLinks">
+      <a routerLink="{{item.url}}"
+        title="{{item.link}}">{{item.link}}</a>
+    </li>
+  </ul>
+</footer>

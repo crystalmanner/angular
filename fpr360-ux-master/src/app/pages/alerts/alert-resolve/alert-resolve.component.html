@@ -1,0 +1,423 @@
+<div *ngIf="isParamAvailable">
+<div class="sub-header-box">
+  <div class="wrap">
+    <div class="line-item">
+      <div class="left-item">
+        <app-editable-title [icon]="'business'"
+          [value]="alert.company.name"
+          [light]="true"
+          [readonly]="true"></app-editable-title>
+      </div>
+      <div class="right-item">
+        <div class="el"
+          *ngFor="let item of alert.users">
+          <div class="small-user-box">
+            <app-image class="avatar-wrap"
+              [size]="36"
+              [type]="'image'"
+              [imageUrl]="item.avatar"
+              [imageAlt]="item.name"
+              routerLink="{{item.url}}"></app-image>
+            <span>{{item.name}}</span>
+            <em>{{item.position}}</em>
+          </div>
+        </div>
+        <div class="el label-el">
+          <app-label [backgroundStyle]="'#00CCB1'">{{alert.status.name}}</app-label>
+        </div>
+         <div class="el button-el">
+          <!-- <app-dd-menu [options]="alert.settings"
+            [light]="true"
+            (select)="selectSettings($event)"></app-dd-menu> -->
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <section class="main-content">
+    <div class="data-line">
+      <app-data-widget [data]="alertDataLine"></app-data-widget>
+    </div>
+    <div class="row top-level">
+      <!-- Alert Info form -->
+      <div class="col-6">
+        <div class="form-title">
+          <h3>Alert Info</h3>
+        </div>
+        <div class="row">
+          <div class="col-s-4">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="{{alert.alertInfo.idNumber.label}}"
+                [(ngModel)]="alert.alertInfo.idNumber.value"
+                [textMask]="{mask: idMask, guide: false}">
+            </mat-form-field>
+          </div>
+          <div class="col-s-4">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="{{alert.alertInfo.provider.label}}"
+                [(ngModel)]="alert.alertInfo.provider.value">
+            </mat-form-field>
+          </div>
+          
+             <div class="col-s-4">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="{{alert.alertInfo.card.label}}"
+                [(ngModel)]="alert.alertInfo.card.value">
+            </mat-form-field>
+          </div>
+      <!--     <div class="col-s-3">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{alert.alertInfo.card.label}}"
+                [(ngModel)]="alert.alertInfo.card.value"
+                [disabled]="readonly"
+                (change)="cardTypeChange(alert.alertInfo.card.value)">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of cards"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-s-12">
+            <mat-form-field class="full-width"
+              [ngClass]="'readonly'">
+              <input matInput
+                [readonly]="true"
+                placeholder="{{alert.alertInfo.timestamp.label}}"
+                [(ngModel)]="alert.alertInfo.timestamp.value">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <!-- Transaction Info form -->
+      <div class="col-6">
+        <div class="form-title">
+          <h3>Transaction Info</h3>
+        </div>
+        <div class="row">
+          <div class="col-s-5">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="{{alert.transactionInfo.merchant.label}}"
+                [(ngModel)]="alert.transactionInfo.merchant.value">
+            </mat-form-field>
+          </div>
+          <div class="col-s-3">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="{{alert.transactionInfo.cardBin.label}}"
+                [(ngModel)]="alert.transactionInfo.cardBin.value"
+                [textMask]="{mask: cardBinMask, guide: false}">
+            </mat-form-field>
+          </div>
+          <div class="col-s-4">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="{{alert.transactionInfo.cc.label}}"
+                [(ngModel)]="alert.transactionInfo.cc.value"
+                [textMask]="{mask: ccMask, guide: false}">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-s-6">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="{{alert.transactionInfo.transactionId.label}}"
+                [(ngModel)]="alert.transactionInfo.transactionId.value">
+            </mat-form-field>
+          </div>
+          <div class="col-s-6">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="{{alert.transactionInfo.descriptor.label}}"
+                [(ngModel)]="alert.transactionInfo.descriptor.value">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+ 
+    
+      <div class="button-wrap"
+        *ngIf="!openRsolveBlock && !openRefundBlock">
+       
+        <button mat-raised-button
+          color="primary"
+       (click) ="openRsolveBlock=true">Resolve</button>
+      </div>
+    
+    
+    <!-- Refund -->
+     <div *ngIf="openRsolveBlock">
+    <div class="row top-level">
+      <div class="col-5">
+        <div class="form-title">
+          <h3>Refund (Coming Soon)</h3>
+        </div>
+      <!--   <div class="row">
+          <div class="col-s-4">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="Status"
+                [(ngModel)]="alert.refund.status">
+            </mat-form-field>
+          </div>
+          <div class="col-s-4">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="Dispute Amount"
+                [(ngModel)]="alert.refund.disputeAmount"
+                [textMask]="{mask: moneyMask, guide: false}">
+            </mat-form-field>
+          </div>
+          <div class="col-s-4">
+            <app-datetime-picker [ngClass]="readonly? 'readonly': ''"
+              [icons]="false"
+              [labelPicker]="'Refund Date'"
+              (change)="backDate($event)"
+              [value]="alert.refund.refundDate"
+              [readonly]="readonly">
+            </app-datetime-picker>
+          </div>
+        </div> -->
+      </div>
+      <div class="col-5">
+        <div class="form-title">
+          <h3>Chargeback (Coming Soon)</h3>
+        </div>
+<!--         <div class="row"> -->
+<!--           <div class="col-s-4"> -->
+<!--             <mat-form-field class="full-width" -->
+<!--               [ngClass]="readonly? 'readonly': ''"> -->
+<!--               <input matInput -->
+<!--                 [readonly]="readonly" -->
+<!--                 placeholder="Status" -->
+<!--                 [(ngModel)]="alert.chargeback.status"> -->
+<!--             </mat-form-field> -->
+<!--           </div> -->
+<!--           <div class="col-s-4"> -->
+<!--             <mat-form-field class="full-width" -->
+<!--               [ngClass]="readonly? 'readonly': ''"> -->
+<!--               <input matInput -->
+<!--                 [readonly]="readonly" -->
+<!--                 placeholder="Dispute Amount" -->
+<!--                 [(ngModel)]="alert.chargeback.disputeAmount" -->
+<!--                 [textMask]="{mask: moneyMask, guide: false}"> -->
+<!--             </mat-form-field> -->
+<!--           </div> -->
+<!--           <div class="col-s-4"> -->
+<!--             <app-datetime-picker [ngClass]="readonly? 'readonly': ''" -->
+<!--               [icons]="false" -->
+<!--               [labelPicker]="'Sale Date'" -->
+<!--               (change)="backDate($event)" -->
+<!--               [value]="alert.chargeback.saleDate" -->
+<!--               [readonly]="readonly"> -->
+<!--             </app-datetime-picker> -->
+<!--           </div> -->
+<!--         </div> -->
+      </div>
+    </div>
+   <!--   <div class="form-title">
+      <h3>Action Steps</h3>
+    </div>
+    
+    <div class="row">
+      <div class="col-3 check-line">
+        <mat-checkbox [ngClass]="readonly? 'readonly': ''"
+         [disabled]="readonly"
+          
+          [(ngModel)]="alert.actionSteps.credit">{{alert.refund.disputeAmount}} to credit</mat-checkbox>
+      </div>
+      <div class="col-3 check-line">
+        <mat-checkbox [ngClass]="readonly? 'readonly': ''"
+          
+        
+          [(ngModel)]="alert.actionSteps.recuring">Cancel Recurring</mat-checkbox>
+      </div>
+      <div class="col-3 check-line">
+        <mat-checkbox [ngClass]="readonly? 'readonly': ''"
+       
+          [disabled]="readonly"
+         
+
+          [(ngModel)]="alert.actionSteps.blacklist">Blacklist Customer</mat-checkbox>
+      </div>
+    </div>
+    -->
+    </div>
+    
+    
+    <!-- Resolve form -->
+    <div class="resolve-box">
+  <!--      <div class="button-wrap"
+        *ngIf="openRsolveBlock && !openRefundBlock">
+        <div class="space">&nbsp;</div>
+        <button mat-raised-button
+          color="primary"
+          (click)="openRefundBlock=true" >Refund</button>
+      </div>
+      -->
+      <div *ngIf="openRsolveBlock">
+       <!--   <div class="space">&nbsp;</div>  -->
+        <div class="form-title">
+          <h3>Resolution Report</h3>
+        </div>
+        <div class="row">
+          <div class="col-s-2">
+            <mat-form-field class="full-width">
+              <input matInput
+                placeholder="Sale Transaction ID"
+                [(ngModel)]="alert.resolutionReport.saleTransactionId">
+            </mat-form-field>
+          </div>
+          <div class="col-s-3">
+            <mat-form-field class="full-width">
+              <input matInput
+                placeholder="Refund Transaction ID"
+                [(ngModel)]="alert.resolutionReport.refundTransactionId">
+            </mat-form-field>
+          </div>
+          <div class="col-s-2">
+            <mat-form-field class="full-width">
+              <input matInput
+                placeholder="Refund Amount"
+                [textMask]="{mask: moneyMask, guide: false}"
+                [(ngModel)]="alert.resolutionReport.refundAmount">
+            </mat-form-field>
+          </div>
+          
+          
+          
+          
+          <div class="col-s-2">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Outcome"
+                [(ngModel)]="alert.resolutionReport.outcome.value">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of alert.resolutionReport.outcome.options"
+                    [value]="item.value">
+                  {{ item.viewValue }} 
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+ 
+           <div class="col-s-3" *ngIf="alert.resolutionReport.outcome.value == ''">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Reason">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar] >
+                  <mat-option *ngFor="let item of reasons" 
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                  
+                </div>
+            
+              </mat-select>
+            </mat-form-field>
+          </div>
+        
+          <div class="col-s-3"  *ngIf="alert.resolutionReport.outcome.value == 'Declined'">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Reason"
+              [(ngModel)]="selectedReason" name="item">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar] >
+                  <mat-option *ngFor="let item of dreasons" 
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                  
+                </div>
+            
+              </mat-select>
+            </mat-form-field>
+          </div>
+      
+    
+    
+         <div class="col-s-3" *ngIf="alert.resolutionReport.outcome.value == 'Resolved' ">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Reason"
+              [(ngModel)]="selectedReason" name="item">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of rreasons"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div> 
+          
+          
+       
+        </div>
+        <div class="row">
+          <div class="col-s-6">
+            <mat-form-field class="full-width">
+              <textarea matInput
+                rows="1"
+                autosize
+                #notes
+                placeholder="Notes (optional)"
+                [(ngModel)]="alert.resolutionReport.notes"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="button-wrap">
+          <button mat-raised-button
+           routerLink="/alerts"
+            (click) = "updateAlert(alert.alertInfo.idNumber.value,this.alert.resolutionReport.outcome.value,selectedReason,alert.resolutionReport.notes,alert.resolutionReport.refundAmount,alert.resolutionReport.refundTransactionId,alert.resolutionReport.saleTransactionId)"
+             
+            color="primary">Submit</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+</div>

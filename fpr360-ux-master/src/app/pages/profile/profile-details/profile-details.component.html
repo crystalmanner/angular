@@ -1,0 +1,112 @@
+<div class="content">
+  <section class="main-content">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="row top-level">
+        <div class="col-6">
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width" [ngClass]="{'readonly': readonly}">
+                <mat-select placeholder="Role"
+                  [formControl]="roleControl">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let role of roles | async"
+                      [value]="role">
+                      {{ role.name }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+                <mat-error *ngIf="roleControl.hasError('required')">
+                  Please select a role
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width"
+                [ngClass]="{'readonly': readonly}">
+                <input matInput
+                  [readonly]="readonly"
+                  placeholder="Email"
+                  [formControl]="emailControl">
+                <mat-error *ngIf="emailControl.hasError('pattern')">
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="{'readonly': readonly}">
+                <input matInput
+                  [readonly]="readonly"
+                  placeholder="Primary Phone"
+                  [textMask]="{mask: phoneMask, guide: false}"
+                  [formControl]="phone_1Control">
+                <mat-error *ngIf="phone_1Control.hasError('pattern')">
+                  Please enter a valid number
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="{'readonly': readonly}">
+                <input matInput
+                  [readonly]="readonly"
+                  placeholder="Secondary Phone"
+                  [textMask]="{mask: phoneMask, guide: false}"
+                  [formControl]="phone_2Control">
+                <mat-error *ngIf="phone_2Control.hasError('pattern')">
+                  Please enter a valid number
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- <div class="space">&nbsp;</div>
+          <div class="change-password">
+            <button mat-raised-button
+              color="primary">Reset Password</button>
+          </div> -->
+        </div>
+        <div class="col-6">
+          <div class="form-title">
+            <h3>Client Companies</h3>
+            <div class="right-item">
+              <a mat-icon-button
+                *ngIf="!readonly"
+                (click)="assignCompany()">
+                <i class="material-icons">add_circle</i>
+              </a>
+            </div>
+          </div>
+          <ul class="clients-companies-list">
+            <ng-template ngFor let-company [ngForOf]="companyList">
+              <li *ngIf="company.included">
+                <span class="company-name">{{ company.name }}</span>
+                <div class="right-item">
+                  <div class="el status-select">
+                    <app-select-menu [value]="company.statusDescription"
+                      [options]="companyStatusOptions"
+                      (change)="changeCompanyStatus($event, company)"></app-select-menu>
+                  </div>
+                  <app-dd-menu class="companies-list-settings"
+                    [options]="['Remove']"
+                    (select)="unassignCompany(company)"></app-dd-menu>
+                </div>
+              </li>
+            </ng-template>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>
+<div class="button-box bottom-position bottom-position-left">
+  <button mat-raised-button
+    color="primary"
+    [disabled]="form.pristine || !form.valid"
+    (click)="save()">Save</button>
+</div>

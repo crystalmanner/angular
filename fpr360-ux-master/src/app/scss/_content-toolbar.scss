@@ -1,0 +1,49 @@
+@import 'theme-var';
+
+.content-toolbar-wrap {
+  margin-bottom: -32px;
+  position: relative;
+  background: #fff;
+  .wrap {
+    min-width: calc(1250px - 64px);
+  }
+  &.bg-toolbar {
+    background: $toolbarBg;
+    .content-toolbar {
+      color: #fff;
+    }
+  }
+}
+.selected-count {
+  float: left;
+  line-height: 40px;
+}
+.content-toolbar {
+  padding: 12px 0 12px 16px;
+  &.top-32 {
+    margin-top: -32px;
+  }
+  .mat-raised-button,
+  .mat-button {
+    margin: 2px 0;
+  }
+  .badges {
+    padding: 8px 0;
+    margin-left: -16px;
+    float: left;
+  }
+  .switch-line {
+    padding: 8px 36px 8px 0;
+  }
+  .toolbal-selects {
+    padding-right: 16px;
+    float: left;
+    app-select-menu {
+      margin-right: 16px;
+    }
+  }
+  .error-label {
+    float: left;
+    line-height: 40px;
+  }
+}

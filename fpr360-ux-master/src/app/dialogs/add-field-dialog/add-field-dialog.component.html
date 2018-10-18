@@ -1,0 +1,42 @@
+<div class="dialog-content check-list-item-dialog">
+  <header>
+    <h3>{{data.dialogName}}</h3>
+  </header>
+  <section>
+    <mat-form-field class="full-width"
+      [ngClass]="readonly? 'readonly': ''">
+      <input matInput
+        placeholder="Field Name"
+        [readonly]="readonly"
+        [(ngModel)]="fieldData.fieldName">
+    </mat-form-field>
+    <mat-form-field class="full-width"
+      [ngClass]="readonly? 'readonly': ''">
+      <mat-select placeholder="Field Type"
+        [(ngModel)]="fieldData.fieldType"
+        [disabled]="readonly">
+        <div class="options-wrap"
+          appNoScroller
+          [perfectScrollbar]>
+          <mat-option *ngFor="let item of fieldTypeOptions"
+            [value]="item.value">
+            {{ item.viewValue }}
+          </mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog();">Cancel</button>
+        <button mat-button
+          color="primary"
+          (click)="createFunction();">Create</button>
+      </div>
+    </div>
+  </footer>
+</div>

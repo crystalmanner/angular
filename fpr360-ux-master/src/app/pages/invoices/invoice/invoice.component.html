@@ -1,0 +1,35 @@
+<div class="sub-header-box with-menu">
+  <div class="wrap">
+    <div class="line-item">
+      <div class="left-item">
+        <app-editable-title [icon]="'business'"
+          [value]="'Orca Nutra Inc.'"
+          [light]="true"
+          [readonly]="true"
+          (changeValue)="titleVal($event)"></app-editable-title>
+      </div>
+      <div class="right-item">
+        <div class="el sub-header-text">
+          <span>ZOHO Account #3765837873</span>
+        </div>
+        <div class="el label-el">
+          <app-label [backgroundStyle]="'#FE9D00'">Paused</app-label>
+        </div>
+        <div class="el button-el">
+          <app-dd-menu [options]="pageSettings"
+            [light]="true"
+            (select)="selectPageSettings($event)"></app-dd-menu>
+        </div>
+      </div>
+    </div>
+    <app-sub-header [light]="true"
+      [innerMenuItems]="invoiceMenu"></app-sub-header>
+  </div>
+  <div class="error-line">
+    <div class="wrap">
+      <p>
+        <i class="material-icons">error_outline</i> Payment for invoice #70430 could not be processed. Pending updated payment information.</p>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

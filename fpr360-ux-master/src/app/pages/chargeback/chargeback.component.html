@@ -1,0 +1,638 @@
+<div class="sub-header-box with-data">
+  <div class="wrap">
+    <div class="line-item">
+      <div class="left-item">
+        <app-editable-title [placeholder]="'Enter Case Number'"
+          [light]="true"
+          [readonly]="false"
+          (changeValue)="titleVal($event)"></app-editable-title>
+      </div>
+      <div class="right-item">
+        <div class="el button-el">
+          <button mat-icon-button
+            [matMenuTriggerFor]="notes"
+            class="light">
+            <i class="material-icons">message</i>
+          </button>
+          <mat-menu #notes
+            class="dropdown-box">
+            <div (click)="stopEvent($event)">
+              <div class="box-title">
+                <h3>Notes</h3>
+                <div class="right-item">
+                  <button mat-button
+                    color="primary"
+                    (click)="addNote()">ADD NOTE</button>
+                </div>
+              </div>
+              <div class="dropdown-box-content"
+                appNoScroller
+                [perfectScrollbar]>
+                <div class="note-item"
+                  *ngFor="let item of notesList">
+                  <div class="avatar-wrap">
+                    <app-image [size]="40"
+                      [type]="item.user.type"
+                      [imageUrl]="item.user.avatar"
+                      [imageAlt]="item.user.name"></app-image>
+                    <i *ngIf="item.user.guru"
+                      class="custom-icons icon-guru"></i>
+                  </div>
+                  <span>{{item.subject}}</span>
+                  <em>{{item.date}}</em>
+                  <p>{{item.note}}</p>
+                </div>
+              </div>
+            </div>
+          </mat-menu>
+        </div>
+        <div class="el button-el settings-placeholder">
+          <app-dd-menu [options]="pageSettings"
+            [light]="true"
+            (select)="selectPageSettings($event)"></app-dd-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap header-data-selects">
+    <div class="row">
+      <div class="col-2">
+        <mat-form-field class="full-width light"
+          [ngClass]="readonly? 'readonly': ''">
+          <mat-select placeholder="{{chargebackTopData.industry.label}}"
+            [(ngModel)]="chargebackTopData.industry.value"
+            [disabled]="readonly"
+            (change)="changeIndustry(chargebackTopData.industry.value)">
+            <div class="options-wrap"
+              appNoScroller
+              [perfectScrollbar]>
+              <mat-option *ngFor="let item of chargebackTopData.industry.options"
+                [value]="item.value">
+                {{ item.viewValue }}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="full-width light"
+          [ngClass]="readonly? 'readonly': ''">
+          <mat-select placeholder="{{chargebackTopData.company.label}}"
+            [(ngModel)]="chargebackTopData.company.value"
+            [disabled]="readonly">
+            <div class="options-wrap"
+              appNoScroller
+              [perfectScrollbar]>
+              <mat-option *ngFor="let item of chargebackTopData.company.options"
+                [value]="item.value">
+                {{ item.viewValue }}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="full-width light"
+          [ngClass]="readonly? 'readonly': ''">
+          <mat-select placeholder="{{chargebackTopData.merchant.label}}"
+            [(ngModel)]="chargebackTopData.merchant.value"
+            [disabled]="readonly">
+            <div class="options-wrap"
+              appNoScroller
+              [perfectScrollbar]>
+              <mat-option *ngFor="let item of chargebackTopData.merchant.options"
+                [value]="item.value">
+                {{ item.viewValue }}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-form-field class="full-width light"
+          [ngClass]="readonly? 'readonly': ''">
+          <mat-select placeholder="{{chargebackTopData.mid.label}}"
+            [(ngModel)]="chargebackTopData.mid.value"
+            [disabled]="readonly">
+            <div class="options-wrap"
+              appNoScroller
+              [perfectScrollbar]>
+              <mat-option *ngFor="let item of chargebackTopData.mid.options"
+                [value]="item.value">
+                {{ item.viewValue }}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Chargeback Details</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <app-datetime-picker [ngClass]="readonly? 'readonly': ''"
+                [icons]="false"
+                [labelPicker]="'Chargeback Date'"
+                [value]="chargeback.details.chargebackDate"
+                [readonly]="readonly">
+              </app-datetime-picker>
+            </div>
+            <div class="col-s-6">
+              <app-datetime-picker [ngClass]="readonly? 'readonly': ''"
+                [icons]="false"
+                [labelPicker]="'Chargeback Due Date'"
+                [value]="chargeback.details.chargebackDueDate"
+                [readonly]="readonly">
+              </app-datetime-picker>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Case Number"
+                  [(ngModel)]="chargeback.details.caseNumber"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Dispute Amount"
+                  [readonly]="readonly"
+                  [(ngModel)]="chargeback.details.disputeAmount"
+                  maxlength="17"
+                  [textMask]="{mask: moneyMask, guide: false}">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Credit Card First 6"
+                  [(ngModel)]="chargeback.details.first6"
+                  [readonly]="readonly"
+                  [textMask]="{mask: first6Mask, guide: false}"
+                  [formControl]="first6validate">
+                <mat-error *ngIf="first6validate.hasError('pattern')">
+                  Not valid number
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Credit Card Last 4"
+                  [(ngModel)]="chargeback.details.last4"
+                  [readonly]="readonly"
+                  [textMask]="{mask: last4Mask, guide: false}"
+                  [formControl]="last4validate">
+                <mat-error *ngIf="last4validate.hasError('pattern')">
+                  Not valid number
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Dispute Type"
+                  [(ngModel)]="chargeback.details.disputeType.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.details.disputeType.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Dispute Reason"
+                  [(ngModel)]="chargeback.details.disputeReason.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.details.disputeReason.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Root Cause"
+                  [(ngModel)]="chargeback.details.rootCause.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.details.rootCause.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Product Delivery Details</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Shipping Carrier"
+                  [(ngModel)]="chargeback.productDelivery.shippingCarrier.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.productDelivery.shippingCarrier.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <app-datetime-picker [ngClass]="readonly? 'readonly': ''"
+                [icons]="false"
+                [labelPicker]="'Shipment Date'"
+                [value]="chargeback.productDelivery.shipmentDate"
+                [readonly]="readonly">
+              </app-datetime-picker>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Tracking Number"
+                  [(ngModel)]="chargeback.productDelivery.trackingNumber"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Refund Resolution</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Refund Status"
+                  [(ngModel)]="chargeback.refundResolution.refundStatus.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.refundResolution.refundStatus.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Refund Type"
+                  [(ngModel)]="chargeback.refundResolution.refundType.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.refundResolution.refundType.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-section"
+          *ngIf="showIndustryParameters">
+          <div class="form-title">
+            <h3>Industry Parameters</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Example"
+                  [(ngModel)]="chargeback.industryParameters.example1.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.industryParameters.example1.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Example"
+                  [(ngModel)]="chargeback.industryParameters.example2"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Example"
+                  [(ngModel)]="chargeback.industryParameters.example3"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Transaction Details</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Transaction ID"
+                  [(ngModel)]="chargeback.transactionDetails.transactionId"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <app-datetime-picker [ngClass]="readonly? 'readonly': ''"
+                [icons]="false"
+                [labelPicker]="'Transaction Date'"
+                [value]="chargeback.transactionDetails.transactionDate"
+                [readonly]="readonly">
+              </app-datetime-picker>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Transaction Amount"
+                  [(ngModel)]="chargeback.transactionDetails.transactionAmount"
+                  [readonly]="readonly"
+                  maxlength="17"
+                  [textMask]="{mask: moneyMask, guide: false}">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="AVS Match"
+                  [(ngModel)]="chargeback.transactionDetails.avsMatch.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.transactionDetails.avsMatch.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="CVV Match"
+                  [(ngModel)]="chargeback.transactionDetails.cvvMatch.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.transactionDetails.cvvMatch.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Sale Type"
+                  [(ngModel)]="chargeback.transactionDetails.saleType.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.transactionDetails.saleType.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Order ID"
+                  [(ngModel)]="chargeback.transactionDetails.orderId"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Customer Details</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Customer Name"
+                  [(ngModel)]="chargeback.customerDetails.customerName"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Country"
+                  [(ngModel)]="chargeback.customerDetails.country.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.customerDetails.country.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="State"
+                  [(ngModel)]="chargeback.customerDetails.state.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of stateUSA"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="IP Address"
+                  [(ngModel)]="chargeback.customerDetails.ipAddress"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+            <div class="col-s-8">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Product"
+                  [(ngModel)]="chargeback.customerDetails.product"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Affiliate ID"
+                  [(ngModel)]="chargeback.customerDetails.affiliateId"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Sub-Affiliate ID"
+                  [(ngModel)]="chargeback.customerDetails.subAffiliateId"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Contacted Customer Service?"
+                  [(ngModel)]="chargeback.customerDetails.contacted.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.customerDetails.contacted.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-6"
+              *ngIf="chargeback.customerDetails.contacted.value==='Yes'">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Method"
+                  [(ngModel)]="chargeback.customerDetails.method.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of chargeback.customerDetails.method.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="line-item">
+      <div class="right-item">
+        <div class="el">
+          <button mat-raised-button
+            routerLink="/chargebacks"
+            color="primary">Create</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

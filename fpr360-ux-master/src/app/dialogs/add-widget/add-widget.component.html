@@ -1,0 +1,38 @@
+<div class="dialog-content add-widget-dialog">
+  <header>
+    <h3>Add Widget</h3>
+  </header>
+  <div *ngIf="data.dialogName != 'CRM'"
+    class="dialog-toolbar line-item">
+    <div class="left-item">
+      <div class="checkbox-line"></div>
+    </div>
+    <div class="dialog-search">
+      <app-simple-search [closeButton]="true"
+        (change)="searchFunction($event)"></app-simple-search>
+    </div>
+  </div>
+  <section appNoScroller
+    [perfectScrollbar]>
+    <div class="ckeck-list-items">
+      <div class="checkbox-line"
+        *ngFor="let item of showArray | dialogListSearch:search">
+        <mat-checkbox [(ngModel)]="item.included"
+          (change)="!item.included; checkItem()">{{item.name}}</mat-checkbox>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog();">Cancel</button>
+        <button mat-button
+          color="primary"
+          (click)="saveFunction();">Add</button>
+      </div>
+    </div>
+  </footer>
+</div>

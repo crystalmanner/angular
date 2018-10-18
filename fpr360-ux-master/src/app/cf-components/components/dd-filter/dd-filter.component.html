@@ -1,0 +1,20 @@
+<button mat-icon-button
+  [matMenuTriggerFor]="menu"
+  class="standard-lignt"
+  [ngClass]="light?' light':null">
+  <i class="material-icons">filter_list</i>
+</button>
+<mat-menu #menu="matMenu">
+  <div *ngFor="let item of filterOptions">
+    <button class="filter-item"
+      *ngIf="item.option!='divider'"
+      mat-menu-item
+      (click)="checkFunction($event); item.flag = !item.flag; checkFilter([item.option, item.flag]);">
+      <i *ngIf="item.flag"
+        class="material-icons">check</i>
+      <span>{{item.option}}</span>
+    </button>
+    <span *ngIf="item.option==='divider'"
+      class="cf-divider"></span>
+  </div>
+</mat-menu>

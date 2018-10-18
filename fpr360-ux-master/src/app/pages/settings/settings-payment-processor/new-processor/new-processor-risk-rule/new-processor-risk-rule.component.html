@@ -1,0 +1,136 @@
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <div class="col-6"
+        *ngFor="let item of rules">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>{{item.name}}</h3>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Treshold Evaluation"
+                  [(ngModel)]="item.tresholdEvaluation.value"
+                  [disabled]="readonly"
+                  (change)="changeTresholdEvaluationFunction(item.tresholdEvaluation, item.tresholdEvaluation.value)">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of tresholdEvaluationOptions"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <div class="row"
+                *ngIf="item.tresholdEvaluation.count.flag">
+                <div class="col-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="{{item.tresholdEvaluation.count.label}}"
+                      [readonly]="readonly"
+                      [(ngModel)]="item.tresholdEvaluation.count.value"
+                      [textMask]="{mask: countMask, guide: false}">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row"
+                *ngIf="item.tresholdEvaluation.countPercentage.flag">
+                <div class="col-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="{{item.tresholdEvaluation.countPercentage.countLabel}}"
+                      [readonly]="readonly"
+                      [(ngModel)]="item.tresholdEvaluation.countPercentage.countValue"
+                      [textMask]="{mask: countMask, guide: false}">
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="{{item.tresholdEvaluation.countPercentage.percentageLabel}}"
+                      [readonly]="readonly"
+                      [(ngModel)]="item.tresholdEvaluation.countPercentage.percentageValue"
+                      maxlength="4"
+                      [textMask]="{mask: percentMask, guide: false}">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row"
+                *ngIf="item.tresholdEvaluation.percentage.flag">
+                <div class="col-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="{{item.tresholdEvaluation.percentage.label}}"
+                      [readonly]="readonly"
+                      [(ngModel)]="item.tresholdEvaluation.percentage.value"
+                      maxlength="4"
+                      [textMask]="{mask: percentMask, guide: false}">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Refund Threshold"
+                  [(ngModel)]="item.refundThreshold.value"
+                  [disabled]="readonly"
+                  (change)="changeRefundThresholdFunction(item.refundThreshold, item.refundThreshold.value)">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of refundThresholdOptions"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <div class="row"
+                *ngIf="item.refundThreshold.percentage.flag">
+                <div class="col-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="{{item.refundThreshold.percentage.label}}"
+                      [readonly]="readonly"
+                      [(ngModel)]="item.refundThreshold.percentage.value"
+                      maxlength="4"
+                      [textMask]="{mask: percentMask, guide: false}">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row"
+                *ngIf="item.refundThreshold.dollar.flag">
+                <div class="col-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="{{item.refundThreshold.dollar.label}}"
+                      [readonly]="readonly"
+                      [(ngModel)]="item.refundThreshold.dollar.value"
+                      [textMask]="{mask: moneyMask, guide: false}">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </section>
+</div>

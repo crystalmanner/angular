@@ -1,0 +1,410 @@
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <div class="col-6">
+        <!-- Prevention Alerts -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Prevention Alerts</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <div class="switch-line">
+                <mat-slide-toggle class="left-label"
+                  [ngClass]="readonly? 'readonly': ''"
+                  [disabled]="readonly"
+                  [(ngModel)]="billingData.preventionAlerts.validate"
+                  [color]="'primary'">
+                  Client-Managed Alerts
+                </mat-slide-toggle>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-3">
+              <mat-form-field class="full-width readonly">
+                <input matInput
+                  placeholder="Provider"
+                  [(ngModel)]="billingData.preventionAlerts.provider1"
+                  readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-s-3 col-off-s-1">
+              <mat-form-field class="full-width right-align"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Fee"
+                  [readonly]="readonly"
+                  [(ngModel)]="billingData.preventionAlerts.value1"
+                  maxlength="17"
+                  [textMask]="{mask: moneyMask, guide: false}">
+              </mat-form-field>
+            </div>
+            <div class="col-s-5">
+              <div class="switch-line right-position">
+                <mat-slide-toggle class="left-label"
+                  [ngClass]="readonly? 'readonly': ''"
+                  [color]="'primary'"
+                  [disabled]="readonly"
+                  [(ngModel)]="billingData.preventionAlerts.allowDuplicates1">
+                  Allow Duplicates
+                </mat-slide-toggle>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-3">
+              <mat-form-field class="full-width readonly">
+                <input matInput
+                  placeholder="Provider"
+                  [(ngModel)]="billingData.preventionAlerts.provider2"
+                  readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-s-3 col-off-s-1">
+              <mat-form-field class="full-width right-align"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Fee"
+                  [readonly]="readonly"
+                  [(ngModel)]="billingData.preventionAlerts.value2"
+                  maxlength="17"
+                  [textMask]="{mask: moneyMask, guide: false}">
+              </mat-form-field>
+            </div>
+            <div class="col-s-5">
+              <div class="switch-line right-position">
+                <mat-slide-toggle class="left-label"
+                  [ngClass]="readonly? 'readonly': ''"
+                  [disabled]="readonly"
+                  [color]="'primary'"
+                  [(ngModel)]="billingData.preventionAlerts.allowDuplicates2">
+                  Allow Duplicates
+                </mat-slide-toggle>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <!-- Professional Services -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Professional Services</h3>
+            <mat-slide-toggle class="title-slide"
+              [ngClass]="readonly? 'readonly': ''"
+              [disabled]="readonly"
+              [color]="'primary'"
+              [(ngModel)]="billingData.professionalServices.check"></mat-slide-toggle>
+          </div>
+          <div *ngIf="billingData.professionalServices.check">
+            <div class="row">
+              <div class="col-s-8">
+                <mat-form-field class="full-width readonly">
+                  <input matInput
+                    placeholder="Method"
+                    [(ngModel)]="billingData.professionalServices.method1"
+                    readonly>
+                </mat-form-field>
+              </div>
+              <div class="col-s-4">
+                <mat-form-field class="full-width right-align"
+                  [ngClass]="readonly? 'readonly': ''">
+                  <input matInput
+                    placeholder="Fee"
+                    [readonly]="readonly"
+                    [(ngModel)]="billingData.professionalServices.value1"
+                    maxlength="17"
+                    [textMask]="{mask: moneyMask, guide: false}">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-s-8">
+                <mat-form-field class="full-width readonly">
+                  <input matInput
+                    placeholder="Method"
+                    [(ngModel)]="billingData.professionalServices.method2"
+                    readonly>
+                </mat-form-field>
+              </div>
+              <div class="col-s-4">
+                <mat-form-field class="full-width right-align"
+                  [ngClass]="readonly? 'readonly': ''">
+                  <input matInput
+                    placeholder="Fee"
+                    [readonly]="readonly"
+                    [(ngModel)]="billingData.professionalServices.value2"
+                    maxlength="17"
+                    [textMask]="{mask: moneyMask, guide: false}">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-s-8">
+                <mat-form-field class="full-width readonly">
+                  <input matInput
+                    placeholder="Method"
+                    [(ngModel)]="billingData.professionalServices.method3"
+                    readonly>
+                </mat-form-field>
+              </div>
+              <div class="col-s-4">
+                <mat-form-field class="full-width right-align"
+                  [ngClass]="readonly? 'readonly': ''">
+                  <input matInput
+                    placeholder="Per complaint"
+                    [readonly]="readonly"
+                    [(ngModel)]="billingData.professionalServices.value3"
+                    maxlength="17"
+                    [textMask]="{mask: moneyMask, guide: false}">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-s-6">
+                <mat-form-field class="full-width readonly">
+                  <input matInput
+                    placeholder="Method"
+                    [(ngModel)]="billingData.professionalServices.method4"
+                    readonly>
+                </mat-form-field>
+              </div>
+              <div class="col-s-3">
+                <mat-form-field class="full-width right-align"
+                  [ngClass]="readonly? 'readonly': ''">
+                  <input matInput
+                    placeholder="Setup fee"
+                    [readonly]="readonly"
+                    [(ngModel)]="billingData.professionalServices.value4"
+                    maxlength="17"
+                    [textMask]="{mask: moneyMask, guide: false}">
+                </mat-form-field>
+              </div>
+              <div class="col-s-3">
+                <mat-form-field class="full-width right-align"
+                  [ngClass]="readonly? 'readonly': ''">
+                  <input matInput
+                    placeholder="Per complaint"
+                    [readonly]="readonly"
+                    [(ngModel)]="billingData.professionalServices.value5"
+                    maxlength="17"
+                    [textMask]="{mask: moneyMask, guide: false}">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <!-- Payment Terms -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Payment Terms</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Billing Cycle"
+                  [(ngModel)]="billingData.paymentTerms.billingCycle.value"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of billingData.paymentTerms.billingCycle.values"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-6">
+        <!-- Chargeback Representment -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Chargeback Representment</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-8">
+              <mat-form-field class="full-width readonly">
+                <input matInput
+                  placeholder="Method"
+                  [(ngModel)]="billingData.chargeback.method1"
+                  readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width right-align"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Fee"
+                  [readonly]="readonly"
+                  [(ngModel)]="billingData.chargeback.value1"
+                  maxlength="17"
+                  [textMask]="{mask: moneyMask, guide: false}">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-8">
+              <mat-form-field class="full-width readonly">
+                <input matInput
+                  placeholder="Method"
+                  [(ngModel)]="billingData.chargeback.method2"
+                  readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width right-align"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Percentage"
+                  [readonly]="readonly"
+                  [(ngModel)]="billingData.chargeback.value2"
+                  [textMask]="{mask: percentMask, guide: false}">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-8">
+              <mat-form-field class="full-width readonly">
+                <input matInput
+                  placeholder="Method"
+                  [(ngModel)]="billingData.chargeback.method3"
+                  readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width right-align"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Fee"
+                  [readonly]="readonly"
+                  [(ngModel)]="billingData.chargeback.value3"
+                  maxlength="17"
+                  [textMask]="{mask: moneyMask, guide: false}">
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+        <!-- Mid Reconciliation -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Mid Reconciliation</h3>
+            <mat-slide-toggle class="title-slide"
+              [ngClass]="readonly? 'readonly': ''"
+              [disabled]="readonly"
+              [color]="'primary'"
+              [(ngModel)]="billingData.enableServices.check"></mat-slide-toggle>
+          </div>
+          <div *ngIf="billingData.enableServices.check">
+            <div class="row">
+              <div class="col-s-8">
+                <mat-form-field class="full-width readonly">
+                  <input matInput
+                    placeholder="Method"
+                    [(ngModel)]="billingData.enableServices.method1"
+                    readonly>
+                </mat-form-field>
+              </div>
+              <div class="col-s-4">
+                <mat-form-field class="full-width right-align"
+                  [ngClass]="readonly? 'readonly': ''">
+                  <input matInput
+                    placeholder="Fee"
+                    [readonly]="readonly"
+                    [(ngModel)]="billingData.enableServices.value1"
+                    maxlength="17"
+                    [textMask]="{mask: moneyMask, guide: false}">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-s-8">
+                <mat-form-field class="full-width readonly">
+                  <input matInput
+                    placeholder="Method"
+                    [(ngModel)]="billingData.enableServices.method2"
+                    readonly>
+                </mat-form-field>
+              </div>
+              <div class="col-s-4">
+                <mat-form-field class="full-width right-align"
+                  [ngClass]="readonly? 'readonly': ''">
+                  <input matInput
+                    placeholder="Fee"
+                    [readonly]="readonly"
+                    [(ngModel)]="billingData.enableServices.value2"
+                    maxlength="17"
+                    [textMask]="{mask: moneyMask, guide: false}">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <!-- Order Management -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Order Management</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <div class="switch-line">
+                <mat-slide-toggle class="left-label"
+                  [ngClass]="readonly? 'readonly': ''"
+                  [color]="'primary'"
+                  [disabled]="readonly"
+                  [(ngModel)]="billingData.orderManagement.validate">
+                  Validate new orders
+                </mat-slide-toggle>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-8">
+              <mat-form-field class="full-width readonly">
+                <input matInput
+                  placeholder="Method"
+                  [(ngModel)]="billingData.orderManagement.method1"
+                  readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width right-align"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Per Transaction"
+                  [readonly]="readonly"
+                  [(ngModel)]="billingData.orderManagement.value1"
+                  maxlength="17"
+                  [textMask]="{mask: moneyMask, guide: false}">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-8">
+              <mat-form-field class="full-width readonly">
+                <input matInput
+                  placeholder="Method"
+                  [(ngModel)]="billingData.orderManagement.method2"
+                  readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width right-align"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="Fee"
+                  [readonly]="readonly"
+                  [(ngModel)]="billingData.orderManagement.value2"
+                  maxlength="17"
+                  [textMask]="{mask: moneyMask, guide: false}">
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </section>
+</div>

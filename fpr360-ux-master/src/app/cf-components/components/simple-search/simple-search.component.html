@@ -1,0 +1,28 @@
+<div class="dynamic-search {{placeholder?' open-search placeholder':''}}"
+  [ngClass]="class">
+  <form>
+    <div class="field-wrap">
+      <input (focus)="onFocus()"
+        (blur)="(focusable.value === '')? class = '' : class = ' open-search'"
+        #focusable
+        type="search"
+        name="search"
+        [(ngModel)]="data"
+        (ngModelChange)="changeFunction(data); backData(data)"
+        autocomplete="off"
+        placeholder="{{placeholder}}">
+    </div>
+    <button mat-icon-button
+      class="standard cancel-search-btn"
+      *ngIf="closeButton"
+      (click)="cancelFunction()">
+      <i class="material-icons">close</i>
+    </button>
+    <a class="dynamic-search-btn standard"
+      href="#"
+      mat-icon-button
+      (click)="openSearch($event, focusable)">
+      <i class="material-icons">search</i>
+    </a>
+  </form>
+</div>

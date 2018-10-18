@@ -1,0 +1,102 @@
+@import '../../../cf-components/styles/mixins';
+.notifications-bar {
+  width: 100%;
+  header {
+    height: 64px;
+    background: #429eff;
+    color: #fff;
+    padding: 0 10px 0 64px;
+    position: relative;
+    h3 {
+      font-size: 20px;
+      line-height: 64px;
+      padding: 0;
+      color: #fff;
+    }
+    .notifications-settings {
+      padding: 12px 0;
+    }
+    .notifications-icon {
+      width: 64px;
+      height: 64px;
+      padding: 20px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      em {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-style: normal;
+        display: block;
+        width: 16px;
+        height: 16px;
+        border-radius: 500rem;
+        color: #fff;
+        background: #ff2929;
+        text-align: center;
+        line-height: 16px;
+        font-size: 9px;
+        font-weight: normal;
+      }
+    }
+  }
+  .notifications-toolbar {
+    height: 48px;
+    padding: 0 0 0 64px;
+    border-bottom: 1px solid $borderColor;
+    .new-count {
+      float: left;
+      line-height: 48px;
+      font-size: 14px;
+      color: #db3069;
+    }
+    .right-item {
+      padding: 4px 8px 4px 0;
+    }
+  }
+  section {
+    position: relative;
+    height: calc(100vh - 64px - 48px);
+    overflow: auto;
+    article {
+      border-top: 1px solid $borderColor;
+      padding: 20px 32px 20px 64px;
+      position: relative;
+      &:first-child {
+        border: none;
+      }
+      .item-icon {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+    }
+  }
+}
+.notification-box {
+  font-size: 14px;
+  .notification-title {
+    width: 100%;
+    padding: 0 0 12px;
+    @include clearfix();
+    h4 {
+      float: left;
+      padding: 0;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    em {
+      float: right;
+      font-style: normal;
+      color: $textColorLight;
+    }
+  }
+  p {
+    line-height: 20px;
+    padding: 0 0 8px;
+  }
+  .mat-button {
+    margin-left: -16px;
+  }
+}

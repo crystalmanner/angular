@@ -1,0 +1,249 @@
+<div class="sub-header-box with-data">
+  <div class="wrap">
+    <div class="line-item">
+      <div class="left-item">
+        <app-editable-title [value]="chargebackTitle"
+          [light]="true"
+          [readonly]="true"
+          (changeValue)="titleVal($event)"></app-editable-title>
+      </div>
+      <div class="right-item">
+        <div class="el"
+          *ngFor="let item of chargebackUsers">
+          <div class="small-user-box">
+            <app-image class="avatar-wrap"
+              [size]="36"
+              [type]="'image'"
+              [imageUrl]="item.avatar"
+              [imageAlt]="item.name"
+              routerLink="{{item.url}}"></app-image>
+            <span>{{item.name}}</span>
+            <em>{{item.position}}</em>
+          </div>
+        </div>
+        <div class="el label-el">
+          <app-label [backgroundStyle]="'#00CCB1'">New</app-label>
+        </div>
+        <div class="el button-el">
+          <button mat-icon-button
+            [matMenuTriggerFor]="history"
+            class="light">
+            <i class="material-icons">history</i>
+          </button>
+          <mat-menu #history
+            class="dropdown-box">
+            <div (click)="stopEvent($event)">
+              <div class="box-title">
+                <h3>History</h3>
+              </div>
+              <div class="dropdown-box-content"
+                appNoScroller
+                [perfectScrollbar]>
+                <div class="history-item"
+                  *ngFor="let item of historyList">
+                  <i class="icon material-icons"
+                    [ngClass]="item.icon==='error'? 'error-color': ''">{{item.icon}}</i>
+                  <span>{{item.title}}</span>
+                  <em>{{item.date}}</em>
+                </div>
+              </div>
+            </div>
+          </mat-menu>
+        </div>
+        <div class="el button-el">
+          <button mat-icon-button
+            [matMenuTriggerFor]="notes"
+            class="light">
+            <i class="material-icons">message</i>
+          </button>
+          <mat-menu #notes
+            class="dropdown-box">
+            <div (click)="stopEvent($event)">
+              <div class="box-title">
+                <h3>Notes</h3>
+                <div class="right-item">
+                  <button mat-button
+                    color="primary"
+                    (click)="addNote()">ADD NOTE</button>
+                </div>
+              </div>
+              <div class="dropdown-box-content"
+                appNoScroller
+                [perfectScrollbar]>
+                <div class="note-item"
+                  *ngFor="let item of notesList">
+                  <div class="avatar-wrap">
+                    <app-image [size]="40"
+                      [type]="item.user.type"
+                      [imageUrl]="item.user.avatar"
+                      [imageAlt]="item.user.name"></app-image>
+                    <i *ngIf="item.user.guru"
+                      class="custom-icons icon-guru"></i>
+                  </div>
+                  <span>{{item.subject}}</span>
+                  <em>{{item.date}}</em>
+                  <p>{{item.note}}</p>
+                </div>
+              </div>
+            </div>
+          </mat-menu>
+        </div>
+        <div class="el button-el settings-placeholder">
+          <app-dd-menu [options]="pageSettings"
+            [light]="true"
+            (select)="selectPageSettings($event)"></app-dd-menu>
+        </div>
+      </div>
+    </div>
+    <div class="info-elements">
+      <ul>
+        <li *ngFor="let item of infoList">
+          <em>{{item.label}}</em>
+          <span>{{item.value}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <div class="col-6">
+        <div class="form-title">
+          <h3>Cover Letter</h3>
+        </div>
+        <mat-form-field class="full-width"
+          [ngClass]="readonly? 'readonly': ''">
+          <mat-select placeholder="Title"
+            [(ngModel)]="letterTitle.value"
+            [disabled]="readonly">
+            <div class="options-wrap"
+              appNoScroller
+              [perfectScrollbar]>
+              <mat-option *ngFor="let item of letterTitle.options"
+                [value]="item.value">
+                {{ item.viewValue }}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="editor-box"></div>
+      </div>
+    </div>
+    <div class="row top-level">
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Transaction Details</h3>
+            <div class="right-item">
+              <a mat-icon-button
+                (click)="uploadDocument()">
+                <i class="material-icons">add_circle</i>
+              </a>
+            </div>
+          </div>
+          <ul class="checking-list">
+            <li class="line-item"
+              *ngFor="let item of transactionDetailsList">
+              <div class="left-item">
+                <span routerLink="{{item.link}}"
+                  class="data">{{item.name}}</span>
+              </div>
+              <div class="right-item">
+                <app-dd-menu class="table-settings"
+                  [options]="listSettings"
+                  (select)="settingsFunction($event, item)"></app-dd-menu>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Website Documents</h3>
+            <div class="right-item">
+              <a mat-icon-button
+                (click)="uploadDocument()">
+                <i class="material-icons">add_circle</i>
+              </a>
+            </div>
+          </div>
+          <ul class="checking-list">
+            <li class="line-item"
+              *ngFor="let item of websiteDocumentsList">
+              <div class="left-item">
+                <span routerLink="{{item.link}}"
+                  class="data">{{item.name}}</span>
+              </div>
+              <div class="right-item">
+                <app-dd-menu class="table-settings"
+                  [options]="listSettings"
+                  (select)="settingsFunction($event, item)"></app-dd-menu>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+        <div class="row">
+          <div class="col-s-6">
+            <fieldset class="form-section">
+              <div class="form-title">
+                <h3>Transmission Method</h3>
+              </div>
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="transmissionMethod.label"
+                  [(ngModel)]="transmissionMethod.value"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Additional Documents</h3>
+            <div class="right-item">
+              <a mat-icon-button
+                (click)="uploadDocument()">
+                <i class="material-icons">add_circle</i>
+              </a>
+            </div>
+          </div>
+          <ul class="checking-list">
+            <li class="line-item"
+              *ngFor="let item of additionalDocumentsList">
+              <div class="left-item">
+                <span routerLink="{{item.link}}"
+                  class="data">{{item.name}}</span>
+              </div>
+              <div class="right-item">
+                <app-dd-menu class="table-settings"
+                  [options]="listSettings"
+                  (select)="settingsFunction($event, item)"></app-dd-menu>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+    </div>
+    <div class="line-item">
+      <div class="right-item">
+        <div class="el">
+          <button mat-raised-button
+            color="primary"
+            class="dark-button">Preview</button>
+        </div>
+        <div class="el">
+          <button mat-raised-button
+            routerLink="/chargeback-error"
+            color="primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

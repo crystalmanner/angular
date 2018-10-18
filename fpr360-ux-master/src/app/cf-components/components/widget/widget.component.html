@@ -1,0 +1,27 @@
+<mat-card class="widget">
+  <mat-card-header>
+    <div class="line-item">
+      <div class="left-item">
+        <mat-card-title>{{widgetTitle}}</mat-card-title>
+      </div>
+      <div class="right-item">
+        <div class="el">
+          <button mat-icon-button
+            *ngIf="fullScreenBtn"
+            (click)="fullScreenFunction($event)"
+            class="standard">
+            <i class="material-icons">fullscreen</i>
+          </button>
+        </div>
+        <div class="el">
+          <app-dd-menu class="widget-menu"
+            [options]="widgetSettings"
+            (select)="selectMenu($event)"></app-dd-menu>
+        </div>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-content></ng-content>
+  </mat-card-content>
+</mat-card>

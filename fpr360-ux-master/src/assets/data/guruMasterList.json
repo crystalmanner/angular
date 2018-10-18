@@ -1,0 +1,114 @@
+[
+    {
+        "id": "1",
+        "name": "Milton Underwood",
+        "icon": {
+          "avatar": "/assets/images/user.png"
+        },
+        "active": true,
+        "role": {
+            "id": "8",
+            "name": "Followup Analyst"
+        },
+        "email": "murazik.albertha@hotmail.com",
+        "phone_1": "+1 457-473-8473",
+        "phone_2": "",
+        "companyList": [
+            {
+                "id": "1",
+                "name": "210417 IVS",
+                "status": "primary"
+            },
+            {
+                "id": "2",
+                "name": "9931651 CANADA INC.",
+                "status": "primary"
+            },
+            {
+                "id": "3",
+                "name": "AABLE LLC DBA PC Service Technologies",
+                "status": "secondary"
+            },
+            {
+                "id": "4",
+                "name": "Abbbc Pty Ltf",
+                "status": "primary"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "name": "Isaiah Figueroa",
+        "icon": {
+          "avatar": "/assets/images/user2.png"
+        },
+        "active": false,
+        "role": {
+            "id": "5",
+            "name": "Chargeback Analyst (Senior)"
+        },
+        "email": "isaiah@fpr360.com",
+        "phone_1": "+1 472-285-5748",
+        "phone_2": "",
+        "companyList": [
+            {
+                "id": "5",
+                "name": "Abc Merchant Inc",
+                "status": "primary"
+            },
+            {
+                "id": "6",
+                "name": "Above & Beyond Marketing Solutions, LLC",
+                "status": "primary"
+            },
+            {
+                "id": "8",
+                "name": "Advanced Legacy Technologies LLC",
+                "status": "primary"
+            }            
+        ]
+    },
+    {
+        "id": "3",
+        "name": "Elijah Rodriguez",
+        "icon": {
+          "avatar": "/assets/images/user3.png"
+        },
+        "active": true,
+        "role": {
+            "id": "5",
+            "name": "Chargeback Analyst (Senior)"
+        },
+        "email": "elijah@fpr360.com",
+        "phone_1": "+1 583-287-7292",
+        "phone_2": "",
+        "companyList": [
+            {
+                "id": "9",
+                "name": "Advanced Life Media LLC",
+                "status": "primary"
+            },
+            {
+                "id": "11",
+                "name": "Agile Tech Solutions",
+                "status": "secondary"
+            }         
+        ]
+    },
+    {
+        "id": "4",
+        "name": "Paul Maldonado",
+        "icon": {
+          "avatar": "/assets/images/user4.png"
+        },
+        "active": true,
+        "role": {
+            "id": "5",
+            "name": "Chargeback Analyst (Senior)"
+        },
+        "email": "paul@fpr360.com",
+        "phone_1": "+1 457-473-8473",
+        "phone_2": "",
+        "companyList": []
+    }
+]

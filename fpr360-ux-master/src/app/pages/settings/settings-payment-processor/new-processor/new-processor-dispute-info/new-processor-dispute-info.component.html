@@ -1,0 +1,115 @@
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="Case Update Method"
+                [(ngModel)]="caseUpdateMethod.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of caseUpdateMethod.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Dispute Methods</h3>
+            <div class="right-item">
+              <a mat-icon-button
+                (click)="addDisputeMethod()">
+                <i class="material-icons">add_circle</i>
+              </a>
+            </div>
+          </div>
+          <div class="row dispute-line"
+            *ngFor="let el of disputeMethods">
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <mat-select placeholder="Dispute Method"
+                  [(ngModel)]="el.method"
+                  [disabled]="readonly">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of el.options"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-7">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''"
+                *ngIf="el.method==='Email'">
+                <input matInput
+                  placeholder="Email Address"
+                  [(ngModel)]="el.email"
+                  [readonly]="readonly"
+                  [formControl]="el.emailFormControl">
+                <mat-error *ngIf="el.emailFormControl.hasError('pattern')">
+                  Please enter a valid url
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''"
+                *ngIf="el.method==='Fax'">
+                <input matInput
+                  placeholder="Fax Number"
+                  [textMask]="{mask: phoneMask, guide: false}"
+                  [(ngModel)]="el.phone"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+            <div class="col-1">
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeItem(el)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Dispute Document Details</h3>
+          </div>
+          <ul class="file-list">
+            <li *ngFor="let item of disputeDocumentDetails.documents">
+              <mat-checkbox [(ngModel)]="item.check"
+                (change)="!item.check;">{{item.name}}</mat-checkbox>
+            </li>
+          </ul>
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  placeholder="File size limit"
+                  [(ngModel)]="disputeDocumentDetails.maxSize"
+                  [textMask]="{mask: gbMask, guide: false}"
+                  [readonly]="readonly">
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </section>
+</div>

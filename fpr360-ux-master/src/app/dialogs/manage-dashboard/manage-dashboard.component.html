@@ -1,0 +1,45 @@
+<div class="dialog-content check-list-item-dialog">
+  <header>
+    <h3>Manage Dashboards</h3>
+  </header>
+  <div class="dialog-toolbar line-item">
+    <div class="left-item">
+      &nbsp;
+    </div>
+    <div class="dialog-search">
+      <app-simple-search [closeButton]="true"
+        (change)="searchFunction($event)"></app-simple-search>
+    </div>
+  </div>
+  <section appNoScroller
+    [perfectScrollbar]>
+    <div class="ckeck-list-items">
+      <div class="checkbox-line"
+        *ngFor="let item of array | dialogListSearch:search">
+        <mat-form-field class="editable-name">
+          <input matInput
+            type="text"
+            [(ngModel)]="item.name">
+        </mat-form-field>
+        <button mat-icon-button
+          class="delete-btn standard"
+          (click)="remove(item)">
+          <i class="material-icons">delete</i>
+        </button>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog();">Cancel</button>
+        <button mat-button
+          color="primary"
+          (click)="saveFunction();">Save</button>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,22 @@
+<div class="dialog-content conform-dialog">
+  <header>
+    <h3>Remove Client Contact</h3>
+  </header>
+  <section appNoScroller
+    [perfectScrollbar]>
+    <p>Are you sure you want to remove the a client contact? This can not be undone.</p>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog();">Cancel</button>
+        <button mat-button
+          color="warn"
+          (click)="removeFunction();">Remove</button>
+      </div>
+    </div>
+  </footer>
+</div>

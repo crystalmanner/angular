@@ -1,0 +1,51 @@
+<div class="dialog-content check-list-item-dialog">
+  <header>
+    <h3>{{data.dialogName}}</h3>
+  </header>
+  <section>
+    <ul class="checking-list">
+      <li class="line-item"
+        *ngFor="let item of values">
+        <div class="left-item no-link">
+          <mat-form-field class="full-width simple-field">
+            <input matInput
+              [(ngModel)]="item.value"
+              [focus]="item.focusEl"
+              (keyup)="onKey($event)">
+          </mat-form-field>
+        </div>
+        <div class="right-item">
+          <button mat-icon-button
+            class="standard"
+            (click)="removeItem(item)">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+      </li>
+    </ul>
+    <div class="line-item add-item-line">
+      <div class="right-item">
+        <button mat-icon-button
+          class="addButton"
+          [disabled]="emptyField"
+          (click)="addField();emptyField=true;">
+          <i class="material-icons">add_circle</i>
+        </button>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog();">Cancel</button>
+        <button mat-button
+          color="primary"
+          [disabled]="emptyField"
+          (click)="createFunction();">Create</button>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,101 @@
+<div class="sub-header-box header-filter">
+  <div class="wrap">
+    <div class="row">
+      <div class="col-7">
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field class="full-width light"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{dashboardFilter.industry.label}}"
+                [(ngModel)]="dashboardFilter.industry.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of dashboardFilter.industry.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="full-width light"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{dashboardFilter.category.label}}"
+                [(ngModel)]="dashboardFilter.category.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of dashboardFilter.category.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="full-width light"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{dashboardFilter.company.label}}"
+                [(ngModel)]="dashboardFilter.company.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of dashboardFilter.company.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="row">
+          <div class="col-8">
+            <mat-form-field class="full-width light"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{dashboardFilter.merchant.label}}"
+                [(ngModel)]="dashboardFilter.merchant.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of dashboardFilter.merchant.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field class="full-width light"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{dashboardFilter.mid.label}}"
+                [(ngModel)]="dashboardFilter.mid.value"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of dashboardFilter.mid.options"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<table-component class="dashbord-table with-total-row"
+  [tableData]="midReport"></table-component>

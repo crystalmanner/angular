@@ -1,0 +1,81 @@
+@import '../../../cf-components/styles/mixins';
+
+.user-profile {
+  margin: 12px 0 0;
+  height: 60px;
+  position: relative;
+  padding-left: 80px;
+  min-width: 600px;
+  .avatar-wrap {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    left: 0;
+    top: 50%;
+    margin-top: -28px;
+    cursor: pointer;
+    span {
+      &.default-avatar {
+        display: block;
+        width: 56px;
+        height: 56px;
+        border-radius: 500rem;
+        border: 1px dashed #fff;
+        padding: 16px;
+        i {
+          &.material-icons {
+            color: rgba(255, 255, 255, 0.54);
+          }
+        }
+      }
+    }
+  }
+  input {
+    &[type='text'] {
+      color: #fff;
+      border: none;
+      background: none;
+      width: 100%;
+      font-size: 34px;
+      line-height: 44px;
+      font-weight: 300;
+      padding: 8px 0;
+      outline: none;
+      &::-webkit-input-placeholder {
+        color: rgba(255, 255, 255, 0.87);
+      }
+      &::-moz-placeholder {
+        color: rgba(255, 255, 255, 0.87);
+      }
+      &:-ms-input-placeholder {
+        color: rgba(255, 255, 255, 0.87);
+      }
+      &:-moz-placeholder {
+        color: rgba(255, 255, 255, 0.87);
+      }
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.87);
+      }
+    }
+    &.upload-avatar {
+      position: absolute;
+      opacity: 0;
+      z-index: -1;
+    }
+  }
+}
+.icon-guru {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 500rem;
+  background: #fff;
+  color: #2a5f9a;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  font-size: 20px;
+  line-height: 26px;
+  text-align: center;
+}

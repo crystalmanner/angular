@@ -1,0 +1,68 @@
+[
+  {
+    "user": {
+      "type": "image",
+      "name": "Erik Richards",
+      "avatar": "assets/images/user.png",
+      "guru": true
+    },
+    "subject": "Subject",
+    "date": "04 Nov 2018",
+    "note": "Lorem ipsum dolor sit amet, te sed homero facete appareat."
+  },
+  {
+    "user": {
+      "type": "image",
+      "name": "Sandra Tullio",
+      "avatar": "assets/images/user3.png",
+      "guru": true
+    },
+    "subject": "Subject",
+    "date": "04 Nov 2018",
+    "note": "Lorem ipsum dolor sit amet, te sed homero facete appareat."
+  },
+  {
+    "user": {
+      "type": "image",
+      "name": "Erik Richards",
+      "avatar": "assets/images/user.png",
+      "guru": true
+    },
+    "subject": "Subject",
+    "date": "04 Nov 2018",
+    "note": "Lorem ipsum dolor sit amet, te sed homero facete appareat."
+  },
+  {
+    "user": {
+      "type": "image",
+      "name": "Sandra Tullio",
+      "avatar": "assets/images/user3.png",
+      "guru": true
+    },
+    "subject": "Subject",
+    "date": "04 Nov 2018",
+    "note": "Lorem ipsum dolor sit amet, te sed homero facete appareat."
+  },
+  {
+    "user": {
+      "type": "image",
+      "name": "Erik Richards",
+      "avatar": "assets/images/user.png",
+      "guru": true
+    },
+    "subject": "Subject",
+    "date": "04 Nov 2018",
+    "note": "Lorem ipsum dolor sit amet, te sed homero facete appareat."
+  },
+  {
+    "user": {
+      "type": "image",
+      "name": "Sandra Tullio",
+      "avatar": "assets/images/user3.png",
+      "guru": true
+    },
+    "subject": "Subject",
+    "date": "04 Nov 2018",
+    "note": "Lorem ipsum dolor sit amet, te sed homero facete appareat."
+  }
+]

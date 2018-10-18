@@ -1,0 +1,149 @@
+<mat-sidenav-container *ngIf="!loginFlag"
+  class="global-box {{exstraSpaseClass}}"
+  position="end">
+  <mat-sidenav #sidenav
+    class="left-sidenav">
+    <div class="side-nav-holder">
+      <div class="user-item">
+        <div class="user"
+          routerLink="/profile/details"
+          (click)="sidenav.close();">
+          <div class="avatar-wrap">
+            <app-image [size]="48"
+              [type]="'image'"
+              [imageUrl]="user.avatar"
+              [imageAlt]="user.name">
+            </app-image>
+            <i *ngIf="user.guru"
+              class="custom-icons icon-guru"></i>
+          </div>
+          <span>{{user.name}}</span>
+          <em>{{user.position}}</em>
+        </div>
+      </div>
+      <nav appNoScroller
+        [perfectScrollbar]>
+        <ul>
+          <li *ngFor="let item of menuLinks">
+            <button class="light"
+              routerLink="{{item.path}}"
+              routerLinkActive="active"
+              type="button"
+              mat-button
+              (click)="sidenav.close();">
+              <i *ngIf="item.name!='Partners'"
+                class="material-icons">{{item.icon}}</i>
+              <i *ngIf="item.name==='Partners'"
+                class="custom-icons icon-partners"></i>
+              <span>{{item.name}}</span>
+            </button>
+          </li>
+        </ul>
+        <ul class="secondary-menu">
+          <li *ngFor="let item of secondaryMenuLinks">
+            <button class="light"
+              routerLink="{{item.path}}"
+              routerLinkActive="active"
+              type="button"
+              mat-button
+              (click)="sidenav.close();">
+              <i class="material-icons">{{item.icon}}</i>
+              <span>{{item.name}}</span>
+            </button>
+          </li>
+        </ul>
+        <ul class="secondary-menu">
+          <li *ngFor="let item of thirdMenuLinks">
+            <button class="light"
+              routerLink="{{item.path}}"
+              routerLinkActive="active"
+              type="button"
+              mat-button
+              (click)="sidenav.close();">
+              <i class="material-icons">{{item.icon}}</i>
+              <em *ngIf="item.badge"
+                class="menu-badge">{{item.badge}}</em>
+              <span>{{item.name}}</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <div class="nav-logo">
+        <img src={{smallLogo.url}}
+          alt="">
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav #notifications
+    position="end"
+    class="right-sidenav">
+    <app-notifications></app-notifications>
+  </mat-sidenav>
+  <perfect-scrollbar class="scroll-container"
+    [config]="config">
+    <div class="scrollable-content">
+      <div class="container {{headerClass}}"
+        header-animation>
+        <app-advanced-search *ngIf="searchFlag"
+          class="advansed-search-box"
+          [open]="openAdvansedSearch"
+          (close)="closeFunction($event)"
+          [autocomplete]="globalSearchAutocomplete"></app-advanced-search>
+        <header class="main-toolbar">
+          <div class="header-wrap">
+            <button *ngIf="!backFlag"
+              mat-icon-button
+              class="left-btn light"
+              (click)="sidenav.open();">
+              <i class="material-icons">menu</i>
+            </button>
+            <button *ngIf="backFlag"
+              mat-icon-button
+              class="left-btn light"
+              routerLink="{{backLink}}">
+              <i class="material-icons">arrow_back</i>
+            </button>
+            <div class="header-title">
+              <h3 *ngIf="title!='Dashboard'">
+                <a *ngIf="breadcrumbs.topTitle"
+                  routerLink="{{breadcrumbs.topLink}}"
+                  class="clickable">{{breadcrumbs.topTitle}}</a>{{title}}</h3>
+              <div *ngIf="title==='Dashboard'"
+                class="dashboard-select">
+                <app-dashboard-menu [value]="dashboard.value"
+                  [options]="dashboard.options"
+                  [additionalOptions]="dashboard.additionalOptions"
+                  (change)="dashboardChange($event)"></app-dashboard-menu>
+              </div>
+            </div>
+            <div class="right-item">
+              <button mat-icon-button
+                class="light"
+                *ngIf="searchFlag"
+                (click)="openGlobalSearch()">
+                <i class="material-icons">search</i>
+              </button>
+              <button mat-icon-button
+                class="light"
+                *ngIf="widgetsFlag"
+                (click)="dashboardService.addWidget()">
+                <i class="material-icons">widgets</i>
+              </button>
+              <button mat-icon-button
+                class="light notifications-button"
+                (click)="notificationsCount? notifications.open():null">
+                <i class="material-icons">notifications</i>
+                <em *ngIf="notificationsCount">{{notificationsCount}}</em>
+              </button>
+            </div>
+          </div>
+        </header>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</mat-sidenav-container>
+<div class="global-box login-holder"
+  *ngIf="loginFlag">
+  <router-outlet></router-outlet>
+</div>

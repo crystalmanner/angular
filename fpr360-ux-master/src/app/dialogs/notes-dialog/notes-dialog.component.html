@@ -1,0 +1,13 @@
+<div class="dialog-content notes-dialog">
+  <header>
+    <h3>Notes</h3>
+  </header>
+  <section appNoScroller
+    [perfectScrollbar]>
+    <div *ngFor="let item of notes"
+      class="dialog-note">
+      <em>{{item.date}}</em>
+      <span>{{item.note}}</span>
+    </div>
+  </section>
+</div>

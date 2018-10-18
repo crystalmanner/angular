@@ -1,0 +1,64 @@
+<div class="dialog-content">
+  <header>
+    <h3>{{data.dialogName}}</h3>
+  </header>
+  <section appNoScroller
+    [perfectScrollbar]>
+    <div class="user-list-item"
+      *ngFor="let item of showArray"
+      [ngClass]="item.rowIncluded? 'included': ''">
+      <div class="avatar-box"
+        (click)="item.rowIncluded = !item.rowIncluded">
+        <div class="avatar-wrap">
+          <app-image *ngIf="!item.rowIncluded"
+            [size]="40"
+            [type]="item.icon.type"
+            [initial]="item.icon.initials"
+            [initialColor]="item.icon.color"
+            [imageUrl]="item.icon.photo"
+            [imageAlt]="item.name"
+            class="table-avatar"></app-image>
+          <i *ngIf="!item.rowIncluded&&item.icon.guru"
+            class="custom-icons icon-guru"></i>
+        </div>
+        <span class="included-icon"
+          *ngIf="item.rowIncluded">
+          <i class="material-icons">check</i>
+        </span>
+      </div>
+      <div class="user-info">
+        <span>{{item.name}}</span>
+        <em *ngIf="item.position">{{item.position}}</em>
+        <em *ngIf="item.type">{{item.type}}</em>
+      </div>
+      <div class="select-el"
+        *ngIf="item.rowIncluded && item.role">
+        <mat-form-field class="full-width">
+          <mat-select [(ngModel)]="item.role">
+            <div class="options-wrap"
+              appNoScroller
+              [perfectScrollbar]>
+              <mat-option *ngFor="let item of roles"
+                [value]="item.value">
+                {{ item.viewValue }}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="line-item">
+      <div class="right-item">
+        <button mat-button
+          color="primary"
+          class="cancel-dialog"
+          (click)="closeDialog()">Cancel</button>
+        <button mat-button
+          color="primary"
+          (click)="save()">{{data.dialogName==='Select Recipients'?'Apply':'Assign'}}</button>
+      </div>
+    </div>
+  </footer>
+</div>

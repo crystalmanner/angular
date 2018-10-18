@@ -1,0 +1,895 @@
+<div class="sub-header-box">
+  <div class="wrap">
+    <div class="line-item">
+      <div class="left-item">
+        <app-editable-title [value]="'BANK x4766'"
+          [light]="true"
+          [readonly]="false"
+          (changeValue)="titleVal($event)"></app-editable-title>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <section class="main-content">
+    <!-- Processor -->
+    <div class="section-title">
+      <h2>Processor</h2>
+    </div>
+    <div class="row top-level">
+      <div class="col-6">
+        <!-- Account -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Account</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-5">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Processor Name"
+                  [(ngModel)]="processor.account.processorName">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of processor.account.processorNames"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-3">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Currency"
+                  [(ngModel)]="processor.account.currency"
+                  (change)="changeCurrency(processor.account.currency)">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of processor.account.currencies"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="processor.account.monthlyVolume"
+                  placeholder="Monthly Volume"
+                  maxlength="14"
+                  [textMask]="{mask: changeMoneyMask, guide: false}">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="processor.account.accountNumber"
+                  placeholder="Account Number">
+              </mat-form-field>
+            </div>
+            <div class="col-s-8">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="processor.account.midDescriptor"
+                  placeholder="MID Descriptor">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Dispute Method"
+                  [(ngModel)]="processor.account.disputeMethod">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of processor.account.disputeMethods"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-8">
+              <mat-form-field class="full-width"
+                *ngIf="processor.account.disputeMethod==='Email'">
+                <input matInput
+                  [(ngModel)]="processor.account.disputeMethodEmail"
+                  placeholder="Email"
+                  [formControl]="emailControl">
+                <mat-error *ngIf="emailControl.hasError('pattern')">
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="full-width"
+                *ngIf="processor.account.disputeMethod==='SMS'">
+                <input matInput
+                  [(ngModel)]="processor.account.disputeMethodSms"
+                  placeholder="SMS"
+                  [textMask]="{mask: phoneMask, guide: false}"
+                  [formControl]="smsFormControl">
+                <mat-error *ngIf="smsFormControl.hasError('pattern')">
+                  Please enter a valid number
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Case Update Method"
+                  [(ngModel)]="processor.account.updateMethod">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of processor.account.updateMethods"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-8">
+              <mat-form-field class="full-width"
+                *ngIf="processor.account.updateMethod==='Fax'">
+                <input matInput
+                  [(ngModel)]="processor.account.updateMethodFax"
+                  placeholder="Fax Number"
+                  [textMask]="{mask: phoneMask, guide: false}"
+                  [formControl]="faxFormControl">
+                <mat-error *ngIf="faxFormControl.hasError('pattern')">
+                  Please enter a valid number
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="full-width"
+                *ngIf="processor.account.updateMethod==='Phone'">
+                <input matInput
+                  [(ngModel)]="processor.account.updateMethodPhone"
+                  placeholder="Phone Number"
+                  [textMask]="{mask: phoneMask, guide: false}"
+                  [formControl]="phoneFormControl">
+                <mat-error *ngIf="phoneFormControl.hasError('pattern')">
+                  Please enter a valid number
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="processor.account.url"
+                  placeholder="URL"
+                  [formControl]="processor.account.urlFormControl">
+                <mat-error *ngIf="processor.account.urlFormControl.hasError('pattern')">
+                  Please enter a valid url
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="processor.account.userName"
+                  placeholder="Username">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <app-password [placeholder]="'Password'"
+                [password]="processor.account.password"
+                (change)="accountPassword($event)"></app-password>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <!-- Two-Factor Authorization -->
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Two-Factor Authorization</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Method"
+                  [(ngModel)]="processor.account.authorization.method">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of processor.account.authorization.methods"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-8">
+              <mat-form-field class="full-width"
+                *ngIf="processor.account.authorization.method==='Email'">
+                <input matInput
+                  [formControl]="authorizationEmail"
+                  [(ngModel)]="processor.account.authorization.email"
+                  placeholder="Email Address">
+                <mat-error *ngIf="authorizationEmail.hasError('pattern')">
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="full-width"
+                *ngIf="processor.account.authorization.method==='SMS'">
+                <input matInput
+                  placeholder="Phone Number"
+                  [(ngModel)]="processor.account.authorization.sms"
+                  [textMask]="{mask: phoneMask, guide: false}"
+                  [formControl]="sms2FormControl">
+                <mat-error *ngIf="sms2FormControl.hasError('pattern')">
+                  Please enter a valid number
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <textarea matInput
+                  rows="1"
+                  autosize
+                  #notes
+                  maxlength="120"
+                  [(ngModel)]="processor.account.authorization.note"
+                  placeholder="Security Questions"></textarea>
+                <mat-hint align="start">Include security questions in list form</mat-hint>
+                <mat-hint align="end"
+                  [ngClass]="notes.value.length===120?'error-color':''">{{notes.value.length}} / 120</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <!-- Data Transmission Method -->
+    <div class="form-title">
+      <h3>Data Transmission Method</h3>
+    </div>
+    <div class="row top-level">
+      <div class="col-6">
+        <!-- API -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h4>
+              API
+              <i *ngIf="processor.dataTransmission.api.verify"
+                class="material-icons verify-icon">check_circle</i>
+            </h4>
+            <div class="right-item">
+              <div class="el"
+                *ngIf="processor.dataTransmission.api.verifyCancel">
+                <button mat-button
+                  color="primary"
+                  (click)="processor.dataTransmission.api.verify=true; processor.dataTransmission.api.verifyCancel=false;">Cancel</button>
+              </div>
+              <div class="el"
+                *ngIf="!processor.dataTransmission.api.verify">
+                <button mat-raised-button
+                  color="primary"
+                  (click)="processor.dataTransmission.api.verify=true; processor.dataTransmission.api.verifyCancel=false;">Verify</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="processor.dataTransmission.api.url"
+                  placeholder="Portal URL"
+                  [formControl]="processor.dataTransmission.api.urlFormControl"
+                  (change)="reVerify(processor.dataTransmission.api)">
+                <mat-error *ngIf="processor.dataTransmission.api.urlFormControl.hasError('pattern')">
+                  Please enter a valid url
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="processor.dataTransmission.api.userName"
+                  placeholder="Username"
+                  (change)="reVerify(processor.dataTransmission.api)">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <app-password [placeholder]="'Password'"
+                [password]="processor.dataTransmission.api.password"
+                (change)="dataTransmissionPassword($event); reVerify(processor.dataTransmission.api)"></app-password>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <app-password [placeholder]="'Api Key'"
+                [password]="processor.dataTransmission.api.key"
+                (change)="dataTransmissionApiKey($event); reVerify(processor.dataTransmission.api)"></app-password>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <app-datetime-picker [icons]="false"
+                [labelPicker]="'Start Date'"
+                [value]="processor.dataTransmission.api.startDate"
+                (change)="backDate($event); reVerify(processor.dataTransmission.api)">
+              </app-datetime-picker>
+            </div>
+            <div class="col-s-4">
+              <app-datetime-picker [icons]="false"
+                [labelPicker]="'End Date'"
+                [value]="processor.dataTransmission.api.endDate"
+                (change)="backDate($event); reVerify(processor.dataTransmission.api)">
+              </app-datetime-picker>
+            </div>
+          </div>
+        </fieldset>
+        <!-- Master -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h4>
+              Master
+              <i *ngIf="processor.dataTransmission.master.verify"
+                class="material-icons verify-icon">check_circle</i>
+            </h4>
+            <div class="right-item">
+              <div class="el"
+                *ngIf="processor.dataTransmission.master.verifyCancel">
+                <button mat-button
+                  color="primary"
+                  (click)="processor.dataTransmission.master.verify=true; processor.dataTransmission.master.verifyCancel=false;">Cancel</button>
+              </div>
+              <div class="el"
+                *ngIf="!processor.dataTransmission.master.verify">
+                <button mat-raised-button
+                  color="primary"
+                  (click)="processor.dataTransmission.master.verify=true; processor.dataTransmission.master.verifyCancel=false;">Verify</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="processor.dataTransmission.master.url"
+                  placeholder="Portal URL"
+                  [formControl]="processor.dataTransmission.master.urlFormControl"
+                  (change)="reVerify(processor.dataTransmission.master)">
+                <mat-error *ngIf="processor.dataTransmission.master.urlFormControl.hasError('pattern')">
+                  Please enter a valid url
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="processor.dataTransmission.api.userName"
+                  placeholder="Username"
+                  (change)="reVerify(processor.dataTransmission.master)">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <app-password [placeholder]="'Password'"
+                [password]="processor.dataTransmission.api.password"
+                (change)="dataTransmissionPassword($event); reVerify(processor.dataTransmission.master)"></app-password>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-6">
+        <!--  Scrape -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h4>
+              Scrape
+              <i *ngIf="processor.dataTransmission.scrape.verify"
+                class="material-icons verify-icon">check_circle</i>
+            </h4>
+            <div class="right-item">
+              <div class="el"
+                *ngIf="processor.dataTransmission.scrape.verifyCancel">
+                <button mat-button
+                  color="primary"
+                  (click)="processor.dataTransmission.scrape.verify=true; processor.dataTransmission.scrape.verifyCancel=false;">Cancel</button>
+              </div>
+              <div class="el"
+                *ngIf="!processor.dataTransmission.scrape.verify">
+                <button mat-raised-button
+                  color="primary"
+                  (click)="processor.dataTransmission.scrape.verify=true; processor.dataTransmission.scrape.verifyCancel=false;">Verify</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <input matInput
+                  placeholder="Portal URL"
+                  [(ngModel)]="processor.dataTransmission.scrape.url"
+                  [formControl]="processor.dataTransmission.scrape.urlFormControl"
+                  (change)="reVerify(processor.dataTransmission.scrape)">
+                <mat-error *ngIf="processor.dataTransmission.scrape.urlFormControl.hasError('pattern')">
+                  Please enter a valid url
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width">
+                <input matInput
+                  placeholder="User Name"
+                  [(ngModel)]="processor.dataTransmission.scrape.userName"
+                  (change)="reVerify(processor.dataTransmission.scrape)">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <app-password [placeholder]="'Password'"
+                [password]="processor.dataTransmission.scrape.password"
+                (change)="password($event); reVerify(processor.dataTransmission.scrape)"></app-password>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-3">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Scrape ID"
+                  [(ngModel)]="processor.dataTransmission.scrape.id"
+                  (change)="reVerify(processor.dataTransmission.scrape)">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of processor.dataTransmission.scrape.ids"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+        <!-- Web Only -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h4>
+              Web Only
+              <i *ngIf="processor.dataTransmission.web.verify"
+                class="material-icons verify-icon">check_circle</i>
+            </h4>
+            <div class="right-item">
+              <div class="el"
+                *ngIf="processor.dataTransmission.web.verifyCancel">
+                <button mat-button
+                  color="primary"
+                  (click)="processor.dataTransmission.web.verify=true; processor.dataTransmission.web.verifyCancel=false;">Cancel</button>
+              </div>
+              <div class="el"
+                *ngIf="!processor.dataTransmission.web.verify">
+                <button mat-raised-button
+                  color="primary"
+                  (click)="processor.dataTransmission.web.verify=true; processor.dataTransmission.web.verifyCancel=false;">Verify</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <input matInput
+                  placeholder="Portal URL"
+                  [(ngModel)]="processor.dataTransmission.web.url"
+                  [formControl]="processor.dataTransmission.web.urlFormControl"
+                  (change)="reVerify(processor.dataTransmission.web)">
+                <mat-error *ngIf="processor.dataTransmission.web.urlFormControl.hasError('pattern')">
+                  Please enter a valid url
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width">
+                <input matInput
+                  placeholder="User Name"
+                  [(ngModel)]="processor.dataTransmission.web.userName"
+                  (change)="reVerify(processor.dataTransmission.web)">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <app-password [placeholder]="'Password'"
+                [password]="processor.dataTransmission.web.password"
+                (change)="password($event); reVerify(processor.dataTransmission.web)"></app-password>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <!-- Payment Gateway -->
+    <div class="section-title">
+      <h2>Payment Gateway</h2>
+    </div>
+    <div class="row top-level">
+      <div class="col-6">
+        <!-- Account -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Account</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Payment Gateway"
+                  [(ngModel)]="paymentGateway.account.paymentName">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of paymentGateway.account.paymentNames"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="paymentGateway.account.alias"
+                  placeholder="Alias (optional)">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="paymentGateway.account.url"
+                  placeholder="URL"
+                  [formControl]="paymentGateway.account.urlFormControl">
+                <mat-error *ngIf="paymentGateway.account.urlFormControl.hasError('pattern')">
+                  Please enter a valid url
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="paymentGateway.account.userName"
+                  placeholder="Username">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <app-password [placeholder]="'Password'"
+                [password]="paymentGateway.account.password"
+                (change)="accountPassword($event)"></app-password>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <!-- Two-Factor Authorization -->
+      <div class="col-6">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Two-Factor Authorization</h3>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Method"
+                  [(ngModel)]="paymentGateway.account.authorization.method">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of paymentGateway.account.authorization.methods"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-s-8">
+              <mat-form-field class="full-width"
+                *ngIf="paymentGateway.account.authorization.method==='Email'">
+                <input matInput
+                  [formControl]="authorizationEmail2"
+                  [(ngModel)]="paymentGateway.account.authorization.email"
+                  placeholder="Email Address">
+                <mat-error *ngIf="authorizationEmail2.hasError('pattern')">
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="full-width"
+                *ngIf="paymentGateway.account.authorization.method==='SMS'">
+                <input matInput
+                  placeholder="Phone Number"
+                  [(ngModel)]="paymentGateway.account.authorization.sms"
+                  [textMask]="{mask: phoneMask, guide: false}">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <textarea matInput
+                  rows="1"
+                  autosize
+                  #notes
+                  maxlength="120"
+                  [(ngModel)]="paymentGateway.account.authorization.note"
+                  placeholder="Security Questions"></textarea>
+                <mat-hint align="start">Include security questions in list form</mat-hint>
+                <mat-hint align="end"
+                  [ngClass]="notes.value.length===120?'error-color':''">{{notes.value.length}} / 120</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <!-- Data Transmission Method -->
+    <div class="form-title">
+      <h3>Data Transmission Method</h3>
+    </div>
+    <div class="row top-level">
+      <div class="col-6">
+        <!-- API -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h4>
+              API
+              <i *ngIf="paymentGateway.dataTransmission.api.verify"
+                class="material-icons verify-icon">check_circle</i>
+            </h4>
+            <div class="right-item">
+              <div class="el"
+                *ngIf="paymentGateway.dataTransmission.api.verifyCancel">
+                <button mat-button
+                  color="primary"
+                  (click)="paymentGateway.dataTransmission.api.verify=true; paymentGateway.dataTransmission.api.verifyCancel=false;">Cancel</button>
+              </div>
+              <div class="el"
+                *ngIf="!paymentGateway.dataTransmission.api.verify">
+                <button mat-raised-button
+                  color="primary"
+                  (click)="paymentGateway.dataTransmission.api.verify=true; paymentGateway.dataTransmission.api.verifyCancel=false;">Verify</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="paymentGateway.dataTransmission.api.url"
+                  placeholder="Portal URL"
+                  [formControl]="paymentGateway.dataTransmission.api.urlFormControl"
+                  (change)="reVerify(paymentGateway.dataTransmission.api)">
+                <mat-error *ngIf="paymentGateway.dataTransmission.api.urlFormControl.hasError('pattern')">
+                  Please enter a valid url
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width">
+                <input matInput
+                  [(ngModel)]="paymentGateway.dataTransmission.api.userName"
+                  placeholder="Username"
+                  (change)="reVerify(paymentGateway.dataTransmission.api)">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <app-password [placeholder]="'Password'"
+                [password]="paymentGateway.dataTransmission.api.password"
+                (change)="dataTransmissionPassword($event); reVerify(paymentGateway.dataTransmission.api)"></app-password>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <app-password [placeholder]="'Api Key'"
+                [password]="paymentGateway.dataTransmission.api.key"
+                (change)="dataTransmissionApiKey($event); reVerify(paymentGateway.dataTransmission.api)"></app-password>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-4">
+              <app-datetime-picker [icons]="false"
+                [labelPicker]="'Start Date'"
+                [value]="paymentGateway.dataTransmission.api.startDate"
+                (change)="backDate($event); reVerify(paymentGateway.dataTransmission.api)">
+              </app-datetime-picker>
+            </div>
+            <div class="col-s-4">
+              <app-datetime-picker [icons]="false"
+                [labelPicker]="'End Date'"
+                [value]="paymentGateway.dataTransmission.api.endDate"
+                (change)="backDate($event); reVerify(paymentGateway.dataTransmission.api)">
+              </app-datetime-picker>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-6">
+        <!--  Scrape -->
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h4>
+              Scrape
+              <i *ngIf="paymentGateway.dataTransmission.scrape.verify"
+                class="material-icons verify-icon">check_circle</i>
+            </h4>
+            <div class="right-item">
+              <div class="el"
+                *ngIf="paymentGateway.dataTransmission.scrape.verifyCancel">
+                <button mat-button
+                  color="primary"
+                  (click)="paymentGateway.dataTransmission.scrape.verify=true; paymentGateway.dataTransmission.scrape.verifyCancel=false;">Cancel</button>
+              </div>
+              <div class="el"
+                *ngIf="!paymentGateway.dataTransmission.scrape.verify">
+                <button mat-raised-button
+                  color="primary"
+                  (click)="paymentGateway.dataTransmission.scrape.verify=true; paymentGateway.dataTransmission.scrape.verifyCancel=false;">Verify</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-12">
+              <mat-form-field class="full-width">
+                <input matInput
+                  placeholder="Portal URL"
+                  [(ngModel)]="paymentGateway.dataTransmission.scrape.url"
+                  [formControl]="paymentGateway.dataTransmission.scrape.urlFormControl"
+                  (change)="reVerify(paymentGateway.dataTransmission.scrape)">
+                <mat-error *ngIf="paymentGateway.dataTransmission.scrape.urlFormControl.hasError('pattern')">
+                  Please enter a valid url
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width">
+                <input matInput
+                  placeholder="User Name"
+                  [(ngModel)]="paymentGateway.dataTransmission.scrape.userName"
+                  (change)="reVerify(paymentGateway.dataTransmission.scrape)">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <app-password [placeholder]="'Password'"
+                [password]="paymentGateway.dataTransmission.scrape.password"
+                (change)="password($event); reVerify(paymentGateway.dataTransmission.scrape)"></app-password>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-3">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Scrape ID"
+                  [(ngModel)]="paymentGateway.dataTransmission.scrape.id"
+                  (change)="reVerify(paymentGateway.dataTransmission.scrape)">
+                  <div class="options-wrap"
+                    appNoScroller
+                    [perfectScrollbar]>
+                    <mat-option *ngFor="let item of paymentGateway.dataTransmission.scrape.ids"
+                      [value]="item.value">
+                      {{ item.viewValue }}
+                    </mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <!-- CRM -->
+    <div class="section-title">
+      <h2>CRM</h2>
+      <div class="left-item">
+        <a mat-icon-button
+          (click)="openDialog('crm')">
+          <i class="material-icons">add_circle</i>
+        </a>
+      </div>
+    </div>
+    <div class="row top-level">
+      <div class="col-6"
+        *ngFor="let item of crm"
+        [hidden]="!item.included">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>
+              {{item.name}}
+              <i *ngIf="item.verify"
+                class="material-icons verify-icon">check_circle</i>
+            </h3>
+            <div class="right-item">
+              <div class="el"
+                *ngIf="item.verifyCancel">
+                <button mat-button
+                  color="primary"
+                  (click)="item.verify=true; item.verifyCancel=false;">Cancel</button>
+              </div>
+              <div class="el"
+                *ngIf="!item.verify">
+                <button mat-raised-button
+                  color="primary"
+                  (click)="item.verify=true; item.verifyCancel=false;">Verify</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-8">
+              <mat-form-field class="full-width">
+                <input matInput
+                  placeholder="Alias"
+                  [(ngModel)]="item.alias"
+                  (change)="reVerify(item)">
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <app-datetime-picker class="full-width"
+                [icons]="false"
+                [labelPicker]="'Effective as of'"
+                [value]="item.effectiveDate"
+                (change)="backDate($event); reVerify(item)">
+              </app-datetime-picker>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <!-- Products -->
+    <div class="section-title">
+      <h2>Products</h2>
+      <div class="left-item">
+        <a mat-icon-button
+          (click)="openDialog('products')">
+          <i class="material-icons">add_circle</i>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <fieldset class="form-section">
+          <ul class="checking-list">
+            <li class="line-item"
+              *ngFor="let item of productsList"
+              [hidden]="!item.included">
+              <div class="left-item">
+                <span routerLink="{{item.link}}"
+                  class="data">{{item.name}}</span>
+              </div>
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeItem(item)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+    </div>
+  </section>
+</div>

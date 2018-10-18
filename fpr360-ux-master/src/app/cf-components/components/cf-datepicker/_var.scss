@@ -1,0 +1,51 @@
+@import '../../styles/var';
+
+$primary: $calendar-primary !default;
+$warn: #f44336 !default;
+
+$cf-calendar-padding: 8px !default;
+$cf-calendar-weekday-table-font-size: 11px !default;
+
+$cf-calendar-prev-next-icon-border-width: 2px;
+$cf-calendar-prev-next-icon-margin: 15.5px;
+$cf-calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
+$cf-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
+
+$cf-datepicker-calendar-padding: 8px;
+$cf-datepicker-calendar-cell-size: 40px;
+$cf-datepicker-calendar-portrait-width: $cf-datepicker-calendar-cell-size * 7 +
+  $cf-datepicker-calendar-padding * 2;
+$cf-datepicker-calendar-landscape-width: 512px;
+$cf-datepicker-calendar-portrait-height: 405px;
+$cf-datepicker-calendar-landscape-height: 308px;
+
+$cf-datepicker-trigger-height: 30px !default;
+$cf-datepicker-trigger-min-width: 96px !default;
+$cf-datepicker-arrow-size: 5px !default;
+$cf-datepicker-arrow-margin: 4px !default;
+$cf-datepicker-date-cell-size: 32px !default;
+$cf-datepicker-calendar-height: 228px !default;
+
+$cf-clock-size: 228px !default;
+
+$cf-clock-min-size: 228px !default;
+$cf-clock-margin: 16px !default;
+$cf-clock-font-size: 14px !default;
+$cf-clock-cell-size: 14.1666% !default;
+
+$cf-calendar-body-font-size: 13px !default;
+$cf-calendar-body-header-font-size: 14px !default;
+$cf-calendar-body-label-padding-start: 5% !default;
+$cf-calendar-body-label-translation: -6px !default;
+$cf-calendar-body-cell-min-size: 32px !default;
+$cf-calendar-body-cell-size: 100% / 7 !default;
+$cf-calendar-body-cell-content-margin: 5% !default;
+$cf-calendar-body-cell-content-border-width: 1px !default;
+
+$cf-calendar-body-min-size: 7 * $cf-calendar-body-cell-min-size !default;
+$cf-calendar-body-cell-padding: $cf-calendar-body-cell-size / 2 !default;
+$cf-calendar-body-cell-content-size: 100% -
+  $cf-calendar-body-cell-content-margin * 2 !default;
+$cf-datepicker-selected-today-box-shadow-width: 1px;
+
+$cf-datepicker-toggle-icon-size: 24px !default;

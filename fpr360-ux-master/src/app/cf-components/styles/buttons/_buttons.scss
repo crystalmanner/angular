@@ -1,0 +1,139 @@
+@import '../var';
+
+.mat-icon-button {
+  @include animation();
+  &.delete-btn {
+    color: $iconColor;
+    &:hover {
+      color: $red !important;
+    }
+  }
+  &.add-btn {
+    color: $green;
+    &:hover {
+      color: darken($green, 10%);
+    }
+  }
+  &.standard {
+    color: $iconColor;
+    &:hover {
+      color: $iconColorHover;
+    }
+  }
+  &.standard-lignt {
+    color: $iconColorLight;
+    &:hover {
+      color: $iconColorLightHover;
+    }
+  }
+}
+.mat-button {
+  @include button();
+  &.big-button {
+    line-height: 40px;
+  }
+  &.light {
+    color: rgba(255, 255, 255, 0.87);
+    .mat-ripple-element {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+    .mat-button-focus-overlay {
+      opacity: 0;
+      background-color: transparent !important;
+    }
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+.mat-raised-button {
+  @include button();
+  &.big-button {
+    line-height: 40px;
+  }
+  &.light {
+    color: rgba(255, 255, 255, 0.87);
+    .mat-ripple-element {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+.mat-icon-button {
+  @include button();
+  .mat-button-focus-overlay {
+    opacity: 0;
+    background-color: transparent !important;
+  }
+  &.light {
+    color: rgba(255, 255, 255, 0.7);
+    .mat-ripple-element {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+    &:hover {
+      color: #fff;
+    }
+    &.notifications-button {
+      color: #fff;
+    }
+  }
+}
+.mat-fab {
+  @include button();
+
+  &.light {
+    color: rgba(255, 255, 255, 0.87);
+    .mat-ripple-element {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+.mat-mini-fab {
+  @include button();
+  &.light {
+    color: rgba(255, 255, 255, 0.87);
+    .mat-ripple-element {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+a {
+  &.mat-button {
+    color: $linkColor;
+  }
+}
+.button-group {
+  padding-bottom: 24px;
+  .mat-button {
+    margin: 8px 8px 8px 0;
+  }
+  .mat-raised-button {
+    margin: 8px 8px 8px 0;
+  }
+  .mat-icon-button {
+    margin: 8px 8px 8px 0;
+  }
+  .mat-fab {
+    margin: 8px 8px 8px 0;
+  }
+  .mat-mini-fab {
+    margin: 8px 8px 8px 0;
+  }
+}
+.mat-list {
+  .mat-list-item {
+    &.button-line {
+      .mat-list-item-content {
+        margin: 0 -16px;
+      }
+    }
+  }
+}

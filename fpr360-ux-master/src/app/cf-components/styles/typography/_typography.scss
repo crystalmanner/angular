@@ -1,0 +1,113 @@
+@import '../mixins';
+@import '../colors/colors';
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  @include body_1();
+}
+
+.display-4 {
+  @include display_4();
+}
+.display-3 {
+  @include display_3();
+}
+.display-2 {
+  @include display_2();
+}
+.display-1,
+h1 {
+  @include display_1();
+}
+.headline,
+h2 {
+  @include headline();
+}
+.title,
+h3 {
+  @include title();
+}
+.subhead,
+h4 {
+  @include subhead();
+}
+.body_2,
+strong {
+  @include body_2();
+}
+.body_1 {
+  @include body_1();
+}
+.caption,
+small,
+cite {
+  @include caption();
+}
+.button {
+  @include button();
+}
+
+a {
+  color: $linkColor;
+  text-decoration: none !important;
+  @include animation();
+  &:hover {
+    color: $linkColorHover;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+blockquote,
+q {
+  margin: 0;
+}
+hr {
+  border-color: $borderColor;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: auto;
+  -webkit-margin-end: auto;
+  margin: 8px 0;
+}
+.text-box {
+  h1 {
+    padding: 0 0 24px;
+  }
+  h2 {
+    padding: 12px 0 24px;
+  }
+  h3 {
+    padding: 0 0 24px;
+  }
+  h4 {
+    padding: 0 0 24px;
+  }
+  p {
+    padding-bottom: 24px;
+  }
+  ul,
+  ol {
+    padding: 0 0 24px 32px;
+  }
+  blockquote {
+    padding-bottom: 32px;
+    q {
+      display: block;
+      padding-bottom: 16px;
+    }
+    cite {
+      display: block;
+      font-style: italic;
+    }
+  }
+}

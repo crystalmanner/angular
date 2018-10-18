@@ -1,0 +1,11 @@
+<mat-form-field class="full-width"
+  [ngClass]="readonly? 'readonly': ''">
+  <input matInput
+    type="{{cvvField}}"
+    (focus)="cvvField = 'text'"
+    (blur)="cvvField = 'password'"
+    placeholder="CVV"
+    [textMask]="{mask: cvvMask, guide: false}"
+    [(ngModel)]="value"
+    [readonly]="readonly">
+</mat-form-field>

@@ -1,0 +1,458 @@
+<div class="content">
+  <section class="main-content">
+    <div class="crm-block"
+      *ngFor="let crm of crmData">
+      <div class="crm-block-content"
+        *ngIf="crm.included">
+        <div class="section-title">
+          <h2>{{crm.name}}</h2>
+          <div class="right-item">
+            <app-dd-menu [options]="crm.options"
+              (select)="sectionOptionsFunction($event)"></app-dd-menu>
+          </div>
+        </div>
+        <div class="row top-level">
+          <!-- Account -->
+          <div class="col-6">
+            <fieldset class="form-section">
+              <div class="form-title">
+                <h3>Account</h3>
+              </div>
+              <div class="row">
+                <div class="col-s-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="Alias (optional)"
+                      (change)="changeAlias(crm.account.alias)"
+                      [(ngModel)]="crm.account.alias"
+                      [readonly]="readonly">
+                  </mat-form-field>
+                </div>
+                <div class="col-s-4">
+                  <app-datetime-picker [ngClass]="readonly? 'readonly': ''"
+                    [icons]="false"
+                    [labelPicker]="'Activation Date'"
+                    (change)="backDate($event)"
+                    [value]="crm.account.activationDate"
+                    [readonly]="readonly">
+                  </app-datetime-picker>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-12">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="URL"
+                      [(ngModel)]="crm.account.url"
+                      [readonly]="readonly"
+                      [formControl]="crm.account.urlFormControl">
+                    <mat-error *ngIf="crm.account.urlFormControl.hasError('pattern')">
+                      Please enter a valid url
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="User Name"
+                      [(ngModel)]="crm.account.username"
+                      [readonly]="readonly">
+                  </mat-form-field>
+                </div>
+                <div class="col-s-6">
+                  <app-password class="{{readonly? 'readonly': ''}}"
+                    [placeholder]="'Password'"
+                    (change)="password($event)"
+                    [password]="crm.account.password"
+                    [readonly]="readonly"></app-password>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <!-- Two-Factor Authorization -->
+          <div class="col-6">
+            <fieldset class="form-section">
+              <div class="form-title">
+                <h3>Two-Factor Authorization</h3>
+              </div>
+              <div class="row">
+                <div class="col-s-4">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <mat-select placeholder="Method"
+                      [(ngModel)]="crm.authorization.method"
+                      [disabled]="readonly">
+                      <div class="options-wrap"
+                        appNoScroller
+                        [perfectScrollbar]>
+                        <mat-option *ngFor="let item of crm.authorization.methods"
+                          [value]="item.value">
+                          {{ item.viewValue }}
+                        </mat-option>
+                      </div>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-s-8">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''"
+                    *ngIf="crm.authorization.method==='Email'">
+                    <input matInput
+                      placeholder="Email Address"
+                      [(ngModel)]="crm.authorization.email"
+                      [readonly]="readonly"
+                      [formControl]="crm.authorization.emailFormControl">
+                    <mat-error *ngIf="crm.authorization.emailFormControl.hasError('pattern')">
+                      Please enter a valid url
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''"
+                    *ngIf="crm.authorization.method==='SMS'">
+                    <input matInput
+                      placeholder="Phone Number"
+                      [textMask]="{mask: phoneMask, guide: false}"
+                      [(ngModel)]="crm.authorization.phone"
+                      [readonly]="readonly">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-12">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <textarea matInput
+                      rows="1"
+                      autosize
+                      #notes
+                      maxlength="240"
+                      placeholder="Security Questions"
+                      [(ngModel)]="crm.authorization.question"
+                      [readonly]="readonly"></textarea>
+                    <mat-hint align="start">Include security questions in list form</mat-hint>
+                    <mat-hint align="end"
+                      [ngClass]="notes.value.length===240?'error-color':''">{{notes.value.length}} / 240</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="form-title">
+          <h3>Data Transmission</h3>
+        </div>
+        <div class="row top-level">
+          <div class="col-6">
+            <!-- API -->
+            <fieldset class="form-section">
+              <div class="form-title">
+                <h4>
+                  API
+                  <i *ngIf="crm.dataTransmissionMethod.api.verify"
+                    class="material-icons verify-icon">check_circle</i>
+                </h4>
+                <div class="right-item">
+                  <div class="el"
+                    *ngIf="crm.dataTransmissionMethod.api.verifyCancel">
+                    <button mat-button
+                      color="primary"
+                      (click)="crm.dataTransmissionMethod.api.verify=true; crm.dataTransmissionMethod.api.verifyCancel=false;">Cancel</button>
+                  </div>
+                  <div class="el"
+                    *ngIf="!crm.dataTransmissionMethod.api.verify">
+                    <button mat-raised-button
+                      color="primary"
+                      (click)="crm.dataTransmissionMethod.api.verify=true; crm.dataTransmissionMethod.api.verifyCancel=false;">Verify</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-s-12">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="Portal URL"
+                      [(ngModel)]="crm.dataTransmissionMethod.api.portalUrl"
+                      [readonly]="readonly"
+                      [formControl]="crm.dataTransmissionMethod.api.urlFormControl"
+                      (change)="reVerify(crm.dataTransmissionMethod.api)">
+                    <mat-error *ngIf="crm.dataTransmissionMethod.api.urlFormControl.hasError('pattern')">
+                      Please enter a valid url
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="User Name"
+                      [(ngModel)]="crm.dataTransmissionMethod.api.username"
+                      [readonly]="readonly"
+                      (change)="reVerify(crm.dataTransmissionMethod.api)">
+                  </mat-form-field>
+                </div>
+                <div class="col-s-6">
+                  <app-password [placeholder]="'Password'"
+                    class="{{readonly? 'readonly': ''}}"
+                    (change)="password($event); reVerify(crm.dataTransmissionMethod.api)"
+                    [password]="crm.dataTransmissionMethod.api.password"
+                    [readonly]="readonly"></app-password>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-6">
+                  <app-password [placeholder]="'API Key'"
+                    class="{{readonly? 'readonly': ''}}"
+                    (change)="password($event); reVerify(crm.dataTransmissionMethod.api)"
+                    [password]="crm.dataTransmissionMethod.api.apiKey"
+                    [readonly]="readonly"></app-password>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-4">
+                  <app-datetime-picker [ngClass]="readonly? 'readonly': ''"
+                    [icons]="false"
+                    [error]="crm.dataTransmissionMethod.api.dateErrorFlag"
+                    [errorText]="errorDateText"
+                    [labelPicker]="'Start Date'"
+                    (change)="backDateStart($event, crm, crm.dataTransmissionMethod.api.endDate); reVerify(crm.dataTransmissionMethod.api)"
+                
+                    [value]="crm.dataTransmissionMethod.api.startDate"
+                    [readonly]="readonly">
+                  </app-datetime-picker>
+                </div>
+                <div class="col-s-4">
+                  <app-datetime-picker [icons]="false"
+                    [ngClass]="readonly? 'readonly': ''"
+                    [labelPicker]="'End Date'"
+                    [error]="crm.dataTransmissionMethod.api.dateErrorFlag"
+                    [errorText]="errorDateText"
+                    (change)="backDateEnd($event, crm, crm.dataTransmissionMethod.api.startDate); reVerify(crm.dataTransmissionMethod.api)"
+                
+                    [value]="crm.dataTransmissionMethod.api.endDate"
+                    [readonly]="readonly">
+                  </app-datetime-picker>
+                </div>
+              </div>
+            </fieldset>
+            <!-- Master -->
+            <fieldset class="form-section">
+              <div class="form-title">
+                <h4>
+                  Master
+                  <i *ngIf="crm.dataTransmissionMethod.master.verify"
+                    class="material-icons verify-icon">check_circle</i>
+                </h4>
+                <div class="right-item">
+                  <div class="el"
+                    *ngIf="crm.dataTransmissionMethod.master.verifyCancel">
+                    <button mat-button
+                      color="primary"
+                      (click)="crm.dataTransmissionMethod.master.verify=true; crm.dataTransmissionMethod.master.verifyCancel=false;">Cancel</button>
+                  </div>
+                  <div class="el"
+                    *ngIf="!crm.dataTransmissionMethod.master.verify">
+                    <button mat-raised-button
+                      color="primary"
+                      (click)="crm.dataTransmissionMethod.master.verify=true; crm.dataTransmissionMethod.master.verifyCancel=false;">Verify</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-12">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="Portal URL"
+                      [(ngModel)]="crm.dataTransmissionMethod.master.portalUrl"
+                      [readonly]="readonly"
+                      [formControl]="crm.dataTransmissionMethod.master.urlFormControl"
+                      (change)="reVerify(crm.dataTransmissionMethod.master)">
+                    <mat-error *ngIf="crm.dataTransmissionMethod.master.urlFormControl.hasError('pattern')">
+                      Please enter a valid url
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="User Name"
+                      [(ngModel)]="crm.dataTransmissionMethod.master.username"
+                      [readonly]="readonly"
+                      (change)="reVerify(crm.dataTransmissionMethod.master)">
+                  </mat-form-field>
+                </div>
+                <div class="col-s-6">
+                  <app-password class="{{readonly? 'readonly': ''}}"
+                    [placeholder]="'Password'"
+                    (change)="password($event); reVerify(crm.dataTransmissionMethod.master)"
+                    [password]="crm.dataTransmissionMethod.master.password"
+                    [readonly]="readonly"></app-password>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-6">
+            <!--  Scrape -->
+            <fieldset class="form-section">
+              <div class="form-title">
+                <h4>
+                  Scrape
+                  <i *ngIf="crm.dataTransmissionMethod.scrape.verify"
+                    class="material-icons verify-icon">check_circle</i>
+                </h4>
+                <div class="right-item">
+                  <div class="el"
+                    *ngIf="crm.dataTransmissionMethod.scrape.verifyCancel">
+                    <button mat-button
+                      color="primary"
+                      (click)="crm.dataTransmissionMethod.scrape.verify=true; crm.dataTransmissionMethod.scrape.verifyCancel=false;">Cancel</button>
+                  </div>
+                  <div class="el"
+                    *ngIf="!crm.dataTransmissionMethod.scrape.verify">
+                    <button mat-raised-button
+                      color="primary"
+                      (click)="crm.dataTransmissionMethod.scrape.verify=true; crm.dataTransmissionMethod.scrape.verifyCancel=false;">Verify</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-12">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="Portal URL"
+                      [(ngModel)]="crm.dataTransmissionMethod.scrape.portalUrl"
+                      [readonly]="readonly"
+                      [formControl]="crm.dataTransmissionMethod.scrape.urlFormControl"
+                      (change)="reVerify(crm.dataTransmissionMethod.scrape)">
+                    <mat-error *ngIf="crm.dataTransmissionMethod.scrape.urlFormControl.hasError('pattern')">
+                      Please enter a valid url
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="User Name"
+                      [(ngModel)]="crm.dataTransmissionMethod.scrape.username"
+                      [readonly]="readonly"
+                      (change)="reVerify(crm.dataTransmissionMethod.scrape)">
+                  </mat-form-field>
+                </div>
+                <div class="col-s-6">
+                  <app-password class="{{readonly? 'readonly': ''}}"
+                    [placeholder]="'Password'"
+                    (change)="password($event); reVerify(crm.dataTransmissionMethod.scrape)"
+                    [password]="crm.dataTransmissionMethod.scrape.password"
+                    [readonly]="readonly"></app-password>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-3">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <mat-select placeholder="Scrape ID"
+                      [(ngModel)]="crm.dataTransmissionMethod.scrape.scrapeID"
+                      [disabled]="readonly"
+                      (change)="reVerify(crm.dataTransmissionMethod.scrape)">
+                      <div class="options-wrap"
+                        appNoScroller
+                        [perfectScrollbar]>
+                        <mat-option *ngFor="let item of crm.dataTransmissionMethod.scrape.scrapeIDOptions"
+                          [value]="item.value">
+                          {{ item.viewValue }}
+                        </mat-option>
+                      </div>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </fieldset>
+            <!-- Web Only -->
+            <fieldset class="form-section">
+              <div class="form-title">
+                <h4>
+                  Web Only
+                  <i *ngIf="crm.dataTransmissionMethod.webOnly.verify"
+                    class="material-icons verify-icon">check_circle</i>
+                </h4>
+                <div class="right-item">
+                  <div class="el"
+                    *ngIf="crm.dataTransmissionMethod.webOnly.verifyCancel">
+                    <button mat-button
+                      color="primary"
+                      (click)="crm.dataTransmissionMethod.webOnly.verify=true; crm.dataTransmissionMethod.webOnly.verifyCancel=false;">Cancel</button>
+                  </div>
+                  <div class="el"
+                    *ngIf="!crm.dataTransmissionMethod.webOnly.verify">
+                    <button mat-raised-button
+                      color="primary"
+                      (click)="crm.dataTransmissionMethod.webOnly.verify=true; crm.dataTransmissionMethod.webOnly.verifyCancel=false;">Verify</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-12">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="Portal URL"
+                      [(ngModel)]="crm.dataTransmissionMethod.webOnly.portalUrl"
+                      [readonly]="readonly"
+                      [formControl]="crm.dataTransmissionMethod.webOnly.urlFormControl"
+                      (change)="reVerify(crm.dataTransmissionMethod.webOnly)">
+                    <mat-error *ngIf="crm.dataTransmissionMethod.webOnly.urlFormControl.hasError('pattern')">
+                      Please enter a valid url
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-s-6">
+                  <mat-form-field class="full-width"
+                    [ngClass]="readonly? 'readonly': ''">
+                    <input matInput
+                      placeholder="User Name"
+                      [(ngModel)]="crm.dataTransmissionMethod.webOnly.username"
+                      [readonly]="readonly"
+                      (change)="reVerify(crm.dataTransmissionMethod.webOnly)">
+                  </mat-form-field>
+                </div>
+                <div class="col-s-6">
+                  <app-password class="{{readonly? 'readonly': ''}}"
+                    [placeholder]="'Password'"
+                    (change)="password($event); reVerify(crm.dataTransmissionMethod.webOnly)"
+                    [password]="crm.dataTransmissionMethod.webOnly.password"
+                    [readonly]="readonly"></app-password>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- add button -->
+    <div class="button-box bottom-position">
+      <button mat-fab
+        class="visible"
+        (click)="openAddCrmDialog()">
+        <i class="material-icons">add</i>
+      </button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,35 @@
+@import '../../../cf-components/styles/mixins';
+@import '../../../scss/theme-var';
+.select-menu {
+  min-width: 128px;
+  > span {
+    &.clickable {
+      @include values();
+      display: block;
+      font-size: 20px;
+      padding-right: 32px;
+      position: relative;
+      line-height: 38px;
+      height: 38px;
+      color: rgba(255, 255, 255, 0.87);
+      i {
+        &.material-icons {
+          position: absolute;
+          top: 7px;
+          right: 4px;
+          color: rgba(255, 255, 255, 0.87);
+        }
+      }
+      &:hover {
+        i {
+          &.material-icons {
+            position: absolute;
+            top: 7px;
+            right: 4px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

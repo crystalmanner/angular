@@ -1,0 +1,7 @@
+@import '../cf-components/styles/mixins';
+@import 'theme-var';
+.default-avatar {
+  .avatar {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+}

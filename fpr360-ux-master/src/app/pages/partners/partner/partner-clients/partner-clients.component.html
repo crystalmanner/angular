@@ -1,0 +1,103 @@
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <div class="col-4">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Client</h3>
+            <div class="right-item">
+              <a mat-icon-button
+                (click)="openDialog('clients')">
+                <i class="material-icons">add_circle</i>
+              </a>
+            </div>
+          </div>
+          <ul class="checking-list">
+            <li class="line-item"
+              *ngFor="let item of clientsList"
+              [hidden]="!item.included"
+              [ngClass]="item.active?'active':''">
+              <div class="left-item"
+                (click)="acviveClientFunction(item)">
+                <span class="data">{{item.name}}</span>
+              </div>
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeClientItem(item)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+      <div class="col-4">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Merchant</h3>
+            <div class="right-item">
+              <button class="addButton"
+                disabled="{{!merchantFlag}}"
+                mat-icon-button
+                (click)="openDialog('merchants')">
+                <i class="material-icons">add_circle</i>
+              </button>
+            </div>
+          </div>
+          <ul *ngIf="merchantFlag"
+            class="checking-list">
+            <li class="line-item"
+              *ngFor="let item of merchantsList"
+              [hidden]="!item.included"
+              [ngClass]="item.active?'active':''">
+              <div class="left-item"
+                (click)="acviveMerchantFunction(item)">
+                <span class="data">{{item.name}}</span>
+              </div>
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeMerchantItem(item)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+      <div class="col-4">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>MIDs</h3>
+            <div class="right-item">
+              <button class="addButton"
+                disabled="{{!midsFlag}}"
+                mat-icon-button
+                (click)="openDialog('mids')">
+                <i class="material-icons">add_circle</i>
+              </button>
+            </div>
+          </div>
+          <ul *ngIf="midsFlag"
+            class="checking-list">
+            <li class="line-item"
+              *ngFor="let item of midsList"
+              [hidden]="!item.included">
+              <div class="left-item">
+                <span class="data">{{item.name}}</span>
+              </div>
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeItem(item)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,101 @@
+@import '../cf-components/styles/mixins';
+@import 'theme-var';
+
+.grid-carsd {
+  padding: 8px 0;
+  &.row {
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+}
+.user-card {
+  border: 1px solid $borderColor;
+  outline: none;
+  cursor: pointer;
+  border-radius: 2px;
+  float: left;
+  margin: 0 12px 32px;
+  background: #fff;
+  position: relative;
+  width: 176px;
+  height: 192px;
+  padding: 32px 0 0;
+  overflow: hidden;
+  .check-cell {
+    position: absolute;
+    top: 10px;
+    left: 16px;
+    opacity: 0;
+  }
+  &:hover,
+  &.checked-card {
+    background-color: #f2f7fa;
+    .check-cell {
+      opacity: 1;
+    }
+  }
+  &.no-active {
+    &:hover {
+      .check-cell {
+        opacity: 1;
+      }
+    }
+    .grid-avatar,
+    .info {
+      opacity: 0.5;
+    }
+    em {
+      &.role-label {
+        opacity: 0.5;
+      }
+    }
+  }
+  .grid-avatar {
+    display: block;
+    width: 64px;
+    margin: 0 auto 24px;
+  }
+  .info {
+    text-align: center;
+    strong {
+      display: block;
+      line-height: 24px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    span {
+      display: block;
+      @include caption();
+      line-height: 20px;
+    }
+  }
+  em {
+    font-style: normal;
+    display: block;
+    width: 68px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 9px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    &.role-label {
+      background: $primary;
+      bottom: 0;
+    }
+    &.status-label {
+      background: $orange;
+      top: 0;
+    }
+  }
+}
+.check-visible {
+  .user-card {
+    .check-cell {
+      opacity: 1;
+    }
+  }
+}

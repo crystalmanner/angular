@@ -1,0 +1,84 @@
+@import '../../styles/mixins';
+
+.dynamic-search {
+  position: relative;
+  height: 40px;
+  overflow: hidden;
+  min-width: 28px;
+  .dynamic-search-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .cancel-search-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    z-index: 1;
+  }
+  &.open-search {
+    .cancel-search-btn {
+      display: block;
+    }
+    .field-wrap {
+      width: 340px;
+      position: relative;
+      z-index: 1;
+      @include animationWidth(0.3s);
+    }
+    &.placeholder {
+      .field-wrap {
+        &:before {
+          background-color: transparent;
+        }
+      }
+      &.focused {
+        .field-wrap {
+          &:before {
+            background-color: $formActive;
+          }
+        }
+      }
+    }
+    &.focused {
+      .field-wrap {
+        &:before {
+          background-color: $formActive;
+          @include zoom(2);
+        }
+      }
+    }
+  }
+  .field-wrap {
+    height: 40px;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 0;
+    @include animationWidth();
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      width: 100%;
+      background: $borderColor;
+    }
+    input {
+      &[type='search'] {
+        border: none;
+        padding: 8px 0 8px 40px;
+        border-radius: 0;
+        width: calc(100% - 40px);
+        background: none;
+        display: block;
+        @include values();
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,112 @@
+<div class="table-section">
+  <div class="table-wrap">
+    <ngx-datatable #table
+      class="material"
+      [rows]="tableData.rows"
+      [columnMode]="'force'"
+      [headerHeight]="56"
+      [scrollbarV]="false"
+      [scrollbarH]="false"
+      [rowHeight]="48"
+      [rowClass]="getRowClass">
+      <ngx-datatable-column *ngFor="let item of tableData.addidionalData.colsData"
+        [draggable]="false"
+        name="{{item.name}}"
+        [canAutoResize]="!item.width"
+        [maxWidth]="item.width? item.width: undefined"
+        [minWidth]="item.width? item.width: undefined"
+        [width]="item.width? item.width: undefined"
+        [flexGrow]="1"
+        headerClass="{{item.rightAlign? ' right-align ': null}}{{(!item.included? ' hidden ': '')}}"
+        [cellClass]="(item.bold? ' bold ': '') + ' ' + (item.rightAlign? ' right-align ': '') + ' ' + (!item.included? ' hidden ': '')">
+        <ng-template *ngIf="!item.editableselect&&!item.notesIcon"
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="value"
+          let-row="row"
+          let-rowHeight="rowHeight">
+          <span *ngIf="value==='Active_label'"
+            class="table-label active-label">Active</span>
+          <span *ngIf="value==='Paid_label'"
+            class="table-label paid-label">Paid</span>
+          <span *ngIf="value==='Inactive_label'"
+            class="table-label inactive-label">Inactive</span>
+          <span *ngIf="value==='Legacy_label'"
+            class="table-label legacy-label">Legacy</span>
+          <span *ngIf="value==='Open_label'"
+            class="table-label open-label">Open</span>
+          <span *ngIf="value==='Closed_label'"
+            class="table-label closed-label">Closed</span>
+          <span *ngIf="value==='Lost_label'"
+            class="table-label lost-label">Lost</span>
+          <span *ngIf="value==='Won_label'"
+            class="table-label won-label">Won</span>
+          <span *ngIf="value==='Unfought_label'"
+            class="table-label unfought-label">Unfought</span>
+          <span *ngIf="value==='New_label'"
+            class="table-label new-label">New</span>
+          <span *ngIf="value==='Pending_label'"
+            class="table-label pending-label">Pending</span>
+          <span *ngIf="value==='Declined_label'"
+            class="table-label declined-label">Declined</span>
+          <span *ngIf="value==='Void_label'"
+            class="table-label void-label">Void</span>
+          <span *ngIf="value==='Paused_label'"
+            class="table-label paused-label">Paused</span>
+
+          <span *ngIf="value!='Paused_label'&&value!='Void_label'&&value!='Declined_label'&&value!='Pending_label'&&value!='New_label'&&value!='Unfought_label'&&value!='Won_label'&&value!='Lost_label'&&value!='Active_label'&& value!='Inactive_label'&& value!='Legacy_label'&& value!='Paid_label'&&value!='Open_label'&&value!='Closed_label'"
+        
+            [innerHTML]="value"></span>
+        </ng-template>
+        <ng-template *ngIf="item.editableselect"
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="value"
+          let-row="row"
+          let-rowHeight="rowHeight">
+          <app-select-menu class="table-select"
+            [value]="value"
+            [options]="item.editableSelectOptions"
+            (click)="onEvent($event)"
+            (change)="changeStatus($event, item)"></app-select-menu>
+        </ng-template>
+        <ng-template *ngIf="item.notesIcon"
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="value"
+          let-row="row"
+          let-rowHeight="rowHeight">
+          <button mat-icon-button
+            *ngIf="value"
+            class="standard"
+            (click)="openNotes(value)">
+            <i class="material-icons">message</i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [width]="60"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [frozenRight]="true"
+        [name]="'no-link'">
+        <ng-template ngx-datatable-header-template
+          let-column="column">
+          <app-dd-menu *ngIf="manageColumn"
+            class="table-settings"
+            [options]="globalTableSettings"
+            (select)="selectGlobalTableSettings($event)"></app-dd-menu>
+        </ng-template>
+        <ng-template ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="value"
+          let-row="row">
+          <app-dd-menu class="table-settings"
+            [options]="tableData.addidionalData.rowSettings"
+            (select)="rowSettings($event, row)"></app-dd-menu>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

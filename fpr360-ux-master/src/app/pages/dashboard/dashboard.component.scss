@@ -1,0 +1,40 @@
+@import '../../cf-components/styles/mixins';
+
+.mini-widgets {
+  padding: 0 64px 32px 0;
+  position: relative;
+  .mini-widgets-settings {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.widgets {
+  margin: 0 -16px;
+  @include clearfix();
+  .dashboard-widget {
+    padding: 0 16px 32px;
+    float: left;
+    &.full {
+      width: 100%;
+    }
+    &.half {
+      width: 50%;
+    }
+    &.third {
+      width: 33.33%;
+    }
+    &.two-thirds {
+      width: 66.67%;
+    }
+  }
+}
+.chart-placeholder {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1400px;
+}

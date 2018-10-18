@@ -1,0 +1,12 @@
+<div class="editable-title"
+  [ngClass]="additionalClass">
+  <i *ngIf="icon&&!customIcon"
+    class="material-icons">{{icon}}</i>
+  <i *ngIf="icon&&customIcon"
+    class="custom-icons icon-{{icon}}"></i>
+  <input matInput
+    placeholder="{{placeholder}}"
+    readonly="{{readonly}}"
+    [(ngModel)]="value"
+    (change)="backValue(value)">
+</div>

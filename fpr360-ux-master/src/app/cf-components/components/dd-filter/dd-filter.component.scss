@@ -1,0 +1,30 @@
+@import '../../styles/mixins';
+
+.mat-menu-item {
+  &.filter-item {
+    position: relative;
+    padding-left: 56px;
+    i {
+      &.material-icons {
+        color: $primary;
+        position: absolute;
+        top: 12px;
+        left: 16px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .mat-menu-item {
+    &.filter-item {
+      padding-left: 64px;
+      i {
+        &.material-icons {
+          top: 4px;
+          left: 24px;
+        }
+      }
+    }
+  }
+}

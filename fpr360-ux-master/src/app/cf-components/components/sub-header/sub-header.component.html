@@ -1,0 +1,23 @@
+<div class="header-menu">
+  <nav mat-tab-nav-bar
+    [ngClass]="light? ' light-nav': null">
+    <a mat-tab-link
+      [ngClass]="''+(light? ' light': '') + (item.icon? ' with-icon': '')"
+      *ngFor="let item of innerMenuItems"
+      
+      (click)="openDialog(item)"
+      
+      [routerLink]="item.path"
+      routerLinkActive
+      #rla="routerLinkActive"
+      [active]="rla.isActive">
+      {{item.name}}
+      <i *ngIf="item.icon"
+        class="material-icons">{{item.icon}}</i>
+      <i *ngIf="item.indicator==='true'"
+        class="material-icons">check_circle</i>
+      <i *ngIf="item.indicator==='error'"
+        class="material-icons error-color">error</i>
+    </a>
+  </nav>
+</div>

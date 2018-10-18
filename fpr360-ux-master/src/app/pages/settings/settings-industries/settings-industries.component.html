@@ -1,0 +1,104 @@
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <div class="col-4">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Industry</h3>
+            <div class="right-item">
+              <a mat-icon-button
+                (click)="addItemDialog('New Industry')">
+                <i class="material-icons">add_circle</i>
+              </a>
+            </div>
+          </div>
+          <ul class="checking-list auto-height"
+            [perfectScrollbar]>
+            <li class="line-item"
+              *ngFor="let item of industries"
+              [ngClass]="item.active?'active':''">
+              <div class="left-item"
+                (click)="acviveFunction(item)">
+                <span class="data">{{item.value}}</span>
+              </div>
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeIndustry(industries, item)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+      <div class="col-4">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Sub-Industry</h3>
+            <div class="right-item">
+              <button class="addButton"
+                disabled="{{!subIndustryFlag}}"
+                mat-icon-button
+                (click)="addValueDialog('Sub-Industry')">
+                <i class="material-icons">add_circle</i>
+              </button>
+            </div>
+          </div>
+          <ul *ngIf="subIndustryFlag"
+            class="checking-list auto-height"
+            [perfectScrollbar]>
+            <li class="line-item"
+              *ngFor="let item of subIndustry;"
+              [ngClass]="item.active?'active':''">
+              <div class="left-item"
+                (click)="acviveSubIndustryFunction(item)">
+                <span class="data">{{item.value}}</span>
+              </div>
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeSubIndustry(subIndustry, item)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+      <div class="col-4">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Charageback Parameters</h3>
+            <div class="right-item">
+              <button class="addButton"
+                mat-icon-button
+                disabled="{{!charagebackParametersFlag}}"
+                (click)="addChargebackFieldsDialog('Chargeback Fields')">
+                <i class="material-icons">add_circle</i>
+              </button>
+            </div>
+          </div>
+          <ul *ngIf="charagebackParametersFlag"
+            class="checking-list auto-height"
+            [perfectScrollbar]>
+            <li class="line-item"
+              *ngFor="let item of chargebackFields"
+              [hidden]="!item.included">
+              <div class="left-item no-link">
+                <span class="data">{{item.name}}</span>
+              </div>
+              <div class="right-item">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="item.included=false  ">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+    </div>
+  </section>
+</div>

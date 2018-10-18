@@ -1,0 +1,193 @@
+<div class="sub-header-box with-data">
+  <div class="wrap">
+    <div class="line-item">
+      <div class="left-item title-wrap">
+        <label>{{ticketLabel}}</label>
+        <app-editable-title [value]="ticketTitle"
+          [light]="true"
+          [readonly]="true"
+          (changeValue)="titleVal($event)"></app-editable-title>
+      </div>
+      <div class="right-item">
+        <div class="el"
+          *ngFor="let item of ticketUsers">
+          <div class="small-user-box">
+            <app-image class="avatar-wrap"
+              [size]="36"
+              [type]="item.avatarType"
+              [imageUrl]="item.avatar"
+              [imageAlt]="item.name"
+              [initialColor]="item.initialColor"
+              [initial]="item.initial"></app-image>
+            <span>{{item.name}}</span>
+            <em>{{item.position}}</em>
+          </div>
+        </div>
+        <div class="el label-el">
+          <app-label [backgroundStyle]="label.color">{{label.value}}</app-label>
+        </div>
+        <div class="el button-el settings-placeholder">
+          <app-dd-menu [options]="pageSettings"
+            [light]="true"
+            (select)="selectPageSettings($event)"></app-dd-menu>
+        </div>
+      </div>
+    </div>
+    <div class="info-elements">
+      <ul>
+        <li *ngFor="let item of infoList">
+          <em>{{item.label}}</em>
+          <span>{{item.value}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <div class="col-4">
+        <fieldset class="form-section">
+          <div class="form-title">
+            <h3>Recipients</h3>
+            <div class="right-item">
+              <a mat-icon-button
+                (click)="addRecipients()">
+                <i class="material-icons">person_add</i>
+              </a>
+            </div>
+          </div>
+          <div class="uasers-list">
+            <div class="user-list-item"
+              *ngFor="let item of recipients"
+              [hidden]="!item.rowIncluded">
+              <div class="avatar-box">
+                <div class="avatar-wrap">
+                  <app-image [size]="40"
+                    [type]="item.icon.type"
+                    [initial]="item.icon.initials"
+                    [initialColor]="item.icon.color"
+                    [imageUrl]="item.icon.photo"
+                    [imageAlt]="item.name"
+                    class="table-avatar"></app-image>
+                  <i *ngIf="item.icon.guru"
+                    class="custom-icons icon-guru"></i>
+                </div>
+              </div>
+              <div class="user-info">
+                <span>{{item.name}}</span>
+                <em>{{item.position}}</em>
+              </div>
+              <div class="right-button">
+                <button mat-icon-button
+                  class="standard"
+                  (click)="removeRecipients(item)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-5">
+        <div class="messages">
+          <div class="message-form">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <textarea matInput
+                rows="1"
+                autosize
+                placeholder="Add reply"
+                [(ngModel)]="newMessage"
+                [readonly]="readonly"
+                (focus)="focusMessage=true"></textarea>
+            </mat-form-field>
+            <div class="line-item form-hidden"
+              *ngIf="focusMessage">
+              <ul class="attachments-list">
+                <li *ngFor="let el of arrayFiles">
+                  <a routerLink="{{el.path}}">
+                    <i class="material-icons">attach_file</i>
+                    <span>{{el.fileName}}</span>
+                  </a>
+                  <app-dd-menu class="attachments-list-settings"
+                    [options]="attachmentSettings"
+                    (select)="attachmentSettingsFunction($event, el)"></app-dd-menu>
+                </li>
+              </ul>
+              <div class="left-item">
+                <div class="attach-button">
+                  <a class="attach-link"
+                    (click)="file.click()">
+                    <i class="material-icons">add_circle</i>
+                    <span>Attachments</span>
+                  </a>
+                  <input type="file"
+                    #file
+                    multiple
+                    class="hidden"
+                    (change)="onChange($event)">
+                </div>
+              </div>
+              <div class="right-item">
+                <div class="el">
+                  <button mat-raised-button
+                    (click)="sendMessage(newMessage)"
+                    color="primary">Reply</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="messages-list">
+            <div class="item"
+              *ngFor="let item of messages">
+              <div class="avatar-wrap">
+                <app-image [size]="40"
+                  [type]="item.icon.type"
+                  [initial]="item.icon.initials"
+                  [initialColor]="item.icon.color"
+                  [imageUrl]="item.icon.photo"
+                  [imageAlt]="item.name"></app-image>
+                <i *ngIf="item.icon.guru"
+                  class="custom-icons icon-guru"></i>
+              </div>
+              <div class="message">
+                <strong>{{item.name}}</strong>
+                <em>{{item.date}}</em>
+                <p>{{item.message}}</p>
+                <ul class="attachments-list">
+                  <li *ngFor="let el of item.attach">
+                    <a routerLink="{{el.path}}">
+                      <i class="material-icons">attach_file</i>
+                      <span>{{el.fileName}}</span>
+                    </a>
+                    <app-dd-menu class="attachments-list-settings"
+                      [options]="attachmentSettings"
+                      (select)="attachmentMessageSettingsFunction($event, item, el)"></app-dd-menu>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-title">
+          <h3>Attachments</h3>
+        </div>
+        <ul class="attachments-list">
+          <li *ngFor="let item of attachments">
+            <a routerLink="{{item.path}}">
+              <i class="material-icons">attach_file</i>
+              <span>{{item.fileName}}</span>
+            </a>
+            <app-dd-menu class="attachments-list-settings"
+              [options]="attachmentSettings"
+              (select)="attachmentSettingsFunction($event, item)"></app-dd-menu>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>

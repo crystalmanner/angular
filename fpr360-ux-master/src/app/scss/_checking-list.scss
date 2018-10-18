@@ -1,0 +1,115 @@
+@import '../cf-components/styles/mixins';
+
+ul {
+  &.checking-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    &.max-480 {
+      max-height: 480px;
+      position: relative;
+    }
+    &.double-val {
+      li {
+        em {
+          &.type-field {
+            max-width: 30%;
+          }
+        }
+        span {
+          &.data {
+            max-width: 70%;
+          }
+        }
+      }
+    }
+    &.card-codes {
+      li {
+        em {
+          &.value {
+            float: left;
+          }
+        }
+        span {
+          &.data {
+            width: 172px;
+          }
+        }
+      }
+    }
+    li {
+      border-bottom: 1px solid $borderColor;
+      max-height: 48px;
+      position: relative;
+      .amount-cell {
+        padding-left: 0;
+        padding-right: 16px;
+      }
+      &.active {
+        background-color: $tableActive;
+      }
+      .right-item {
+        width: 48px;
+        height: 48px;
+        padding: 4px;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .left-item {
+        padding-right: 48px;
+        width: 100%;
+        cursor: pointer;
+        &.no-link {
+          cursor: default;
+        }
+        .mat-form-field.simple-field .mat-form-field-underline {
+          display: none;
+        }
+      }
+      em {
+        &.type-field,
+        &.value {
+          @include values();
+          overflow: hidden;
+          float: right;
+          line-height: 48px;
+          outline: none !important;
+          padding-left: 16px;
+          height: 48px;
+          font-style: normal;
+        }
+      }
+      span {
+        &.data {
+          @include values();
+          overflow: hidden;
+          float: left;
+          line-height: 48px;
+          outline: none !important;
+          padding-left: 16px;
+          height: 48px;
+          width: 100%;
+        }
+      }
+      em {
+        &.amount {
+          @include values();
+          float: right;
+          line-height: 48px;
+          height: 48px;
+          overflow: hidden;
+          max-width: 100%;
+          font-style: normal;
+        }
+      }
+      &:hover {
+        background-color: $tableHover;
+        .right-item {
+          display: block;
+        }
+      }
+    }
+  }
+}

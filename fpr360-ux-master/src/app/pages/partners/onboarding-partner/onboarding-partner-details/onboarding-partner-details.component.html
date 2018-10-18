@@ -1,0 +1,311 @@
+<div class="content">
+  <section class="main-content">
+    <div class="row top-level">
+      <!-- Company Info -->
+      <div class="col-6">
+        <div class="form-title">
+          <h3>Company Info</h3>
+        </div>
+        <div class="row">
+          <div class="col-s-6">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="Role"
+                [(ngModel)]="data.companyInfo.roleValue"
+                [disabled]="readonly"
+                (change)="changeRole(data.companyInfo.roleValue)">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of roleList"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-s-12">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="Address"
+                [(ngModel)]="data.companyInfo.addressValue">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-s-4">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="City"
+                [(ngModel)]="data.companyInfo.cityValue">
+            </mat-form-field>
+          </div>
+          <div class="col-s-3"
+            *ngIf="!this.countryChanges.stateField">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="{{countryChanges.stateLabel}}"
+                [(ngModel)]="data.companyInfo.stateValue"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of state"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-s-3"
+            *ngIf="this.countryChanges.stateField">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="{{countryChanges.stateLabel}}"
+                [(ngModel)]="data.companyInfo.stateValue">
+            </mat-form-field>
+          </div>
+          <div class="col-s-2">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                [(ngModel)]="data.companyInfo.zipValue"
+                placeholder="{{countryChanges.zipLabel}}"
+                [textMask]="{mask: countryChanges.zipMask, guide: false}">
+            </mat-form-field>
+          </div>
+          <div class="col-s-3">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="Country"
+                (change)="changeCountry(data.companyInfo.countryValue)"
+                [(ngModel)]="data.companyInfo.countryValue"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of country"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-s-6">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="Email"
+                [(ngModel)]="data.companyInfo.emailValue"
+                [formControl]="emailFormControl">
+              <mat-error *ngIf="emailFormControl.hasError('pattern')">
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-s-4">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="Phone Number"
+                [(ngModel)]="data.companyInfo.phoneValue"
+                [textMask]="{mask: countryChanges.phoneMask, guide: false}"
+                [formControl]="data.companyInfo.phoneFormControl">
+              <mat-error *ngIf="data.companyInfo.phoneFormControl.hasError('pattern')">
+                Please enter a valid number
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-s-2">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                [(ngModel)]="data.companyInfo.extensionValue"
+                placeholder="Ext."
+                [textMask]="{mask: extMask, guide: false}">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-s-12">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <input matInput
+                [readonly]="readonly"
+                placeholder="URL"
+                [(ngModel)]="data.companyInfo.urlValue"
+                [formControl]="urlFormControl">
+              <mat-error *ngIf="urlFormControl.hasError('pattern')">
+                Please enter a valid url
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-s-8">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="Industry"
+                [(ngModel)]="data.companyInfo.industryValue"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of industry"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-s-4">
+            <mat-form-field class="full-width"
+              [ngClass]="readonly? 'readonly': ''">
+              <mat-select placeholder="Currency"
+                [(ngModel)]="data.companyInfo.currencyValue"
+                [disabled]="readonly">
+                <div class="options-wrap"
+                  appNoScroller
+                  [perfectScrollbar]>
+                  <mat-option *ngFor="let item of currency"
+                    [value]="item.value">
+                    {{ item.viewValue }}
+                  </mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <!-- Contacts -->
+      <div class="col-6">
+        <div class="form-title">
+          <h3>Contacts</h3>
+          <div class="right-item">
+            <a mat-icon-button
+              *ngIf="!readonly"
+              (click)="addContact()">
+              <i class="material-icons">person_add</i>
+            </a>
+          </div>
+        </div>
+        <!-- Contact boxes -->
+        <div class="contact-box"
+          *ngFor="let item of data.contacts">
+          <app-image class="avatar-wrap"
+            [ngClass]="!item.name? 'default-avatar': ''"
+            [size]="40"
+            [type]="'initial'"
+            [initialColor]="item.name? item.initialColor:''"
+            [initial]="(item.name.split(' ')[0]? item.name.split(' ')[0][0]: '') + (item.name.split(' ')[1]?item.name.split(' ')[1][0]:'')"></app-image>
+          <div class="contact-settings">
+            <app-dd-menu [options]="item.settings"
+              (select)="settingsFunction($event, item)"></app-dd-menu>
+          </div>
+          <div class="row">
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  [readonly]="readonly"
+                  [(ngModel)]="item.name"
+                  placeholder="Name">
+              </mat-form-field>
+            </div>
+            <div class="col-s-6">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  [readonly]="readonly"
+                  [(ngModel)]="item.position"
+                  placeholder="Position">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-5">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  [readonly]="readonly"
+                  [(ngModel)]="item.workNumber"
+                  placeholder="Work Number"
+                  [textMask]="{mask: countryChanges.phoneMask, guide: false}"
+                  [formControl]="item.phoneFormControl">
+                <mat-error *ngIf="item.phoneFormControl.hasError('pattern')">
+                  Please enter a valid number
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-s-2">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  [readonly]="readonly"
+                  [(ngModel)]="item.ext"
+                  placeholder="Ext."
+                  [textMask]="{mask: extMask, guide: false}">
+              </mat-form-field>
+            </div>
+            <div class="col-s-5">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  [readonly]="readonly"
+                  [(ngModel)]="item.mobileNumber"
+                  placeholder="Mobile Number"
+                  [textMask]="{mask: countryChanges.phoneMask, guide: false}"
+                  [formControl]="item.mobilePhoneFormControl">
+                <mat-error *ngIf="item.mobilePhoneFormControl.hasError('pattern')">
+                  Please enter a valid number
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s-8">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  [readonly]="readonly"
+                  [(ngModel)]="item.email"
+                  placeholder="Email"
+                  [formControl]="item.emailValidator">
+                <mat-error *ngIf="item.emailValidator.hasError('pattern')">
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-s-4">
+              <mat-form-field class="full-width"
+                [ngClass]="readonly? 'readonly': ''">
+                <input matInput
+                  [readonly]="readonly"
+                  [(ngModel)]="item.skype"
+                  placeholder="Skype ID">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,20 @@
+<figure class="screenshot">
+  <a mat-button
+    (click)="scrinUpload.click();"
+    class="light"
+    [ngClass]="!file?' default': ''">
+    <img *ngIf="file"
+      src="assets/images/{{file}}"
+      alt="">
+    <i *ngIf="file"
+      class="material-icons">file_download</i>
+    <i *ngIf="!file"
+      class="material-icons">add</i>
+  </a>
+  <input type="file"
+    #scrinUpload
+    (change)="changeFilePath(scrinUpload.value)">
+  <figcaption>
+    <ng-content></ng-content>
+  </figcaption>
+</figure>

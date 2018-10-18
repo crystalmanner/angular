@@ -1,0 +1,20 @@
+<button mat-button
+  class="user-item"
+  (click)="clickOnItem([name, position])">
+  <div class="line-item">
+    <div class="left-item">
+      <div class="user-item-box">
+        <app-image class="avatar-wrap"
+          [size]="40"
+          [type]="'image'"
+          [imageUrl]="avatar"
+          [imageAlt]="name"></app-image>
+        <span>{{name}}</span>
+        <em>{{position}}</em>
+      </div>
+    </div>
+  </div>
+  <div class="right-item-box">
+    <ng-content></ng-content>
+  </div>
+</button>

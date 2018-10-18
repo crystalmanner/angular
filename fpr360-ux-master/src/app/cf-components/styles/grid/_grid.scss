@@ -1,0 +1,281 @@
+//grid variables
+$gutter: 32px;
+$maxWidth: 1280px;
+$containerSpacing: 8px;
+
+@import '../var';
+
+.container {
+  width: 100%;
+  padding: 64px 0 0;
+}
+.section-box {
+  padding: 32px 0;
+}
+.row {
+  @include clearfix();
+  margin-right: -$gutter/2;
+  margin-left: -$gutter/2;
+  position: relative;
+  &.top-level {
+    margin-right: -$gutter;
+    margin-left: -$gutter;
+    > .col-1,
+    > .col-2,
+    > .col-3,
+    > .col-4,
+    > .col-5,
+    > .col-6,
+    > .col-7,
+    > .col-8,
+    > .col-9,
+    > .col-10,
+    > .col-11,
+    > .col-12 {
+      padding-left: $gutter;
+      padding-right: $gutter;
+    }
+  }
+}
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
+  float: left;
+  padding-left: $gutter/2;
+  padding-right: $gutter/2;
+}
+.col-1 {
+  width: 8.333333333333332%;
+}
+.col-2 {
+  width: 16.666666666666664%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-4 {
+  width: 33.33333333333333%;
+}
+.col-5 {
+  width: 41.66666666666667%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-7 {
+  width: 58.333333333333336%;
+}
+.col-8 {
+  width: 66.66666666666666%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-10 {
+  width: 83.33333333333334%;
+}
+.col-11 {
+  width: 91.66666666666666%;
+}
+.col-12 {
+  width: 100%;
+}
+.col-off-1 {
+  margin-left: 8.333333333333332%;
+}
+.col-off-2 {
+  margin-left: 16.666666666666664%;
+}
+.col-off-3 {
+  margin-left: 25%;
+}
+.col-off-4 {
+  margin-left: 33.33333333333333%;
+}
+.col-off-5 {
+  margin-left: 41.66666666666667%;
+}
+.col-off-6 {
+  margin-left: 50%;
+}
+.col-off-7 {
+  margin-left: 58.333333333333336%;
+}
+.col-off-8 {
+  margin-left: 66.66666666666666%;
+}
+.col-off-9 {
+  margin-left: 75%;
+}
+.col-off-10 {
+  margin-left: 83.33333333333334%;
+}
+.col-off-11 {
+  margin-left: 91.66666666666666%;
+}
+// no change width
+.col-s-1,
+.col-s-2,
+.col-s-3,
+.col-s-4,
+.col-s-5,
+.col-s-6,
+.col-s-7,
+.col-s-8,
+.col-s-9,
+.col-s-10,
+.col-s-11,
+.col-s-12 {
+  float: left;
+  padding-left: $gutter/2;
+  padding-right: $gutter/2;
+}
+.col-s-1 {
+  width: 8.333333333333332%;
+}
+.col-s-2 {
+  width: 16.666666666666664%;
+}
+.col-s-3 {
+  width: 25%;
+}
+.col-s-4 {
+  width: 33.33333333333333%;
+}
+.col-s-5 {
+  width: 41.66666666666667%;
+}
+.col-s-6 {
+  width: 50%;
+}
+.col-s-7 {
+  width: 58.333333333333336%;
+}
+.col-s-8 {
+  width: 66.66666666666666%;
+}
+.col-s-9 {
+  width: 75%;
+}
+.col-s-10 {
+  width: 83.33333333333334%;
+}
+.col-s-11 {
+  width: 91.66666666666666%;
+}
+.col-s-12 {
+  width: 100%;
+}
+.col-off-s-1 {
+  margin-left: 8.333333333333332%;
+}
+.col-off-s-2 {
+  margin-left: 16.666666666666664%;
+}
+.col-off-s-3 {
+  margin-left: 25%;
+}
+.col-off-s-4 {
+  margin-left: 33.33333333333333%;
+}
+.col-off-s-5 {
+  margin-left: 41.66666666666667%;
+}
+.col-off-s-6 {
+  margin-left: 50%;
+}
+.col-off-s-7 {
+  margin-left: 58.333333333333336%;
+}
+.col-off-s-8 {
+  margin-left: 66.66666666666666%;
+}
+.col-off-s-9 {
+  margin-left: 75%;
+}
+.col-off-s-10 {
+  margin-left: 83.33333333333334%;
+}
+.col-off-s-11 {
+  margin-left: 91.66666666666666%;
+}
+
+.line-item {
+  width: 100%;
+  @include clearfix();
+  .el {
+    float: left;
+  }
+  .left-item {
+    + .left-item {
+      padding-left: $gutter/2;
+    }
+  }
+}
+.left-item {
+  float: left;
+  .el {
+    float: left;
+    margin-right: $gutter/2;
+  }
+}
+.right-item {
+  float: right;
+  .el {
+    float: left;
+    margin-left: $gutter/2;
+  }
+}
+// @media only screen and (max-width: ($maxWidth + $containerSpacing*2)) {
+//   .row {
+//     margin-left: 0;
+//     margin-right: 0;
+//     .row {
+//       margin-right: -$gutter/2;
+//       margin-left: -$gutter/2;
+//     }
+//   }
+// }
+@media only screen and (max-width: 800px) {
+  .container {
+    padding-top: 56px;
+  }
+  // .col-1,
+  // .col-2,
+  // .col-3,
+  // .col-4,
+  // .col-5,
+  // .col-6,
+  // .col-7,
+  // .col-8,
+  // .col-9,
+  // .col-10,
+  // .col-11,
+  // .col-12 {
+  //   float: none;
+  //   width: 100%;
+  //   padding-bottom: $gutter;
+  // }
+  // .col-off-1,
+  // .col-off-2,
+  // .col-off-3,
+  // .col-off-4,
+  // .col-off-5,
+  // .col-off-6,
+  // .col-off-7,
+  // .col-off-8,
+  // .col-off-9,
+  // .col-off-10,
+  // .col-off-11 {
+  //   margin-left: 0;
+  // }
+}

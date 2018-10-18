@@ -1,0 +1,9 @@
+@import '../../cf-components/styles/mixins';
+@import '../../scss/theme-var';
+
+.not-fought-dialog {
+  width: calc(480px - 32px);
+  @media only screen and (max-width: 480px) {
+    width: 100%;
+  }
+}

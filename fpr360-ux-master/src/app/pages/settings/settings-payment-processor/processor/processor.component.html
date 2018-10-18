@@ -1,0 +1,23 @@
+<div class="sub-header-box with-menu">
+  <div class="wrap">
+    <div class="line-item editable-title-wrap">
+      <div class="left-item">
+        <app-editable-title [value]="processorName"
+          [light]="true"
+          [readonly]="false"
+          (changeValue)="titleVal($event)"></app-editable-title>
+      </div>
+      <div class="right-item middle">
+        <div class="el">
+          <button mat-raised-button
+            routerLink="/settings/payment-processor"
+            color="primary">Save</button>
+        </div>
+        <div class="el settings-placeholder"></div>
+      </div>
+    </div>
+    <app-sub-header [light]="true"
+      [innerMenuItems]="processorMenu"></app-sub-header>
+  </div>
+</div>
+<router-outlet></router-outlet>

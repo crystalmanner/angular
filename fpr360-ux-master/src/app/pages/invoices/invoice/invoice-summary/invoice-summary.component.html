@@ -1,0 +1,65 @@
+<div class="content">
+  <section class="main-content">
+    <div class="data-line">
+      <app-data-widget [data]="invoiceDataLine"></app-data-widget>
+    </div>
+    <div class="title-row">
+      <h3>Invoice #70430</h3>
+      <div class="title-label">
+        <app-label [backgroundStyle]="'#FF2929'">Declined</app-label>
+      </div>
+      <div class="right-button">
+        <button mat-raised-button
+          color="primary">Retry Payment</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <div class="row">
+          <div class="col-3">
+            <app-datetime-picker class="readonly"
+              [icons]="false"
+              [labelPicker]="'Invoice Date'"
+              (change)="backDate($event)"
+              [value]="invoiceDate"
+              [readonly]="true">
+            </app-datetime-picker>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="full-width readonly">
+              <input matInput
+                placeholder="Payment Term"
+                [(ngModel)]="paymentTerm"
+                [readonly]="true">
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <app-datetime-picker class="readonly"
+              [icons]="false"
+              [labelPicker]="'Due Date'"
+              (change)="backDate($event)"
+              [value]="dueDate"
+              [readonly]="true">
+            </app-datetime-picker>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="full-width readonly">
+              <input matInput
+                placeholder="Billing Period"
+                [(ngModel)]="billingPeriod"
+                [readonly]="true">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-single-table [tableData]="invoiceData"
+      [manageColumn]="false"
+      class="with-total-row"></app-single-table>
+    <div class="space">&nbsp;</div>
+    <div class="title-row">
+      <h3>Previous Invoices</h3>
+    </div>
+    <app-single-table [tableData]="previousInvoices"></app-single-table>
+  </section>
+</div>

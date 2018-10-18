@@ -1,0 +1,12 @@
+@import '../../cf-components/styles/mixins';
+@import '../../scss/theme-var';
+
+.user-dialog {
+  .switch-line {
+    padding-top: 0;
+  }
+  .avatar-wrap {
+    display: block;
+    margin-top: 4px;
+  }
+}
