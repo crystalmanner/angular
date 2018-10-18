@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
 import { IndicatorsService } from '../../../services/indicators.service';
-import { HttpClient } from '@angular/common/http'; 
 import { RadioListItemsComponent } from '../../../dialogs/radio-list-items/radio-list-items.component';
-import { Observable } from 'rxjs/Observable';
 import {Output, EventEmitter} from '@angular/core';
+import {JsondataService} from '../../../jsondata.service';
 
 @Component({
   selector: 'app-sub-header',
@@ -20,19 +19,15 @@ export class SubHeaderComponent implements OnInit {
   dataArray = [];
   dialogName: string;
   addMenu : string;
-  constructor(public dialog: MatDialog,
-    private indicatorsService: IndicatorsService,
-    private http: HttpClient) {
-        this.getJSON().subscribe(data => {
-        this.dataArray = data;
-        this.addMenu = '';
-      });
-    }
-    public getJSON(): Observable<any> {
-      return this.http.get("../../assets/data/traderList.json")
-    }
+    constructor(public dialog: MatDialog,
+      private indicatorsService: IndicatorsService,
+      private _data: JsondataService
+    ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.dataArray = this._data.getJsonData();
+    // this.addMenu = '';
+  }
 
   openDialog(dialog): void {
     
@@ -44,7 +39,7 @@ export class SubHeaderComponent implements OnInit {
         this.dialogName = this.dlgName;
         const dialogRef = this.dialog.open(RadioListItemsComponent, {
           data: {
-            dataArray: this.dataArray,
+            dataArray: this._data.getJsonData(),
             dialogName: this.dialogName
           },
           autoFocus: false
@@ -54,7 +49,7 @@ export class SubHeaderComponent implements OnInit {
               //this.addMenu = result;
               this.change.emit(result);
               const newItem = {
-                path : "",
+                path : result,
                 name : result
               };
               if(this.innerMenuItems.length < 5)
